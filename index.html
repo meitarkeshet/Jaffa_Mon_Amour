@@ -18,6 +18,9 @@
 
     <!--To load Jquery-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+    <!-- load isotop -->
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js "></script>
+
 
 
 </head>
@@ -327,10 +330,8 @@
         });
     </script>
 
-    <div id="include_html"></div>
-
     <!-- Start of grid items-->
-    <div class="grid">
+    <div class="grid" id="include_html">
 
         <!-- THIS WILL BE REPLACED WITH INSERTED-->
         <!--  
@@ -356,15 +357,13 @@
         });
     </script>
 
-
+    <!-- load js file with the button controls etc.-->
+    <script src="./js/multifilter.js"></script>
 </body>
 
 <footer>
 
-    <!-- load isotop -->
-    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js "></script>
-    <!-- load js file with the button controls etc.-->
-    <script src="./js/multifilter.js"></script>
+
 
 </footer>
 
