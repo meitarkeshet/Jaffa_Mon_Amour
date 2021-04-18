@@ -9,7 +9,7 @@ var filterFns = {
     //binary_true
     tsunami_binary_true: function() {
         var bol = $(this).find('.tsunami_flood_line').text();
-        alert(bol.match(0))
+        //alert(bol.match(0))
         return bol.match(0);
     },
     tsunami_binary_false: function() {
@@ -156,8 +156,11 @@ $('#sorts').on('click', 'button', function() {
 
 // change is-checked class on buttons
 $('.button-group').each(function(i, buttonGroup) {
+    //alert($(buttonGroup))
+    // ADD DIFFERENCE BETWEEN 'any' Button and the rest 
     var $buttonGroup = $(buttonGroup);
     $buttonGroup.on('click', 'button', function() {
+        //alert($buttonGroup.find('.is-checked'))
         $buttonGroup.find('.is-checked').removeClass('is-checked');
         $(this).addClass('is-checked');
     });
@@ -301,6 +304,9 @@ $('.button-group').each(function(i, buttonGroup) {
         $(this).addClass('is-checked');
     });
 });
+
+
+
 
 /* Merging overlapping tooltips */
 

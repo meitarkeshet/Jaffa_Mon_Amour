@@ -16,9 +16,14 @@
     <link rel=" stylesheet " type="text/css " href="./css/multifilter.css" media="screen " />
     <script src="js/modernizr.custom.js"></script>
 
+    <!--To load Jquery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+
+
 </head>
 
 <body>
+
     <div class="container">
         <header class="clearfix">
             <!-- KEEP HEADER BETWEEN PAGES -->
@@ -311,7 +316,10 @@
             </nav>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!--
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+     -->
+
     <script src="js/cbpHorizontalMenu.min.js"></script>
     <script>
         $(function() {
@@ -319,9 +327,15 @@
         });
     </script>
 
+    <div id="include_html"></div>
+
     <!-- Start of grid items-->
     <div class="grid">
+
         <!-- THIS WILL BE REPLACED WITH INSERTED-->
+        <!--  
+        <div data-includeHTML="bld_img_atr.html"></div>
+        -->
     </div>
     <!-- End of grid items-->
 
@@ -334,15 +348,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js">
     </script>
 
+    <!--To load external html files-->
+
+    <script>
+        $(function() {
+            $("#include_html").load("bld_img_atr.html");
+        });
+    </script>
+
+
 </body>
 
 <footer>
-    <!--To load Jquery-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+
     <!-- load isotop -->
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js "></script>
     <!-- load js file with the button controls etc.-->
     <script src="./js/multifilter.js"></script>
+
 </footer>
 
 </html>
