@@ -167,9 +167,7 @@ $('.button-group').each(function(i, buttonGroup) {
 });
 
 
-.menu {
-    @include 'style.css';
-}
+
 
 
 // V -------------- Create Sliders -------------- V
