@@ -23,6 +23,8 @@
 </head>
 
 <body>
+    <div data-includehtml="example.html">
+    </div>
     <div class="container">
         <header class="clearfix">
             <!-- KEEP HEADER BETWEEN PAGES -->
@@ -109,7 +111,7 @@
                Shapira
               </button>
                                                     <button class="button" data-filter=".12">
-               Tel-Kabir, Neva Ofer, Jaffa B
+               Tel-Kabirת Neva Ofer, Jaffa B
               </button>
                                                 </div>
                                             </div>
@@ -219,21 +221,21 @@
                             <div class="cbp-hrsub-inner">
                                 <div>
                                     <h4>
-                                        Education &amp; Learning
+                                        Test
                                     </h4>
                                     <ul>
                                         <div class="button-group" id="sorts">
                                             <button class="button is-checked" data-sort-by="original-order">
              original order
             </button>
-                                            <button class="button" data-sort-by="name">
-             name
+                                            <button class="button" data-sort-by="id">
+             id
             </button>
-                                            <button class="button" data-sort-by="symbol">
-             symbol
+                                            <button class="button" data-sort-by="n_bicycle_parking">
+                                                n_bicycle_parking
             </button>
-                                            <button class="button" data-sort-by="number">
-             number
+                                            <button class="button" data-sort-by="n_parks">
+                                                n_parks
             </button>
                                             <button class="button" data-sort-by="weight">
              weight
@@ -244,94 +246,8 @@
                                         </div>
                                     </ul>
                                     <h4>
-                                        Professionals
+                                        else
                                     </h4>
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-             Success 1.0
-            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-             Moneymaker
-            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4>
-                                        Entertainment
-                                    </h4>
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-             Gadget Finder
-            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-             Green Tree Express
-            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-             Green Tree Pro
-            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-             Holy Cannoli
-            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-             Wobbler 3.0
-            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-             Coolkid
-            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4>
-                                        Games
-                                    </h4>
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-             Catch the Bullet
-            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-             Snoopydoo
-            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-             Fallen Angel
-            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-             Sui Maker
-            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-             Wave Master
-            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-             Golf Pro
-            </a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                             <!-- /cbp-hrsub-inner -->
@@ -16466,6 +16382,14 @@
     </script>
     <!--To load wNumb formatter-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js">
+    </script>
+    <!--To load external html files-->
+    <script>
+        $(document).ready(function() {
+            $("div[data-includeHTML]").each(function() {
+                $(this).load($(this).attr("data-includeHTML"));
+            });
+        });
     </script>
 </body>
 <footer>

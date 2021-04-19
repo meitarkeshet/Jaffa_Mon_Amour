@@ -15,6 +15,11 @@
     <link rel="stylesheet" type="text/css" href="css/component.css" />
     <link rel=" stylesheet " type="text/css " href="./css/multifilter.css" media="screen " />
     <script src="js/modernizr.custom.js"></script>
+    <!-- style menu -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="./css/menu.scss" />
+
+
 
     <!--To load Jquery-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
@@ -28,6 +33,14 @@
 <body>
 
     <div class="container">
+        <div class="menu">
+            <ul class="list">
+                <li>About</li>
+                <li>Machine</li>
+                <li>Share</li>
+            </ul>
+        </div>
+
         <header class="clearfix">
             <!-- KEEP HEADER BETWEEN PAGES -->
             <span>
@@ -331,7 +344,7 @@
     </script>
 
     <!-- Start of grid items-->
-    <div class="grid" id="include_html">
+    <div class="grid">
 
         <!-- THIS WILL BE REPLACED WITH INSERTED-->
         <!--  
@@ -349,11 +362,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js">
     </script>
 
-    <!--To load external html files-->
 
     <script>
         $(function() {
-            $("#include_html").load("bld_img_atr.html");
+            $("#include_html").load("menu.html");
+        });
+    </script>
+
+    <script>
+        $('.menu').on('click', function() {
+            $('.list').toggleClass('hidden');
         });
     </script>
 

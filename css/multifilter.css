@@ -1,4 +1,6 @@
-* {
+/* fix menu css style conflict */
+
+.menu * {
     box-sizing: border-box;
 }
 
@@ -182,7 +184,9 @@ img {
     display: block;
 }
 
-// fix Items jump after transitioning position bug on isotope
+
+/* fix Items jump after transitioning position bug on isotope */
+
 .grid-item {
     transition: background 0.4s, box-shadow 0.4s;
 }

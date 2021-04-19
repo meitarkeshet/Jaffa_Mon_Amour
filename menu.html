@@ -1,0 +1,21 @@
+<!--To load Jquery-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+<link rel="stylesheet" href="./css/menu.scss" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+</script>
+
+
+<p>test</p>
+<div class="menu">
+    <ul class="list">
+        <li>Save</li>
+        <li>Export to GitHub</li>
+        <li>Delete</li>
+        <li>Share</li>
+    </ul>
+</div>
+<script>
+    $('.menu').on('click', function() {
+        $('.list').toggleClass('hidden');
+    });
+</script>

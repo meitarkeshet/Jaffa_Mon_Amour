@@ -102,9 +102,9 @@ var $grid = $('.grid').isotope({
     itemSelector: '.building_square',
     layoutMode: 'fitRows',
     getSortData: {
-        name: '.id',
-        symbol: '.symbol',
-        number: '.number parseInt',
+        id: '.id',
+        n_bicycle_parking: '.n_bicycle_parking',
+        n_parks: '.n_parks',
         category: '[data-category]',
         weight: function(itemElem) {
             var weight = $(itemElem).find('.weight').text();
@@ -167,7 +167,9 @@ $('.button-group').each(function(i, buttonGroup) {
 });
 
 
-
+.menu {
+    @include 'style.css';
+}
 
 
 // V -------------- Create Sliders -------------- V
