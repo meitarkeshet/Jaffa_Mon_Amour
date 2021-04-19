@@ -33,13 +33,35 @@
 <body>
 
     <div class="container">
-        <div class="menu">
-            <ul class="list">
-                <li>About</li>
-                <li>Machine</li>
-                <li>Share</li>
+        <!-- Navigation menu-->
+        <input id="page-nav-toggle" class="main-navigation-toggle" type="checkbox" />
+        <label for="page-nav-toggle">
+          <svg class="icon--menu-toggle" viewBox="0 0 60 30">
+            <g class="icon-group">
+              <g class="icon--menu">
+                <path d="M 6 0 L 54 0" />
+                <path d="M 6 15 L 54 15" />
+                <path d="M 6 30 L 54 30" />
+              </g>
+              <g class="icon--close">
+                <path d="M 15 0 L 45 30" />
+                <path d="M 15 30 L 45 0" />
+              </g>
+            </g>
+          </svg>
+        </label>
+
+        <nav class="main-navigation">
+            <ul>
+                <li><a href="./index.html">Machine</a></li>
+                <li>
+                    <a href="#0">Data stories</a>
+                </li>
+                <li><a href="#0">About</a></li>
+                <li><a href="#0">Contact</a></li>
             </ul>
-        </div>
+        </nav>
+        <!-- End navigation menu-->
 
         <header class="clearfix">
             <!-- KEEP HEADER BETWEEN PAGES -->
@@ -47,7 +69,7 @@
      Jaffa
     </span>
             <h1>
-                Mixer
+                Machine
             </h1>
             <nav>
                 <a class="icon-arrow-left" data-info="previous Blueprint" href="http://tympanus.net/Blueprints/FullWidthImageSlider/">
