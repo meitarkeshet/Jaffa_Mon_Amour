@@ -398,12 +398,3 @@ function mergeTooltips(slider, threshold, separator) {
         });
     });
 }
-
-
-
-
-.grow: hover {
-    -webkit - transform: scale(1.3); -
-    ms - transform: scale(1.3);
-    transform: scale(1.3);
-}

@@ -9,13 +9,14 @@ body {
 }
 
 
-/* Grow photos when you hover */
+/* Grow photos when you hover
 
 .grow:hover {
     -webkit-transform: scale(1.3);
     -ms-transform: scale(1.3);
     transform: scale(1.3);
 }
+ */
 
 
 /* ---- button ---- */
@@ -174,6 +175,12 @@ img {
 
 
 /* CHANGE PICTURE SIZE */
+
+.building_square:hover {
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
+}
 
 .building_square {
     width: 70px;
