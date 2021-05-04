@@ -1,12 +1,12 @@
 .container {
     max-width: 960px;
     margin: auto;
-    font-family: sans-serif;
+    font-family: 'berlin';
     line-height: 1.5;
 }
 
 h2 {
-    color: yellow;
+    color: #F1CEA8;
 }
 
 .flex-grid {
@@ -16,7 +16,7 @@ h2 {
 }
 
 .col {
-    background-color: black;
+    background-color: #64504D;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
     padding: 1rem;

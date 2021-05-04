@@ -1,4 +1,4 @@
-/* General Demo Style */
+/* General Demo Style 
 
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 @font-face {
@@ -8,6 +8,7 @@
     font-weight: normal;
     font-style: normal;
 }
+*/
 
 body,
 html {
@@ -41,13 +42,14 @@ html {
 }
 
 body {
-    font-family: 'Lato', Calibri, Arial, sans-serif;
-    color: #47a3da;
+    font-family: 'berlin';
+    color: #88AED9;
 }
 
 a {
     color: #f0f0f0;
     text-decoration: none;
+    font-size: 14px;
 }
 
 a:hover {
@@ -66,7 +68,7 @@ a:hover {
 }
 
 .container>header h1 {
-    font-size: 2.125em;
+    font-size: 50px;
     line-height: 1.3;
     margin: 0;
     float: left;
@@ -85,6 +87,9 @@ a:hover {
     float: right;
 }
 
+
+/*
+
 .container>header nav a {
     display: block;
     float: left;
@@ -95,13 +100,13 @@ a:hover {
     border-radius: 50%;
     color: transparent;
     margin: 0 0.1em;
-    border: 4px solid #47a3da;
+    border: 4px solid #7dda47;
     text-indent: -8000px;
 }
 
 .container>header nav a:after {
     content: attr(data-info);
-    color: #47a3da;
+    color: #da4784;
     position: absolute;
     width: 600%;
     top: 120%;
@@ -116,9 +121,13 @@ a:hover {
 }
 
 .container>header nav a:hover {
-    background: #47a3da;
+    background: #b46f0e;
 }
 
+*/
+
+
+/*
 .icon-drop:before,
 .icon-arrow-left:before {
     font-family: 'fontawesome';
@@ -131,14 +140,18 @@ a:hover {
     font-weight: normal;
     line-height: 2;
     text-align: center;
-    color: #47a3da;
+    color: #da5d47;
     -webkit-font-smoothing: antialiased;
     text-indent: 8000px;
     padding-left: 8px;
 }
+*/
+
+
+/*
 
 .container>header nav a:hover:before {
-    color: #fff;
+    color: rgb(110, 36, 36);
 }
 
 .icon-drop:before {
@@ -148,3 +161,5 @@ a:hover {
 .icon-arrow-left:before {
     content: "\f060";
 }
+
+*/
