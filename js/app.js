@@ -1,3 +1,1 @@
-const swup = new Swup({
-    theme: [new SwupSlideTheme()]
-});
+const swup = new Swup()

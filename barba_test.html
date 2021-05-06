@@ -1,41 +1,312 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Barba.js with Barba CSS Plugin</title>
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link href="assets/app.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: aquamarine;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaffa Mon Amour</title>
+    <meta name="description" content="Blueprint: Horizontal Drop-Down Menu">
+    <meta name="keywords" content="horizontal menu, microsoft menu, drop-down menu, mega menu, javascript, jquery, simple menu">
+    <meta name="author" content="Codrops">
+    <!-- <link rel="shortcut icon" href="../favicon.ico"> REMOVE ME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.0/nouislider.min.css">
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+    <link rel="stylesheet" type="text/css" href="css/component.css">
+    <link rel=" stylesheet " type="text/css " href="./css/multifilter.css" media="screen">
+    <script src="js/modernizr.custom.js"></script>
+    <!-- style menu -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--To load Jquery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+    <!-- load isotop -->
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js "></script>
+    <!-- load swup -->
+    <script defer src="node_modules/swup/dist/swup.min.js">
+    </script>
+    <script defer src="./js/app.js"></script>
+    <link href="./css/trans.css" rel="stylesheet">
 </head>
 
-<body>
+<!-- content that will not change  -->
 
-    <div class="container">
-        <a href="index.html" class="slide_page">Link</a> TEST TEST WHOP WHOP
-    </div>
-    <script>
-        $(function() {
-            // hide the div on page load and use a slidedown effect
-            $('div.container').fadeOut(0, function() {
-                $(this).slideDown(500);
-            });
-            // capture link clicks and slide up then go to the links href attribute
-            $('a.slide_page').click(function(e) {
-                e.preventDefault();
-                var $href = $(this).attr('href');
-                $('div.container').slideUp(500, function() {
-                    window.location = $href;
+<div class="container">
+    <!-- Navigation menu-->
+    <input id="page-nav-toggle" class="main-navigation-toggle" type="checkbox" />
+    <label for="page-nav-toggle">
+          <svg class="icon--menu-toggle" viewBox="0 0 60 30">
+            <g class="icon-group">
+              <g class="icon--menu">
+                <path d="M 6 0 L 54 0" />
+                <path d="M 6 15 L 54 15" />
+                <path d="M 6 30 L 54 30" />
+              </g>
+              <g class="icon--close">
+                <path d="M 15 0 L 45 30" />
+                <path d="M 15 30 L 45 0" />
+              </g>
+            </g>
+          </svg>
+        </label>
+
+    <nav class="main-navigation">
+        <ul>
+            <li><a href="./output.html">Machine</a></li>
+            <li>
+                <a href="#0">Data stories</a>
+            </li>
+            <li><a href="./about.html">About</a></li>
+        </ul>
+    </nav>
+    <!-- End burger navigation menu-->
+
+
+
+    <!-- content that will be changed when navigating -->
+
+    <header class="clearfix">
+        <!-- KEEP HEADER BETWEEN PAGES -->
+
+
+        <!--
+
+        <span>
+     Jaffa
+    </span>
+        <h1>
+            Machine
+        </h1>
+
+        -->
+
+        <!--
+        <nav>
+            <a class="icon-arrow-left" data-info="previous Blueprint" href="http://tympanus.net/Blueprints/FullWidthImageSlider/">
+      Previous Blueprint
+     </a>
+            <a class="icon-drop" data-info="back to the Codrops article" href="http://tympanus.net/codrops/?p=14426">
+      back to the Codrops article
+     </a>
+        </nav>
+        -->
+    </header>
+
+    <body>
+
+        <!-- FILTER / SORT DROP MENUS-->
+        <div class="main">
+            <nav class="cbp-hrmenu" id="cbp-hrmenu">
+                <ul>
+                    <li>
+                        <a href="#">
+        Filter
+       </a>
+                        <div class="cbp-hrsub">
+                            <div class="cbp-hrsub-inner">
+                                <div>
+                                    <h4>
+                                        Button test
+                                    </h4>
+                                    <ul>
+                                        <div class="filters">
+                                            <div class="ui-group">
+                                                <a>
+                                                    Would the house be touched in the case of sea level rising 5 m.
+                                                </a>
+                                                <div class="button-group js-radio-button-group" data-filter-group="tsunami_flood_line_buttons">
+                                                    <button class="button is-checked" data-filter="">
+               any
+              </button>
+                                                    <button class="button" data-filter="tsunami_binary_true">
+               yes
+              </button>
+                                                    <button class="button" data-filter="tsunami_binary_false">
+               no
+              </button>
+                                                </div>
+                                            </div>
+                                            <div class="ui-group">
+                                                <a>
+                                                    Neighbourhood 
+                                                </a>
+                                                <div class="button-group js-radio-button-group" data-filter-group="Max amount of bicycle parkings within 15 min. walking radius">
+                                                    <button class="button is-checked" data-filter="">
+               any
+              </button>
+                                                    <button class="button" data-filter=".0">Mevo'ot Jafo</button>
+                                                    <button class="button" data-filter=".4">College of Tel-Aviv-Yaffo</button>
+                                                    <button class="button" data-filter=".10">Neve Sha'anan</button>
+                                                    <button class="button" data-filter=".12">Jaffa Center</button>
+                                                    <button class="button" data-filter=".12">Jaffa North</button>
+                                                    <button class="button" data-filter=".12">Neve Golan</button>
+                                                    <button class="button" data-filter=".12">Florentine</button>
+                                                    <button class="button" data-filter=".12">Tzahalon & Shikunei Hisachon</button>
+                                                    <button class="button" data-filter=".12">Shapira</button>
+                                                    <button class="button" data-filter=".12">Tel-Kabirת Neva Ofer, Jaffa B</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </ul>
+                                </div>
+                                <!--TEST -->
+                                <div class="img_filters">
+                                    <h4>
+                                        15 minutes city: Amount of...
+                                    </h4>
+                                    <ul>
+                                        <li>
+                                            <a>Bicycle parkings</a>
+                                            <div class="slider" data-filter="bi_parking_min_max_slider" id="bi_parking_slider">
+                                            </div>
+                                            <br/>
+                                        </li>
+                                        <li>
+                                            <a>Tel-o-fun bicycles (max capacity)</a>
+                                            <div class="slider" data-filter="n_tel_o_fun_min_max_slider" id="n_tel_o_fun_slider">
+                                            </div>
+                                            <br/>
+                                        </li>
+                                        <li>
+                                            <a>Auto-Tel Car sharing vehicles (max capacity)</a>
+                                            <div class="slider" data-filter="n_auto_tel_min_max_slider" id="n_auto_tel_slider">
+                                            </div>
+                                            <br/>
+                                        </li>
+                                        <li>
+                                            <a>Green areas and parks</a>
+                                            <div class="slider" data-filter="n_parks_min_max_slider" id="n_parks_slider">
+                                            </div>
+                                            <br/>
+                                        </li>
+                                        <li>
+                                            <a>Playgrounds</a>
+                                            <div class="slider" data-filter="n_playgrounds_min_max_slider" id="n_playgrounds_slider">
+                                            </div>
+                                            <br/>
+                                        </li>
+                                        <li>
+                                            <a>kindergardens</a>
+                                            <div class="slider" data-filter="n_kindergartens_min_max_slider" id="n_kindergartens_slider">
+                                            </div>
+                                            <br>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--END class="img_filters"-->
+
+                                <!--TEST -->
+
+
+                                <div>
+                                    <h4>
+                                        Misc
+                                    </h4>
+                                    <div class="img_filters">
+
+                                        <ul>
+
+                                            <li>
+                                                <a>Building's ID </a>
+                                                <div class="slider" data-filter="id_min_max_slider" id="id_slider">
+                                                </div>
+
+                                                <br>
+                                            </li>
+                                        </ul>
+                                        <h4>
+                                            Control
+                                        </h4>
+                                        <ul>
+                                            <li>
+                                                <a href="#">
+             reset
+            </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+             extend options
+            </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /cbp-hrsub-inner -->
+                        </div>
+                        <!-- /cbp-hrsub -->
+                    </li>
+                    <li>
+                        <a href="#">
+        Sort
+       </a>
+                        <div class="cbp-hrsub">
+                            <div class="cbp-hrsub-inner">
+                                <div>
+                                    <h4>
+                                        Test
+                                    </h4>
+                                    <ul>
+                                        <div class="button-group" id="sorts">
+                                            <button class="button is-checked" data-sort-by="original-order">
+             original order
+            </button>
+                                            <button class="button" data-sort-by="id">
+             id
+            </button>
+                                            <button class="button" data-sort-by="n_bicycle_parking">
+                                                n_bicycle_parking
+            </button>
+                                            <button class="button" data-sort-by="n_parks">
+                                                n_parks
+            </button>
+                                            <button class="button" data-sort-by="weight">
+             weight
+            </button>
+                                            <button class="button" data-sort-by="category">
+             category
+            </button>
+                                        </div>
+                                    </ul>
+                                    <h4>
+                                        else
+                                    </h4>
+                                </div>
+                            </div>
+                            <!-- /cbp-hrsub-inner -->
+                        </div>
+                        <!-- /cbp-hrsub -->
+                    </li>
+                </ul>
+            </nav>
+
+            <script src="js/cbpHorizontalMenu.min.js"></script>
+            <script>
+                $(function() {
+                    cbpHorizontalMenu.init();
                 });
-            });
-        });
-    </script>
+            </script>
+            </header>
+            <!-- END Of filter drop down menus-->
 
-</body>
+            <!-- load swup -->
+            <script defer src="node_modules/swup/dist/swup.min.js">
+            </script>
+            <script defer src="./js/app.js"></script>
+            <link href="./css/trans.css" rel="stylesheet">
+            </head>
+
+            <body>
+
+                <main id="swup" class="transition-fade">
+                    <h1> THIS IS A TEST </h1>
+
+                    <a href="/index.html">Link</a>
+                    <h2>Here there will be a MAP from plotly</h2>
+                    <p> WHERE IS ALL THE TEXT?</p>
+                    <img src="https://miro.medium.com/max/2880/1*vgL7OvFYvsghn_V0S3XqrQ.png" />
+                </main>
+
+            </body>
 
 </html>
