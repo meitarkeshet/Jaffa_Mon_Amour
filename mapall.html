@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" class="no-js">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -26,7 +25,14 @@
     </script>
     <script defer src="./js/app.js"></script>
     <link href="./css/trans.css" rel="stylesheet">
+    <!-- load leaflet for map-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <link rel="stylesheet" href="./css/mapall.css">
+
+    <!-- Make sure you put this AFTER Leaflet 's CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 </head>
+
 
 <!-- content that will not change  -->
 
@@ -68,7 +74,7 @@
         <!-- KEEP HEADER BETWEEN PAGES -->
 
         <a href="/output.html">
-            Map
+            Grid
            </a>
         <!--
 
@@ -294,60 +300,33 @@
             <!-- END Of filter drop down menus-->
 
 
-            <!-- Start of grid items-->
-            <div class="grid">
+            <body>
+                <main class="transition-fade" id="swup">
+                    <div id="mapid"></div>
 
-                <!-- THIS WILL BE REPLACED WITH INSERTED-->
-                <!--  
-        <div data-includeHTML="bld_img_atr.html"></div>
-        -->
-            </div>
-            <!-- End of grid items-->
-
-            <!-- THIS WILL BE CHANGED BETWEEN PAGES-->
-
-            <main id="swup" class="transition-fade">
-
-                <a href="/output.html">Link</a>
-                <h2>the page has now changed</h2>
-                <h>this is another test</h>
+                </main>
+                <script src="./js/mapall.js"></script>
 
 
-            </main>
-
-
-
-
-            <!--To load noUiSlider-->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.0/nouislider.min.js">
-            </script>
-
-            <!--To load wNumb formatter-->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js">
-            </script>
-
-
-            <script>
-                $(function() {
-                    $("#include_html").load("menu.html");
-                });
-            </script>
-
-            <script>
-                $('.menu').on('click', function() {
-                    $('.list').toggleClass('hidden');
-                });
-            </script>
-
-            <!-- load js file with the button controls etc.-->
-            <script src="./js/multifilter.js"></script>
-
-            <!-- close div class= "main"-->
-
-        </div>
-        <!-- close div class="container"-->
-</div>
-<!-- close barba wrapper-->
-</body>
+                <!--To load noUiSlider-->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.0/nouislider.min.js">
+                </script>
+                <!--To load wNumb formatter-->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js">
+                </script>
+                <script>
+                    $(function() {
+                        $("#include_html").load("menu.html");
+                    });
+                </script>
+                <script>
+                    $('.menu').on('click', function() {
+                        $('.list').toggleClass('hidden');
+                    });
+                </script>
+                <!-- load js file with the button controls etc.-->
+                <script src="./js/multifilter.js">
+                </script>
+            </body>
 
 </html>
