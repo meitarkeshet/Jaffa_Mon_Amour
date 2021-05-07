@@ -95,6 +95,10 @@
 
         <!-- FILTER / SORT DROP MENUS-->
         <div class="main">
+            <a href="/index.html">
+                Map
+               </a>
+
             <nav class="cbp-hrmenu" id="cbp-hrmenu">
                 <ul>
                     <li>
@@ -289,24 +293,61 @@
             </header>
             <!-- END Of filter drop down menus-->
 
-            <!-- load swup -->
-            <script defer src="node_modules/swup/dist/swup.min.js">
+
+            <!-- Start of grid items-->
+            <div class="grid">
+
+                <!-- THIS WILL BE REPLACED WITH INSERTED-->
+                <!--  
+        <div data-includeHTML="bld_img_atr.html"></div>
+        -->
+            </div>
+            <!-- End of grid items-->
+
+            <!-- THIS WILL BE CHANGED BETWEEN PAGES-->
+
+            <main id="swup" class="transition-fade">
+
+                <a href="/barba_test.html">Link</a>
+                <h2>the page has now changed</h2>
+                <h>this is another test</h>
+
+
+            </main>
+
+
+
+
+            <!--To load noUiSlider-->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.0/nouislider.min.js">
             </script>
-            <script defer src="./js/app.js"></script>
-            <link href="./css/trans.css" rel="stylesheet">
-            </head>
 
-            <body>
+            <!--To load wNumb formatter-->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js">
+            </script>
 
-                <main id="swup" class="transition-fade">
-                    <h1> THIS IS A TEST </h1>
 
-                    <a href="/index.html">Link</a>
-                    <h2>Here there will be a MAP from plotly</h2>
-                    <p> WHERE IS ALL THE TEXT?</p>
-                    <img src="https://miro.medium.com/max/2880/1*vgL7OvFYvsghn_V0S3XqrQ.png" />
-                </main>
+            <script>
+                $(function() {
+                    $("#include_html").load("menu.html");
+                });
+            </script>
 
-            </body>
+            <script>
+                $('.menu').on('click', function() {
+                    $('.list').toggleClass('hidden');
+                });
+            </script>
+
+            <!-- load js file with the button controls etc.-->
+            <script src="./js/multifilter.js"></script>
+
+            <!-- close div class= "main"-->
+
+        </div>
+        <!-- close div class="container"-->
+</div>
+<!-- close barba wrapper-->
+</body>
 
 </html>
