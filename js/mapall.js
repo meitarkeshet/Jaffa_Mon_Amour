@@ -14,22 +14,38 @@ var marker = L.marker([32.049357, 34.758355]).addTo(mymap);
 /* when images are filterd - modify JSON file to visible / invisible */
 
 $('.img_filters').on('click', '.slider', function() {
-    // for every picture (both visible and invisible?)
+    // empty string to push to
+    var string_combined_arr = []
+        // for every picture (both visible and invisible?)
     $(".building_square").each(function(index) {
-        console.log(index + ": " + $(this).attr('id'));
+        //console.log(index + ": " + $(this).text());
         var obj = new Object();
         obj.type = "Feature";
-        obj.age = 32;
-        obj.married = false;
+        // dict prop.
+        var properties = {};
+        let id = $(this).attr('id');
+        //alert(id);
+        properties.name = id; // $(this).attr('id')
+        if ($(this).css('display') == 'none') {
+            properties.show_on_map = 'false';
+        } else {
+            properties.show_on_map = 'true';
+        };
+        obj.properties = properties;
+        // dict geo.
+        var geometry = {};
+        geometry.type = "Point";
+        geometry.coordinates = "4";
+        obj.geometry = geometry;
+        // push to combined string
+        string_combined_arr.push(obj);
+        //string_combined += tmp_string;
         //convert object to json string
-        var string = JSON.stringify(obj);
-        //convert string to Json Object
-        console.log(JSON.parse(string)); // this is your requirement.
+        var tmp_string = JSON.stringify(obj);
+        console.log(JSON.parse(tmp_string)); // this is your requirement.
     });
-    //filterGroup = $(this).attr('id')
-    //alert(filterGroup);
-    //var filterValue = $(this).attr('data-filter');
-    alert("check!")
+    var string_combined_str = JSON.stringify(string_combined_arr); // turn from array to JSON formatted string
+    //console.log(JSON.parse(string_combined_str)); // See results
 });
 
 
