@@ -129,6 +129,7 @@ var $grid = $('.grid').isotope({
                 break;
             }
         }
+
         return isMatched;
     }
 });

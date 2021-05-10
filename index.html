@@ -322,11 +322,14 @@
                 $('#vis').click(function() {
                     if ($('#mapid').css('visibility') == 'hidden') {
                         $('#mapid').css('visibility', 'visible');
-                        $('#gridid').css('visibility', 'hidden');
+                        $('#mapid').css('height', '480px');
+                        $('#gridid').hide();
                         //alert('show');
                     } else {
                         $('#mapid').css('visibility', 'hidden');
-                        $('#gridid').css('visibility', 'visible');
+                        $('#mapid').css('height', '0px');
+                        //$('#gridid').css('display', 'normal');
+                        $('#gridid').show();
                         //alert('hide');
                     }
                     // visible
