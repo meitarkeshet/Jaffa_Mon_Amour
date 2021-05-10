@@ -18,31 +18,33 @@ $('.img_filters').on('click', '.slider', function() {
     var string_combined_arr = []
         // for every picture (both visible and invisible?)
     $(".building_square").each(function(index) {
-        //console.log(index + ": " + $(this).text());
+        console.log(index + ": " + $(this).text().split('\n')[1]); // use to get specific line form text 
         var obj = new Object();
         obj.type = "Feature";
         // dict prop.
         var properties = {};
         let id = $(this).attr('id');
         //alert(id);
+        // address?
         properties.name = id; // $(this).attr('id')
-        if ($(this).css('display') == 'none') {
+        if ($(this).css('display') == 'none') { // if the image is not currently showing (was filterd by user, don't )
             properties.show_on_map = 'false';
         } else {
             properties.show_on_map = 'true';
         };
         obj.properties = properties;
+        // add popupContent?
         // dict geo.
         var geometry = {};
         geometry.type = "Point";
-        geometry.coordinates = "4";
+        geometry.coordinates = "4"; // format [-104.98404, 39.74621]
         obj.geometry = geometry;
         // push to combined string
         string_combined_arr.push(obj);
         //string_combined += tmp_string;
         //convert object to json string
         var tmp_string = JSON.stringify(obj);
-        console.log(JSON.parse(tmp_string)); // this is your requirement.
+        //console.log(JSON.parse(tmp_string)); // this is your requirement.
     });
     var string_combined_str = JSON.stringify(string_combined_arr); // turn from array to JSON formatted string
     //console.log(JSON.parse(string_combined_str)); // See results
