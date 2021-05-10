@@ -75,11 +75,11 @@
     <header class="clearfix">
         <!-- KEEP HEADER BETWEEN PAGES -->
 
-        <li>
-            <a href="/barba_test.html">
-                Map
-               </a>
-        </li>
+
+        <button id="vis">
+                map / not
+            </button>
+
         <!--
 
         <span>
@@ -302,38 +302,52 @@
             </header>
             <!-- END Of filter drop down menus-->
 
-            <!-- THIS WILL BE CHANGED BETWEEN PAGES-->
-            <main id="swup" class="transition-fade">
-                <!-- Start of grid items-->
-                <div class="grid">
 
-                    <!-- THIS WILL BE REPLACED WITH INSERTED-->
+            <!-- Start of grid items-->
+            <div id="gridid" class="grid" style="visibility: visible">
 
-                </div>
-                <!-- End of grid items-->
+                <!-- THIS WILL BE REPLACED WITH INSERTED-->
 
-            </main>
-            <!-- End of: THIS WILL BE CHANGED BETWEEN PAGES-->
+            </div>
+            <!-- End of grid items-->
+
+
 
             <!-- map (first hidden)-->
-            <div id="mapid"></div>
+            <div id="mapid" style="visibility: hidden"></div>
+
             <!-- end of: map -->
 
+            <script>
+                $('#vis').click(function() {
+                    if ($('#mapid').css('visibility') == 'hidden') {
+                        $('#mapid').css('visibility', 'visible');
+                        $('#gridid').css('visibility', 'hidden');
+                        //alert('show');
+                    } else {
+                        $('#mapid').css('visibility', 'hidden');
+                        $('#gridid').css('visibility', 'visible');
+                        //alert('hide');
+                    }
+                    // visible
+                });
+            </script>
+
             <!--To load javascript for map-->
-            <script src="./js/mapall.js"></script>
+            <script src="./js/mapall.js "></script>
 
             <!--To load noUiSlider-->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.0/nouislider.min.js">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.0/nouislider.min.js ">
             </script>
 
             <!--To load wNumb formatter-->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js ">
             </script>
 
 
             <script>
                 $(function() {
-                    $("#include_html").load("menu.html");
+                    $("#include_html ").load("menu.html ");
                 });
             </script>
 
@@ -344,12 +358,12 @@
             </script>
 
             <!-- load js file with the button controls etc.-->
-            <script src="./js/multifilter.js"></script>
+            <script src="./js/multifilter.js "></script>
 
-            <!-- close div class= "main"-->
+            <!-- close div class= "main "-->
 
         </div>
-        <!-- close div class="container"-->
+        <!-- close div class="container "-->
 </div>
 <!-- close barba wrapper-->
 </body>
