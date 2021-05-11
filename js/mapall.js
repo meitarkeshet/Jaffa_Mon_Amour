@@ -1,4 +1,7 @@
+//mymap.remove() // remove anything that exists before
 var mymap = L.map('mapid').setView([32.049357, 34.758355], 15); // change zoom and center   
+
+mymap.invalidateSize() // fix gray areas issue after initializing with height 0
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -9,7 +12,9 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: 'pk.eyJ1IjoiamFmZmFtb25hbW91ciIsImEiOiJja29laTQ4YzMwNW5jMnZsejZkMWNxMW1nIn0.FZF-e-4X_LuaFTbc199few'
 }).addTo(mymap);
 
-mymap.invalidateSize() // fix gray areas issue after initializing with height 0
+
+var locations_layer;
+
 
 // var marker = L.marker([32.049357, 34.758355]).addTo(mymap);
 
@@ -18,6 +23,12 @@ var layerGroup = L.layerGroup().addTo(mymap);
 /* when images are filterd - modify JSON file to visible / invisible */
 
 $('.img_filters').on('click', '.slider', function() {
+    $grid.on('arrangeComplete',
+        function(event, filteredItems) {
+            console.log('Isotope arrange completed on ' +
+                filteredItems.length + ' items');
+        }
+    );
     // empty string to push to
     var string_combined_arr = []
         // for every picture (both visible and invisible?)
@@ -63,7 +74,7 @@ $('.img_filters').on('click', '.slider', function() {
 
     mymap.invalidateSize() // fix gray areas issue after initializing with height 0
 
-    /*
+
     // to download and see the json created
     var a = document.createElement("a")
     a.href = `data:application/json;charset=utf-8, ${together}`
@@ -71,19 +82,22 @@ $('.img_filters').on('click', '.slider', function() {
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
-    */
+
 
     //alert(locations_layer);
+    //$('#mapid').remove();
 
 
     if (layerGroup !== undefined) {
         // remove all the markers in one go
         layerGroup.clearLayers();
+        mymap.removeLayer(layerGroup);
+
         alert("trying to clean");
-        //alert(layerGroup);
     };
 
-    var locations_layer = L.geoJSON(json_pins, {
+
+    locations_layer = new L.geoJSON(json_pins, {
         filter: function(feature, layer) {
             return feature.properties.show_on_map;
         },
@@ -94,9 +108,9 @@ $('.img_filters').on('click', '.slider', function() {
             });
         }
     });
-
     // Adding current locations to the layer group
     locations_layer.addTo(layerGroup);
+
     // Adding layer group to map
     layerGroup.addTo(mymap);
 });
