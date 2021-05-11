@@ -334,6 +334,31 @@
                 });
             </script>
             <!-- END Of filter drop down menus-->
+
+            <!-- map (first hidden)-->
+            <div id="mapid" style="visibility: hidden">
+            </div>
+            <!-- end of: map -->
+            <script>
+                $('#vis').click(function() {
+                    if ($('#mapid').css('visibility') == 'hidden') {
+                        $('#mapid').css('visibility', 'visible');
+                        $('#mapid').css('height', '480px');
+                        //$('#gridid').hide();
+                        //alert('show');
+                    } else {
+                        $('#mapid').css('visibility', 'hidden');
+                        $('#mapid').css('height', '0px');
+                        //$('#gridid').css('display', 'normal');
+                        //$('#gridid').show();
+                        //alert('hide');
+                    }
+                    // visible
+                });
+            </script>
+
+
+
             <!-- Start of grid items-->
             <div class="grid" id="gridid" style="visibility: visible">
                 <div class="building_square">
@@ -19244,27 +19269,7 @@
                     <p class="secondary" style="display:none;">international_neoclassicism</p><img src=""></div>
             </div>
             <!-- End of grid items-->
-            <!-- map (first hidden)-->
-            <div id="mapid" style="visibility: hidden">
-            </div>
-            <!-- end of: map -->
-            <script>
-                $('#vis').click(function() {
-                    if ($('#mapid').css('visibility') == 'hidden') {
-                        $('#mapid').css('visibility', 'visible');
-                        $('#mapid').css('height', '480px');
-                        $('#gridid').hide();
-                        //alert('show');
-                    } else {
-                        $('#mapid').css('visibility', 'hidden');
-                        $('#mapid').css('height', '0px');
-                        //$('#gridid').css('display', 'normal');
-                        $('#gridid').show();
-                        //alert('hide');
-                    }
-                    // visible
-                });
-            </script>
+
             <!--To load javascript for map-->
             <script src="./js/mapall.js ">
             </script>
