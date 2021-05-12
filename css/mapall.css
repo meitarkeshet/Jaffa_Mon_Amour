@@ -3,3 +3,14 @@
     /* 480px */
     z-index: 0;
 }
+
+
+/* This class is added on scroll */
+
+.fixedscroll {
+    z-index: 9999;
+    position: fixed;
+    left: 0;
+    /*top: 0;
+    width: 100%;*/
+}

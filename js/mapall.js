@@ -149,3 +149,24 @@ $('#vis_map').click(function() {
         scrollTop: $('#mapid').offset().top
     }, 2000);
 });
+
+// back to top
+/*
+$('html, body').animate({
+    scrollTop: $("#mapid").offset().top
+});
+*/
+
+// for keeping the menu fixed on scrol
+$(document).ready(function() {
+    $(window).trigger('scroll');
+    $(window).bind('scroll', function() {
+        //alert('scroll'); // works
+        var pixels = 200; //number of pixels before modifying styles
+        if ($(window).scrollTop() > pixels) {
+            $('#nav_sticky').addClass('fixedscroll');
+        } else {
+            $('#nav_sticky').removeClass('fixedscroll');
+        }
+    });
+});

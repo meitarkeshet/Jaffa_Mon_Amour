@@ -308,6 +308,7 @@ $('.button-group').each(function(i, buttonGroup) {
 
 /* BIG style sort by groups */
 // categoryRows custom layout mode 
+/*
 $.extend($.Isotope.prototype, {
 
     _bigGraphReset: function() {
@@ -385,10 +386,7 @@ $.extend($.Isotope.prototype, {
     }
 
 });
-
-
-
-
+*/
 
 
 
