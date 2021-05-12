@@ -136,15 +136,16 @@ geojsonLayer = L.geoJson(json_pins, {
 //mymap.addLayer(geojsonLayer);
 
 
-$(function() {
-    $('a[href*=\\#]:not([href=\\#])').on('click', function() {
-        var target = $(this.hash);
-        target = target.length ? target : $('[name=' + this.hash.substr(1) + ']');
-        if (target.length) {
-            $('html,body').animate({
-                scrollTop: target.offset().top
-            }, 1000);
-            return false;
-        }
-    });
+// scroll to elements 
+
+$('#vis_grid').click(function() {
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $('#gridid').offset().top
+    }, 2000);
+});
+
+$('#vis_map').click(function() {
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $('#mapid').offset().top
+    }, 2000);
 });

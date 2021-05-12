@@ -87,8 +87,11 @@
     <!-- content that will be changed when navigating -->
     <header class="clearfix">
         <!-- KEEP HEADER BETWEEN PAGES -->
-        <button id="vis">
-    map / not
+        <button id="vis_grid">
+    grid
+   </button>
+        <button id="vis_map">
+    map
    </button>
         <!--
 
@@ -336,9 +339,11 @@
             <!-- END Of filter drop down menus-->
 
             <!-- map (first hidden)-->
-            <div id="mapid" style="visibility: hidden">
+            <div id="mapid" style="visibility: visible">
             </div>
             <!-- end of: map -->
+
+            <!-- HIDE MAP / GRID 
             <script>
                 $('#vis').click(function() {
                     if ($('#mapid').css('visibility') == 'hidden') {
@@ -356,7 +361,7 @@
                     // visible
                 });
             </script>
-
+            -->
 
 
             <!-- Start of grid items-->
