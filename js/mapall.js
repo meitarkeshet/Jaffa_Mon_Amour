@@ -25,7 +25,7 @@ var layerGroup = L.layerGroup().addTo(mymap);
 // $('.img_filters').on('click', '.slider', function() {
 $(function() {
     var map_reload = function() {
-        alert('yo');
+        //alert('yo');
         // empty string to push to
         var string_combined_arr = []
             // for every picture (both visible and invisible?)
