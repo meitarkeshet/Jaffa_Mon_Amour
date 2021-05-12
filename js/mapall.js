@@ -22,8 +22,17 @@ var layerGroup = L.layerGroup().addTo(mymap);
 
 /* when images are filterd - modify JSON file to visible / invisible */
 
-$('.img_filters').on('click', '.slider', function() {
-    $grid.on('arrangeComplete',
+// $('.img_filters').on('click', '.slider', function() {
+$(function() {
+    var map_reload = function() {
+        alert('yo');
+    };
+    $("#button").click(your_code);
+    your_code();
+});
+
+$(document).ready(function() {
+    $grid.on('arrangeComplete', // 
         function(event, filteredItems) {
             console.log('Isotope arrange completed on ' +
                 filteredItems.length + ' items');
@@ -160,7 +169,7 @@ $(document).ready(function() {
     $(window).bind('scroll', function() {
         //alert('scroll'); // works
         var pixels = 100; //number of pixels before modifying styles - needs to work with bar size
-        if ($('#About_me_main').is(':animated')) {
+        if ($('#About_me_main').is(':animated')) { // is this actually working?
             if ($(window).scrollTop() >= pixels) {
                 $('#nav_sticky').addClass('fixedscroll');
                 // $('#gridid').addClass('maringscroll');
@@ -171,3 +180,14 @@ $(document).ready(function() {
         }
     });
 });
+
+$("#foo").one("click", function() {
+    alert("This will be displayed only once.");
+});
+
+// only first isotope innit for map
+/*
+$grid.one('arrangeComplete', function() {
+    console.log('arrange done, just this one time');
+});
+*/
