@@ -1,4 +1,6 @@
 #mapid {
+    z-index: 0;
+    /*margin-top: 100px; */
     height: 480px;
     /* 480px */
     z-index: 0;
@@ -8,9 +10,22 @@
 /* This class is added on scroll */
 
 .fixedscroll {
-    z-index: 9999;
+    overflow: hidden;
+    z-index: 10;
     position: fixed;
+    /* Set the navbar to fixed position */
     left: 0;
-    /*top: 0;
-    width: 100%;*/
+    top: 0;
+    /* Position the navbar at the top of the page */
+    width: 100%;
+    /* Full width */
+    background: rgb(255, 255, 255);
+    /* notice background-color: ; */
+}
+
+
+/* Add a top margin to avoid content overlay */
+
+.maringscroll {
+    margin-top: 100px;
 }

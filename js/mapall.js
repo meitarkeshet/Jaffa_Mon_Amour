@@ -139,34 +139,35 @@ geojsonLayer = L.geoJson(json_pins, {
 // scroll to elements 
 
 $('#vis_grid').click(function() {
+    //$('#nav_sticky').addClass('fixedscroll'); // try open bar first
     $([document.documentElement, document.body]).animate({
-        scrollTop: $('#gridid').offset().top
-    }, 2000);
-});
-
-$('#vis_map').click(function() {
-    $([document.documentElement, document.body]).animate({
-        scrollTop: $('#mapid').offset().top
+        scrollTop: $('#gridid').offset().top - 100 // NOTICE - substract the bar pixels
     }, 2000);
 });
 
 // back to top
-/*
-$('html, body').animate({
-    scrollTop: $("#mapid").offset().top
+
+$('#vis_map').click(function() {
+    $([document.documentElement, document.body]).animate({
+        scrollTop: 0
+    }, 2000);
 });
-*/
 
 // for keeping the menu fixed on scrol
+// change to always locked
 $(document).ready(function() {
     $(window).trigger('scroll');
     $(window).bind('scroll', function() {
         //alert('scroll'); // works
-        var pixels = 200; //number of pixels before modifying styles
-        if ($(window).scrollTop() > pixels) {
-            $('#nav_sticky').addClass('fixedscroll');
-        } else {
-            $('#nav_sticky').removeClass('fixedscroll');
+        var pixels = 100; //number of pixels before modifying styles - needs to work with bar size
+        if ($('#About_me_main').is(':animated')) {
+            if ($(window).scrollTop() >= pixels) {
+                $('#nav_sticky').addClass('fixedscroll');
+                // $('#gridid').addClass('maringscroll');
+            } else {
+                $('#nav_sticky').removeClass('fixedscroll');
+                //$('#gridid').removeClass('maringscroll');
+            }
         }
     });
 });

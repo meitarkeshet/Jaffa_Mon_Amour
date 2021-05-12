@@ -8,7 +8,7 @@
 /* fix drop down menu over-lay bug */
 
 .cbp-hrsub {
-    z-index: 1;
+    z-index: 10;
 }
 
 
