@@ -71,15 +71,15 @@ $(function() {
 
         mymap.invalidateSize() // fix gray areas issue after initializing with height 0
 
-
-        // to download and see the json created
-        var a = document.createElement("a")
-        a.href = `data:application/json;charset=utf-8, ${together}`
-        a.download = "some.json"
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
-
+        /*
+                // to download and see the json created
+                var a = document.createElement("a")
+                a.href = `data:application/json;charset=utf-8, ${together}`
+                a.download = "some.json"
+                document.body.appendChild(a)
+                a.click()
+                document.body.removeChild(a)
+        */
 
         //alert(locations_layer);
         //$('#mapid').remove();

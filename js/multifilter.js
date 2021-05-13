@@ -388,11 +388,7 @@ $.extend($.Isotope.prototype, {
 });
 */
 
-// only first isotope innit for map
 
-$grid.one('arrangeComplete', function() {
-    console.log('arrange done, just this one time');
-});
 
 
 
