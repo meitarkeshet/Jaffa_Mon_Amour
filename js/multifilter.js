@@ -326,8 +326,10 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     var isHorizontalMode = !!$this.attr('data-is-horizontal');
     if (isHorizontal !== isHorizontalMode) {
         // change container size if horiz/vert change
+        // format vert height : number of items in largest catagory * gutter size * img size
+        // width number is automatic - change columnWidth instead?
         var containerStyle = isHorizontalMode ? {
-            height: $window.height() * 100 // 'auto' //
+            height: $window.height() * 20 // 'auto' //
         } : {
             width: document.body.clientWidth // 'auto' // document.body.clientWidth //
         };
