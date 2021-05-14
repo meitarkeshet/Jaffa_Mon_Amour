@@ -1,8 +1,7 @@
 // This isn't necessary but it keeps the editor from thinking these external packages are typos or missing
-// external js: isotope.pkgd.js
+// external js: isotope.pkgd.js masonry-horizontal.js cells-by-column.js
 /* global isotope.pkgd.js, noUiSlider */
 //-----------------------------------
-
 
 // filter functions
 var filterFns = {
@@ -100,7 +99,11 @@ var filters = {};
 // init Isotope
 var $grid = $('.grid').isotope({
     itemSelector: '.building_square',
-    layoutMode: 'fitRows', // NOTICE changed form 'fitRows'
+    layoutMode: 'fitRows', // NOTICE changed form 'fitRows' cellsByColumn
+    cellsByColumn: {
+        columnWidth: 200,
+        //rowHeight: 200
+    },
     getSortData: {
         id: '.id',
         n_bicycle_parking: '.n_bicycle_parking',
@@ -313,7 +316,7 @@ var $window = $(window);
 
 $('.layout-mode-button-group').on('click', 'button', function() {
     // adjust container sizing if layout mode is changing from vertical or horizontal
-    alert('click');
+    //alert('click');
     var $this = $(this);
     var isHorizontalMode = !!$this.attr('data-is-horizontal');
     if (isHorizontal !== isHorizontalMode) {
@@ -328,7 +331,7 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     }
     // change layout mode
     var layoutModeValue = $this.attr('data-layout-mode');
-    alert(layoutModeValue);
+    //alert(layoutModeValue);
     $grid.isotope({ layoutMode: layoutModeValue });
 });
 
