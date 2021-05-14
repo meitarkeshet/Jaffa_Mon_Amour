@@ -29,7 +29,9 @@ $(function() {
         // empty string to push to
         var string_combined_arr = []
             // for every picture (both visible and invisible?)
-        $(".building_square").each(function(index) {
+        $(".building_square").each(function() {
+            // if it wasn't added as a null item
+
             //console.log(index + ": " + $(this).text().split('\n')[1]); // use to get specific line form text 
             var obj = new Object();
             obj.type = "Feature";
@@ -51,8 +53,14 @@ $(function() {
             // dict geo.
             var geometry = {};
             geometry.type = "Point";
-            let lon = parseFloat($(this).text().split('\n')[2].trim()); // grab the long column (as string) and trim the excess spaces and parse to float
-            let lat = parseFloat($(this).text().split('\n')[3].trim());
+            if (!($(this).hasClass('nullElem'))) { // consider null items that are added
+                var lon = parseFloat($(this).text().split('\n')[2].trim()); // grab the long column (as string) and trim the excess spaces and parse to float
+                var lat = parseFloat($(this).text().split('\n')[3].trim());
+            } else {
+                var lon = 0;
+                var lat = 0;
+            };
+
             let cord = [lon, lat]
             geometry.coordinates = cord; // format [-104.98404, 39.74621]
             obj.geometry = geometry;
@@ -61,7 +69,9 @@ $(function() {
             //convert object to json string
             var tmp_string = JSON.stringify(obj);
             //console.log(JSON.parse(tmp_string)); // this is your requirement.
-        });
+        }); // close $(".building_square").each(function(index)
+
+
         var str_open = '{ "type": "FeatureCollection",' +
             '"features": '; // notice no multiline option in JS
         var str_close = '}'

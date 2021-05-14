@@ -440,7 +440,7 @@ function mergeTooltips(slider, threshold, separator) {
 }
 
 
-// --------- Grouping ------------
+// --------- Grouping ------------ //
 
 $('.layout-mode-button-group').on('click', 'button', function() {
     //alert("hello");
@@ -448,8 +448,14 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     let secondary_lst = [];
     //count the number of articales (images) in the largest catagory
     $(".building_square").each(function(index) {
-        let tmp_primary = $(this).text().split('\n')[25].trim();
-        let tmp_secondary = $(this).text().split('\n')[26].trim();
+        if (!($(this).hasClass('nullElem'))) { // consider null items that are added
+            var tmp_primary = $(this).text().split('\n')[25].trim();
+            var tmp_secondary = $(this).text().split('\n')[26].trim();
+        } else {
+            var tmp_primary = '';
+            var lat = '';
+        };
+
         primary_lst.push(tmp_primary);
         secondary_lst.push(tmp_secondary);
     });
@@ -479,10 +485,18 @@ function frequency(arr, mod_item) {
     return result.length;
 };
 
+function frequency_lst(arr, mod_item) {
+    const map = arr.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
+    return ([...map.entries()]);
+};
+
+// merge to top function
 
 $('.layout-mode-button-group').on('click', 'button', function() {
     alert('create elem');
-    // create new item elements
+    var most_repeted_freq = frequency(primary_lst, mode(primary_lst)); // check the max number of entries in a catagory
+    var cat_lst = frequency_lst()
+        // create new item elements
     var elems = [];
     for (var i = 0; i < 100; i++) {
         var $elem = $('<div class="building_square nullElem" />');
