@@ -170,7 +170,7 @@ $(document).ready(function() {
     $(window).bind('scroll', function() {
         //alert('scroll'); // works
         var pixels = 100; //number of pixels before modifying styles - needs to work with bar size
-        if ($('#About_me_main').is(':animated')) { // is this actually working?
+        if ($('#About_me_main').is(':animated')) { // is this actually working? 
             if ($(window).scrollTop() >= pixels) {
                 $('#nav_sticky').addClass('fixedscroll');
                 // $('#gridid').addClass('maringscroll');
@@ -181,14 +181,3 @@ $(document).ready(function() {
         }
     });
 });
-
-$("#foo").one("click", function() {
-    alert("This will be displayed only once.");
-});
-
-// only first isotope innit for map
-/*
-$grid.one('arrangeComplete', function() {
-    console.log('arrange done, just this one time');
-});
-*/

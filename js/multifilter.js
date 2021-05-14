@@ -101,10 +101,12 @@ var $grid = $('.grid').isotope({
     itemSelector: '.building_square',
     layoutMode: 'fitRows', // NOTICE changed form 'fitRows' cellsByColumn
     cellsByColumn: {
-        columnWidth: 200,
+        columnWidth: 100,
         //rowHeight: 200
     },
     getSortData: {
+        primary: '.primary',
+        secondary: '.secondary',
         id: '.id',
         n_bicycle_parking: '.n_bicycle_parking',
         n_parks: '.n_parks',
@@ -157,6 +159,8 @@ $('#sorts').on('click', 'button', function() {
     var sortByValue = $(this).attr('data-sort-by');
     $grid.isotope({ sortBy: sortByValue });
 });
+
+
 
 // change is-checked class on buttons
 $('.button-group').each(function(i, buttonGroup) {
@@ -434,3 +438,67 @@ function mergeTooltips(slider, threshold, separator) {
         });
     });
 }
+
+
+// --------- Grouping ------------
+
+$('.layout-mode-button-group').on('click', 'button', function() {
+    //alert("hello");
+    let primary_lst = [];
+    let secondary_lst = [];
+    //count the number of articales (images) in the largest catagory
+    $(".building_square").each(function(index) {
+        let tmp_primary = $(this).text().split('\n')[25].trim();
+        let tmp_secondary = $(this).text().split('\n')[26].trim();
+        primary_lst.push(tmp_primary);
+        secondary_lst.push(tmp_secondary);
+    });
+    //console.log(mode(primary_lst));
+    //console.log(frequency(primary_lst, mode(primary_lst)));
+    var most_repeted_freq = frequency(primary_lst, mode(primary_lst));
+});
+
+// mode function
+function mode(arr) {
+    return arr.sort((a, b) =>
+        arr.filter(v => v === a).length -
+        arr.filter(v => v === b).length
+    ).pop();
+}
+
+// frequency function
+
+function frequency(arr, mod_item) {
+    const map = arr.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
+    console.info([...map.keys()]);
+    console.info([...map.values()]);
+    console.info([...map.entries()]);
+
+    let result = arr.filter(lst_item => lst_item == mod_item);
+    console.log(result.length);
+    return result.length;
+};
+
+
+$('.layout-mode-button-group').on('click', 'button', function() {
+    alert('create elem');
+    // create new item elements
+    var elems = [];
+    for (var i = 0; i < 100; i++) {
+        var $elem = $('<div class="building_square nullElem" />');
+        // set number
+        var tmp_style = 'arab';
+        $elem.append('<p class="primary" style="display:none">' + tmp_style + '</p>');
+        elems.push($elem[0]);
+    }
+    // insert new elements
+    $grid.isotope('insert', elems);
+});
+
+// bind sort button for groups
+$('.layout-mode-button-group').on('click', 'button', function() {
+    var sortByValue = $(this).attr('data-sort-by');
+    console.log('sorted');
+    //alert('hiiiooo');
+    $grid.isotope({ sortBy: sortByValue });
+});

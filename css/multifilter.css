@@ -205,6 +205,14 @@ img {
 }
 
 
+/* add nullelem class one sorting with groups*/
+
+.nullElem {
+    border: none;
+    background: none;
+}
+
+
 /* Only showing tooltips when sliding handles */
 
 .noUi-tooltip {
