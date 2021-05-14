@@ -99,10 +99,10 @@ var filters = {};
 // init Isotope
 var $grid = $('.grid').isotope({
     itemSelector: '.building_square',
-    layoutMode: 'fitRows', // NOTICE changed form 'fitRows' cellsByColumn
+    layoutMode: 'fitRows', // NOTICE changed form 'fitRows' cellsByColumn  fitColumns
     cellsByColumn: {
-        columnWidth: 100,
-        //rowHeight: 200
+        columnWidth: 70,
+        rowHeight: 70
     },
     getSortData: {
         primary: '.primary',
@@ -320,19 +320,22 @@ var $window = $(window);
 
 $('.layout-mode-button-group').on('click', 'button', function() {
     // adjust container sizing if layout mode is changing from vertical or horizontal
-    //alert('click');
+    console.log(document.body.clientWidth + ' wide by ' + document.body.clientHeight + ' high');
     var $this = $(this);
+
     var isHorizontalMode = !!$this.attr('data-is-horizontal');
     if (isHorizontal !== isHorizontalMode) {
         // change container size if horiz/vert change
         var containerStyle = isHorizontalMode ? {
-            height: $window.height() * 0.7
+            height: $window.height() * 100 // 'auto' //
         } : {
-            width: 'auto'
+            width: document.body.clientWidth // 'auto' // document.body.clientWidth //
         };
         $grid.css(containerStyle);
         isHorizontal = isHorizontalMode;
     }
+
+
     // change layout mode
     var layoutModeValue = $this.attr('data-layout-mode');
     //alert(layoutModeValue);
@@ -443,10 +446,17 @@ function mergeTooltips(slider, threshold, separator) {
 // --------- Grouping ------------ //
 
 $('.layout-mode-button-group').on('click', 'button', function() {
-    //alert("hello");
+    // remove all previously added null items, if exist
+    existing_nulls = document.getElementsByClassName('nullElem');
+    $grid.isotope('remove', existing_nulls)
+        // layout remaining item elements
+        //.isotope('layout');
+
+
+    // create empty list containers for the possible groups
     let primary_lst = [];
     let secondary_lst = [];
-    //count the number of articales (images) in the largest catagory
+    // collect the information from the currently shown pictures *NOTICE is is working well after Filter?
     $(".building_square").each(function(index) {
         if (!($(this).hasClass('nullElem'))) { // consider null items that are added
             var tmp_primary = $(this).text().split('\n')[25].trim();
@@ -455,13 +465,51 @@ $('.layout-mode-button-group').on('click', 'button', function() {
             var tmp_primary = '';
             var lat = '';
         };
-
         primary_lst.push(tmp_primary);
         secondary_lst.push(tmp_secondary);
     });
-    //console.log(mode(primary_lst));
-    //console.log(frequency(primary_lst, mode(primary_lst)));
-    var most_repeted_freq = frequency(primary_lst, mode(primary_lst));
+    // set most_repeted_freq and cat_lst depending on the group selected by user
+    var sel_group_by = $(this).attr('data-group-by');
+    console.log(sel_group_by);
+    switch (sel_group_by) {
+        case 'primary':
+            console.log('You have selected: Primary');
+            // check the max number of entries in a catagory
+            var most_repeted_freq = frequency(primary_lst, mode(primary_lst));
+            var cat_lst = frequency_lst(primary_lst, mode(primary_lst));
+            break;
+        case 'secondary':
+            console.log('You have selected: Secondary');
+            var most_repeted_freq = frequency(secondary_lst, mode(secondary_lst));
+            var cat_lst = frequency_lst(secondary_lst, mode(secondary_lst));
+            break;
+        default:
+            console.log('default');
+            var most_repeted_freq = 0;
+            var cat_lst = [];
+    }
+
+    //console.log(most_repeted_freq);
+    //console.log(cat_lst);
+
+    // create list dump for elements
+    var elems = [];
+
+    cat_lst.forEach(function(Element, index) {
+        var catagory = Element[0];
+        var catagory_n_elem = Element[1];
+        //console.log(Element[0], Element[1]);
+        for (var i = 0; i < most_repeted_freq - catagory_n_elem; i++) { // loop until getting to the differnce between #catagory and #max
+            var $elem = $('<div class="building_square nullElem" />');
+            $elem.append(`<p class="${sel_group_by}" style="display:none">` + catagory + '</p>');
+            //console.log($elem[0]);
+            elems.push($elem[0]);
+        }
+    });
+
+    // insert new elements
+    $grid.isotope('insert', elems);
+    //$grid.isotope('layout');
 });
 
 // mode function
@@ -476,12 +524,12 @@ function mode(arr) {
 
 function frequency(arr, mod_item) {
     const map = arr.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
-    console.info([...map.keys()]);
-    console.info([...map.values()]);
-    console.info([...map.entries()]);
+    //console.info([...map.keys()]);
+    //console.info([...map.values()]);
+    // console.info([...map.entries()]);
 
     let result = arr.filter(lst_item => lst_item == mod_item);
-    console.log(result.length);
+    //console.log(result.length);
     return result.length;
 };
 
@@ -490,29 +538,12 @@ function frequency_lst(arr, mod_item) {
     return ([...map.entries()]);
 };
 
-// merge to top function
 
-$('.layout-mode-button-group').on('click', 'button', function() {
-    alert('create elem');
-    var most_repeted_freq = frequency(primary_lst, mode(primary_lst)); // check the max number of entries in a catagory
-    var cat_lst = frequency_lst()
-        // create new item elements
-    var elems = [];
-    for (var i = 0; i < 100; i++) {
-        var $elem = $('<div class="building_square nullElem" />');
-        // set number
-        var tmp_style = 'arab';
-        $elem.append('<p class="primary" style="display:none">' + tmp_style + '</p>');
-        elems.push($elem[0]);
-    }
-    // insert new elements
-    $grid.isotope('insert', elems);
-});
 
 // bind sort button for groups
 $('.layout-mode-button-group').on('click', 'button', function() {
     var sortByValue = $(this).attr('data-sort-by');
-    console.log('sorted');
+    console.log('sorted by:', sortByValue);
     //alert('hiiiooo');
     $grid.isotope({ sortBy: sortByValue });
 });

@@ -27,7 +27,8 @@
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js "></script>
     <!-- load isotope's cells by colomn -->
     <script src="node_modules/isotope-cells-by-column/cells-by-column.js"></script>
-
+    <!-- load isotope's cells by colomn -->
+    <script src="node_modules/isotope-fit-columns/fit-columns.js"></script>
     <!-- load swup -->
     <script defer="" src="node_modules/swup/dist/swup.min.js">
     </script>
@@ -341,10 +342,12 @@
                                     Possible groups
                                 </h4>
                                 <ul>
-                                    <div class="button-group layout-mode-button-group">
-                                        <button class="button is-checked" data-layout-mode="fitRows" checked="checked" data-sort-by="original-order">original order</button>
-                                        <button class="button" data-layout-mode="cellsByColumn" data-group-by='primary' data-sort-by='primary'>primary</button>
-                                        <button class="button" data-layout-mode="cellsByColumn" data-group-by='secondary' data-sort-by='secondary'>secondary</button>
+                                    <div class="button-group layout-mode-button-group" id="group-sort">
+                                        <button class="button is-checked" data-layout-mode="fitRows" checked="checked" data-group-by='non' data-sort-by="original-order">original order</button>
+                                        <button class="button" data-layout-mode="cellsByColumn" data-is-horizontal="true" data-group-by='primary' data-sort-by='primary'>primary</button>
+                                        <button class="button" data-layout-mode="cellsByColumn" data-is-horizontal="true" data-group-by='secondary' data-sort-by='secondary'>secondary</button>
+                                        <button class="button" data-layout-mode="fitRows" checked="checked" data-group-by='non' data-sort-by="original-order">fitcolumns</button>
+
                                     </div>
                                 </ul>
                                 <h4>

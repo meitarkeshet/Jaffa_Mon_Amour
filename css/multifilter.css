@@ -94,8 +94,11 @@ font size - 14*/
 /* ---- isotope ---- */
 
 .grid {
-    z-index: -2;
+    z-index: 0;
     background: #E5E7EA;
+    /* either of these will work for horizontal Isotope layouts
+    height: 60000%;
+    height: 9980px; */
 }
 
 
@@ -105,7 +108,7 @@ font size - 14*/
     content: '';
     display: block;
     clear: both;
-    z-index: -2;
+    z-index: 0;
 }
 
 
