@@ -101,8 +101,9 @@ var $grid = $('.grid').isotope({
     itemSelector: '.building_square',
     layoutMode: 'fitRows', // NOTICE changed form 'fitRows' cellsByColumn  fitColumns
     cellsByColumn: {
-        columnWidth: 70,
-        rowHeight: 70
+        columnWidth: 120,
+        //gutter: 150 //  not working
+        rowHeight: 52
     },
     getSortData: {
         primary: '.primary',
@@ -122,7 +123,7 @@ var $grid = $('.grid').isotope({
         var $this = $(this);
         // skip filtering on null objects (that are used as spacers for Group-by)
         if (!($(this).hasClass('nullElem'))) {
-            console.log('Not a null object!');
+            //console.log('Not a null object!');
 
             for (var prop in filters) {
                 var filter = filters[prop];
@@ -284,8 +285,8 @@ noUiSlider.create(n_kindergartens_slider, {
 $('.img_filters').on('click', '.slider', function() {
     // get group key
     filterGroup = $(this).attr('id')
-    console.log(filterGroup);
-    //alert(filterGroup);
+        //console.log(filterGroup);
+        //alert(filterGroup);
     var filterValue = $(this).attr('data-filter');
     //alert(filterValue);
     // use filterFn if matches value
@@ -324,45 +325,6 @@ $('.button-group').each(function(i, buttonGroup) {
         $(this).addClass('is-checked');
     });
 });
-
-// to enable multiple layouts
-
-var isHorizontal = false;
-var $window = $(window);
-
-$('.layout-mode-button-group').on('click', 'button', function() {
-    // adjust container sizing if layout mode is changing from vertical or horizontal
-    console.log(document.body.clientWidth + ' wide by ' + document.body.clientHeight + ' high');
-    var $this = $(this);
-
-    var isHorizontalMode = !!$this.attr('data-is-horizontal');
-    if (isHorizontal !== isHorizontalMode) {
-        // change container size if horiz/vert change
-        // format vert height : number of items in largest catagory * gutter size * img size
-        // width number is automatic - change columnWidth instead?
-        var containerStyle = isHorizontalMode ? {
-            height: $window.height() * 20 // 'auto' //
-        } : {
-            width: document.body.clientWidth // 'auto' // document.body.clientWidth //
-        };
-        $grid.css(containerStyle);
-        isHorizontal = isHorizontalMode;
-    }
-
-
-    // change layout mode
-    var layoutModeValue = $this.attr('data-layout-mode');
-    //alert(layoutModeValue);
-    $grid.isotope({ layoutMode: layoutModeValue });
-});
-
-
-
-
-
-
-
-
 
 
 /* Merging overlapping tooltips */
@@ -457,14 +419,23 @@ function mergeTooltips(slider, threshold, separator) {
 }
 
 
+
 // --------- Grouping ------------ //
 
+// to enable multiple layouts
+
+var isHorizontal = false;
+var $window = $(window);
+
 $('.layout-mode-button-group').on('click', 'button', function() {
+
+    // ------------------ Null elem creation ------------------- //
+
     // remove all previously added null items, if exist
     existing_nulls = document.getElementsByClassName('nullElem');
     $grid.isotope('remove', existing_nulls)
         // layout remaining item elements
-        //.isotope('layout');
+        .isotope('layout');
 
 
     // create empty list containers for the possible groups
@@ -472,47 +443,62 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     let secondary_lst = [];
     // collect the information from the currently shown pictures *NOTICE is is working after Filter?
     $(".building_square").each(function(index) {
-        if (!($(this).hasClass('nullElem'))) { // consider null items that are added
-            var tmp_primary = $(this).text().split('\n')[25].trim();
-            var tmp_secondary = $(this).text().split('\n')[26].trim();
+        if (!($(this).hasClass('nullElem'))) { // if it's not a null added item
+            // and only if it's currently shown
+            if ($(this).css('display') != 'none') {
+                var tmp_primary = $(this).text().split('\n')[25].trim();
+                var tmp_secondary = $(this).text().split('\n')[26].trim();
+                console.log('This I can see.');
+                primary_lst.push(tmp_primary);
+                secondary_lst.push(tmp_secondary);
+            }
         } else {
-            var tmp_primary = '';
-            var lat = '';
+            //var tmp_primary = '';
+            //var lat = '';
+            console.log('nullElem have not been removed.');
         };
-        primary_lst.push(tmp_primary);
-        secondary_lst.push(tmp_secondary);
+
     });
     // set most_repeted_freq and cat_lst depending on the group selected by user
     var sel_group_by = $(this).attr('data-group-by');
-    console.log(sel_group_by);
+    //console.log(sel_group_by);
     switch (sel_group_by) {
         case 'primary':
-            console.log('You have selected: Primary');
+            // console.log('You have selected: Primary');
             // check the max number of entries in a catagory
-            var most_repeted_freq = frequency(primary_lst, mode(primary_lst));
+            //var most_repeted_freq = frequency(primary_lst, mode(primary_lst));
             var cat_lst = frequency_lst(primary_lst, mode(primary_lst));
             break;
         case 'secondary':
-            console.log('You have selected: Secondary');
-            var most_repeted_freq = frequency(secondary_lst, mode(secondary_lst));
+            //console.log('You have selected: Secondary');
+            //var most_repeted_freq = frequency(secondary_lst, mode(secondary_lst));
             var cat_lst = frequency_lst(secondary_lst, mode(secondary_lst));
             break;
         default:
-            console.log('default');
-            var most_repeted_freq = 0;
+            //console.log('default');
+            //var most_repeted_freq = 0;
             var cat_lst = [];
     }
 
-    //console.log(most_repeted_freq);
-    //console.log(cat_lst);
-
     // create list dump for elements
     var elems = [];
+    var occu_lst = [];
+
+    cat_lst.forEach(function(Element, index) {
+        var catagory_n_elem = Element[1];
+        occu_lst.push(catagory_n_elem);
+    });
+    console.log(occu_lst);
+    var most_repeted_freq = occu_lst.reduce(function(x, y) {
+        return Math.max(x, y);
+    });
+    console.log(most_repeted_freq);
 
     cat_lst.forEach(function(Element, index) {
         var catagory = Element[0];
         var catagory_n_elem = Element[1];
         //console.log(Element[0], Element[1]);
+        console.log(catagory, catagory_n_elem, most_repeted_freq - catagory_n_elem);
         for (var i = 0; i < most_repeted_freq - catagory_n_elem; i++) { // loop until getting to the differnce between #catagory and #max
             var $elem = $('<div class="building_square nullElem" />');
             $elem.append(`<p class="${sel_group_by} ignore" style="display:none">` + catagory + '</p>');
@@ -521,9 +507,51 @@ $('.layout-mode-button-group').on('click', 'button', function() {
         }
     });
 
+
     // insert new elements
     $grid.isotope('insert', elems);
-    //$grid.isotope('layout');
+
+    // ------------------ Adjust container sizing ------------------- //
+    // adjust container sizing if layout mode is changing from vertical or horizontal
+    //console.log(document.body.clientWidth + ' wide by ' + document.body.clientHeight + ' high');
+    var $this = $(this);
+
+    var isHorizontalMode = !!$this.attr('data-is-horizontal');
+    if (isHorizontal !== isHorizontalMode) {
+        // change container size if horiz/vert change
+        // format vert height : number of items in largest catagory * gutter size * img size
+        // width number is automatic - change columnWidth instead?
+        // num_largest_cat = 
+        // img size is 70 × 47 + maring 5px
+        var img_size = 55; // NOTICE 
+        //grid_gutter = 70; // = rowHeight ?
+        console.log('most repeted: ', most_repeted_freq);
+        var container_height = `${most_repeted_freq * img_size}px`; // grid_gutter
+        //container_width = `${document.body.clientWidth}px`;
+        //console.log(container_height, container_width);
+        // NOTICE - only the width OR height will be taken into account - not both
+        var containerStyle = isHorizontalMode ? {
+            // changing to cellsByColumn
+            height: container_height, //$window.height() * 20 // 'auto' //
+            //width: container_width
+        } : {
+            // changing to fitRows
+            width: 'auto' // document.body.clientWidth //
+        };
+        $grid.css(containerStyle);
+        isHorizontal = isHorizontalMode;
+    }
+
+
+    // change layout mode
+    var layoutModeValue = $this.attr('data-layout-mode');
+    //alert(layoutModeValue);
+    $grid.isotope({ layoutMode: layoutModeValue });
+
+    // ----------------- Sort -------------------- //
+    var sortByValue = $(this).attr('data-sort-by');
+    console.log('sorted by:', sortByValue);
+    $grid.isotope({ sortBy: sortByValue });
 });
 
 // mode function
@@ -544,20 +572,11 @@ function frequency(arr, mod_item) {
 
     let result = arr.filter(lst_item => lst_item == mod_item);
     //console.log(result.length);
-    return result.length;
+    return (result.length); // NOTICE - subtracting 1 to fix issue
 };
 
 function frequency_lst(arr, mod_item) {
     const map = arr.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
+    //console.info(['in frquency_lst func: ', ...map.entries()]);
     return ([...map.entries()]);
 };
-
-
-
-// bind sort button for groups
-$('.layout-mode-button-group').on('click', 'button', function() {
-    var sortByValue = $(this).attr('data-sort-by');
-    console.log('sorted by:', sortByValue);
-    //alert('hiiiooo');
-    $grid.isotope({ sortBy: sortByValue });
-});
