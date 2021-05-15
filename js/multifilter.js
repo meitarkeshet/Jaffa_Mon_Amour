@@ -120,24 +120,24 @@ var $grid = $('.grid').isotope({
 
         var isMatched = true;
         var $this = $(this);
+        // skip filtering on null objects (that are used as spacers for Group-by)
+        if (!($(this).hasClass('nullElem'))) {
+            console.log('Not a null object!');
 
-        if ($(this).hasClass('nullElem')) {
-            console.log('a null object!');
-        }
-
-        for (var prop in filters) {
-            var filter = filters[prop];
-            //console.log(filter); // slider names
-            // use function if it matches
-            filter = filterFns[filter] || filter;
-            //console.log(filter); // functions if they exist
-            // test each filter
-            if (filter) {
-                isMatched = isMatched && $(this).is(filter);
-            }
-            // break if not matched
-            if (!isMatched) {
-                break;
+            for (var prop in filters) {
+                var filter = filters[prop];
+                //console.log(filter); // slider names
+                // use function if it matches
+                filter = filterFns[filter] || filter;
+                //console.log(filter); // functions if they exist
+                // test each filter
+                if (filter) {
+                    isMatched = isMatched && $(this).is(filter);
+                }
+                // break if not matched
+                if (!isMatched) {
+                    break;
+                }
             }
         }
 
