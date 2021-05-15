@@ -121,10 +121,16 @@ var $grid = $('.grid').isotope({
         var isMatched = true;
         var $this = $(this);
 
+        if ($(this).hasClass('nullElem')) {
+            console.log('a null object!');
+        }
+
         for (var prop in filters) {
             var filter = filters[prop];
+            //console.log(filter); // slider names
             // use function if it matches
             filter = filterFns[filter] || filter;
+            //console.log(filter); // functions if they exist
             // test each filter
             if (filter) {
                 isMatched = isMatched && $(this).is(filter);
@@ -278,7 +284,8 @@ noUiSlider.create(n_kindergartens_slider, {
 $('.img_filters').on('click', '.slider', function() {
     // get group key
     filterGroup = $(this).attr('id')
-        //alert(filterGroup);
+    console.log(filterGroup);
+    //alert(filterGroup);
     var filterValue = $(this).attr('data-filter');
     //alert(filterValue);
     // use filterFn if matches value
@@ -292,6 +299,11 @@ $('.img_filters').on('click', '.slider', function() {
     //alert(filters_concat);
     // arrange, and use filter fn
     $grid.isotope();
+    /*
+        $grid.isotope({
+            filter: filters + ', .ignore'
+        });
+    */
 });
 
 // flatten object by concatting values - for combaining filter 
@@ -458,7 +470,7 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     // create empty list containers for the possible groups
     let primary_lst = [];
     let secondary_lst = [];
-    // collect the information from the currently shown pictures *NOTICE is is working well after Filter?
+    // collect the information from the currently shown pictures *NOTICE is is working after Filter?
     $(".building_square").each(function(index) {
         if (!($(this).hasClass('nullElem'))) { // consider null items that are added
             var tmp_primary = $(this).text().split('\n')[25].trim();
@@ -503,7 +515,7 @@ $('.layout-mode-button-group').on('click', 'button', function() {
         //console.log(Element[0], Element[1]);
         for (var i = 0; i < most_repeted_freq - catagory_n_elem; i++) { // loop until getting to the differnce between #catagory and #max
             var $elem = $('<div class="building_square nullElem" />');
-            $elem.append(`<p class="${sel_group_by}" style="display:none">` + catagory + '</p>');
+            $elem.append(`<p class="${sel_group_by} ignore" style="display:none">` + catagory + '</p>');
             //console.log($elem[0]);
             elems.push($elem[0]);
         }
