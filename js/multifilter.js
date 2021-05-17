@@ -108,6 +108,7 @@ var $grid = $('.grid').isotope({
     getSortData: {
         primary: '.primary',
         secondary: '.secondary',
+        col_header: '[col_header]',
         id: '.id',
         n_bicycle_parking: '.n_bicycle_parking',
         n_parks: '.n_parks',
@@ -446,8 +447,14 @@ $('.layout-mode-button-group').on('click', 'button', function() {
         if (!($(this).hasClass('nullElem'))) { // if it's not a null added item
             // and only if it's currently shown
             if ($(this).css('display') != 'none') { // NOTICE if the html divs are not ordered in a singel line = ERROR . look for <null> tag.
+                //console.log($(this).text().split('\n')[25]);
                 var tmp_primary = $(this).text().split('\n')[25].trim(); //$(this).text().split('\n')[25].trim(); trim not needed - spacing intentional
-                tmp_primary = ' ' + tmp_primary; // try to add single space before
+                //var first_char = tmp_primary.charAt(0); // get first char of string
+                //var pre_char = alpha_swap(first_char);
+                //console.log(pre_char);
+                //tmp_primary = pre_char + tmp_primary; 
+                tmp_primary = " " + tmp_primary; // try to add single space before
+                console.log(tmp_primary);
                 if (tmp_primary == 0) {
                     console.log('This was passed as 0:');
                     console.log($(this).text());
@@ -522,7 +529,7 @@ $('.layout-mode-button-group').on('click', 'button', function() {
             console.log(catagory, catagory_n_elem, most_repeted_freq - catagory_n_elem);
         };
         // add catagory name 
-        var $elem = $('<div class="building_square nullElem" />');
+        var $elem = $('<div class="building_square nullElem " col_header="a"/>'); // NOTICE - col_header
         $elem.append(`<h4 class="${sel_group_by} ignore">` + catagory + '</h4>'); // remove display:none to show
         elems.push($elem[0]);
     });
@@ -574,7 +581,7 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     // ----------------- Sort -------------------- //
     var sortByValue = $(this).attr('data-sort-by');
     console.log('sorted by:', sortByValue);
-    $grid.isotope({ sortBy: sortByValue });
+    $grid.isotope({ sortBy: [sortByValue, 'col_header'] }); // [ sortByValue, 'col_header' ] // { sortBy: sortByValue }
 });
 
 function frequency_lst(arr) {
@@ -588,6 +595,26 @@ function frequency_lst(arr) {
 
 };
 
+// Return preview letter in the alphabet 
+function alpha_swap(arr) {
+    const isAlpha = code => (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
+    const isLast = code => code === 90 || code === 122;
+    const nextLetterString = arr => {
+        const strArr = arr.split('');
+        return strArr.reduce((acc, val) => {
+            const code = val.charCodeAt(0);
+            if (!isAlpha(code)) {
+                return acc + val;
+            };
+            if (isLast(code)) {
+                return acc + String.fromCharCode(code - 25);
+            };
+            return acc + String.fromCharCode(code + 1);
+        }, '');
+    };
+    console.log(nextLetterString(arr));
+    return nextLetterString(arr);
+};
 /*
 // mode function
 function mode(arr) {
