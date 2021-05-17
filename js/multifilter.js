@@ -430,7 +430,7 @@ var $window = $(window);
 $('.layout-mode-button-group').on('click', 'button', function() {
 
     // ------------------ Null elem creation ------------------- //
-
+    console.log('---------- Resetting layout ----------');
     // remove all previously added null items, if exist
     existing_nulls = document.getElementsByClassName('nullElem');
     $grid.isotope('remove', existing_nulls)
@@ -445,13 +445,20 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     $(".building_square").each(function(index) {
         if (!($(this).hasClass('nullElem'))) { // if it's not a null added item
             // and only if it's currently shown
-            if ($(this).css('display') != 'none') {
+            if ($(this).css('display') != 'none') { // NOTICE if the html divs are not ordered in a singel line = ERROR . look for <null> tag.
                 var tmp_primary = $(this).text().split('\n')[25].trim();
+                if (tmp_primary == 0) {
+                    console.log('This was passed as 0:');
+                    console.log($(this).text());
+                }
+                //console.log(tmp_primary); // NOTICE some are passed as '0'. why?
                 var tmp_secondary = $(this).text().split('\n')[26].trim();
                 console.log('This I can see.');
                 primary_lst.push(tmp_primary);
                 secondary_lst.push(tmp_secondary);
-            }
+            } else {
+                //console.log('Skipped a filtered item.');
+            };
         } else {
             //var tmp_primary = '';
             //var lat = '';
@@ -461,18 +468,18 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     });
     // set most_repeted_freq and cat_lst depending on the group selected by user
     var sel_group_by = $(this).attr('data-group-by');
-    //console.log(sel_group_by);
+    //console.log('mode primary_list returns: ', mode(primary_lst));
     switch (sel_group_by) {
         case 'primary':
             // console.log('You have selected: Primary');
             // check the max number of entries in a catagory
             //var most_repeted_freq = frequency(primary_lst, mode(primary_lst));
-            var cat_lst = frequency_lst(primary_lst, mode(primary_lst));
+            var cat_lst = frequency_lst(primary_lst);
             break;
         case 'secondary':
             //console.log('You have selected: Secondary');
             //var most_repeted_freq = frequency(secondary_lst, mode(secondary_lst));
-            var cat_lst = frequency_lst(secondary_lst, mode(secondary_lst));
+            var cat_lst = frequency_lst(secondary_lst);
             break;
         default:
             //console.log('default');
@@ -496,15 +503,26 @@ $('.layout-mode-button-group').on('click', 'button', function() {
 
     cat_lst.forEach(function(Element, index) {
         var catagory = Element[0];
-        var catagory_n_elem = Element[1];
-        //console.log(Element[0], Element[1]);
-        console.log(catagory, catagory_n_elem, most_repeted_freq - catagory_n_elem);
-        for (var i = 0; i < most_repeted_freq - catagory_n_elem; i++) { // loop until getting to the differnce between #catagory and #max
-            var $elem = $('<div class="building_square nullElem" />');
-            $elem.append(`<p class="${sel_group_by} ignore" style="display:none">` + catagory + '</p>');
-            //console.log($elem[0]);
-            elems.push($elem[0]);
+        if (catagory == 0) {
+            console.log('Empty items in frequency_lst are returned as 0.');
         }
+        var catagory_n_elem = Element[1];
+        if (catagory != 0) {
+            console.log(catagory, catagory_n_elem, most_repeted_freq - catagory_n_elem);
+            for (var i = 0; i < most_repeted_freq - catagory_n_elem; i++) { // loop until getting to the differnce between #catagory and #max
+                var $elem = $('<div class="building_square nullElem" />');
+                // add tag names
+                $elem.append(`<p class="${sel_group_by} ignore" style="display:none">` + catagory + 'a' + '</p>'); // add a to make sure the added Nulls are under 
+                //console.log($elem[0]);
+                elems.push($elem[0]);
+            }
+        } else {
+            console.log(catagory, catagory_n_elem, most_repeted_freq - catagory_n_elem);
+        };
+        // add catagory name 
+        var $elem = $('<div class="building_square nullElem" />');
+        $elem.append(`<p class="${sel_group_by} ignore">` + catagory + '</p>'); // remove display:none to show
+        elems.push($elem[0]);
     });
 
 
@@ -554,6 +572,18 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     $grid.isotope({ sortBy: sortByValue });
 });
 
+function frequency_lst(arr) {
+    console.info('Array passed: ', arr); // NOTICE already when passed - 0 found in array
+    const map = arr.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
+    //console.info(['in frquency_lst func: ', ...map.entries()]);
+    console.info([...map.keys()]);
+    console.info([...map.values()]);
+    console.info([...map.entries()]);
+    return ([...map.entries()]);
+
+};
+
+/*
 // mode function
 function mode(arr) {
     return arr.sort((a, b) =>
@@ -561,8 +591,11 @@ function mode(arr) {
         arr.filter(v => v === b).length
     ).pop();
 }
+*/
 
-// frequency function
+
+// frequency function 
+/*
 
 function frequency(arr, mod_item) {
     const map = arr.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
@@ -574,9 +607,4 @@ function frequency(arr, mod_item) {
     //console.log(result.length);
     return (result.length); // NOTICE - subtracting 1 to fix issue
 };
-
-function frequency_lst(arr, mod_item) {
-    const map = arr.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
-    //console.info(['in frquency_lst func: ', ...map.entries()]);
-    return ([...map.entries()]);
-};
+*/
