@@ -501,6 +501,7 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     });
     console.log(most_repeted_freq);
 
+
     cat_lst.forEach(function(Element, index) {
         var catagory = Element[0];
         if (catagory == 0) {
@@ -521,7 +522,7 @@ $('.layout-mode-button-group').on('click', 'button', function() {
         };
         // add catagory name 
         var $elem = $('<div class="building_square nullElem" />');
-        $elem.append(`<p class="${sel_group_by} ignore">` + catagory + '</p>'); // remove display:none to show
+        $elem.append(`<h4 class="${sel_group_by} ignore">` + catagory + '</h4>'); // remove display:none to show
         elems.push($elem[0]);
     });
 
@@ -533,6 +534,9 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     // adjust container sizing if layout mode is changing from vertical or horizontal
     //console.log(document.body.clientWidth + ' wide by ' + document.body.clientHeight + ' high');
     var $this = $(this);
+
+    most_repeted_freq += 1;
+    console.log('added 1 to most repeted: ', most_repeted_freq); // to deal with added tags
 
     var isHorizontalMode = !!$this.attr('data-is-horizontal');
     if (isHorizontal !== isHorizontalMode) {
