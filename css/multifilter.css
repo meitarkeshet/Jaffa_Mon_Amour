@@ -101,6 +101,11 @@ font size - 14*/
     height: 9980px; */
 }
 
+.building_square,
+.grid-sizer {
+    width: 5000;
+}
+
 
 /* clear fix */
 

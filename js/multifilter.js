@@ -95,13 +95,14 @@ var filterFns = {
 // store filter for each group
 var filters = {};
 
+var colWidth = 5; // start colwidth with a random value to be changed later
 
 // init Isotope
 var $grid = $('.grid').isotope({
     itemSelector: '.building_square',
     layoutMode: 'fitRows', // NOTICE changed form 'fitRows' cellsByColumn  fitColumns
     cellsByColumn: {
-        columnWidth: 120,
+        columnWidth: colWidth, //120
         //gutter: 150 //  not working
         rowHeight: 52
     },
@@ -434,10 +435,17 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     console.log('---------- Resetting layout ----------');
     // remove all previously added null items, if exist
     existing_nulls = document.getElementsByClassName('nullElem');
-    $grid.isotope('remove', existing_nulls)
-        // layout remaining item elements
-        .isotope('layout');
+    console.log('existing null before: ', existing_nulls);
+    $grid.isotope('remove', existing_nulls);
+    console.log('existing null after isotope: ', existing_nulls);
+    $(existing_nulls).remove();
+    console.log('existing null after jquery remove: ', existing_nulls);
 
+    // layout remaining item elements
+    $grid.isotope('layout'); // restart layout
+    $grid.isotope('reloadItems'); // work?
+
+    var null_flag = false;
 
     // create empty list containers for the possible groups
     let primary_lst = [];
@@ -454,14 +462,14 @@ $('.layout-mode-button-group').on('click', 'button', function() {
                 //console.log(pre_char);
                 //tmp_primary = pre_char + tmp_primary; 
                 tmp_primary = " " + tmp_primary; // try to add single space before
-                console.log(tmp_primary);
+                //console.log(tmp_primary);
                 if (tmp_primary == 0) {
-                    console.log('This was passed as 0:');
-                    console.log($(this).text());
+                    //console.log('This was passed as 0:');
+                    //console.log($(this).text());
                 }
                 //console.log(tmp_primary); // NOTICE some are passed as '0'. why?
                 var tmp_secondary = $(this).text().split('\n')[26].trim();
-                console.log('This I can see.');
+                // console.log('This I can see.');
                 primary_lst.push(tmp_primary);
                 secondary_lst.push(tmp_secondary);
             } else {
@@ -471,6 +479,7 @@ $('.layout-mode-button-group').on('click', 'button', function() {
             //var tmp_primary = '';
             //var lat = '';
             console.log('nullElem have not been removed.');
+            null_flag = true;
         };
 
     });
@@ -503,11 +512,11 @@ $('.layout-mode-button-group').on('click', 'button', function() {
         var catagory_n_elem = Element[1];
         occu_lst.push(catagory_n_elem);
     });
-    console.log(occu_lst);
+    //console.log(occu_lst);
     var most_repeted_freq = occu_lst.reduce(function(x, y) {
         return Math.max(x, y);
     });
-    console.log(most_repeted_freq);
+    //console.log(most_repeted_freq);
 
 
     cat_lst.forEach(function(Element, index) {
@@ -517,7 +526,7 @@ $('.layout-mode-button-group').on('click', 'button', function() {
         }
         var catagory_n_elem = Element[1];
         if (catagory != 0) {
-            console.log(catagory, catagory_n_elem, most_repeted_freq - catagory_n_elem);
+            //console.log(catagory, catagory_n_elem, most_repeted_freq - catagory_n_elem);
             for (var i = 0; i < most_repeted_freq - catagory_n_elem; i++) { // loop until getting to the differnce between #catagory and #max
                 var $elem = $('<div class="building_square nullElem" />');
                 // add tag names
@@ -526,7 +535,7 @@ $('.layout-mode-button-group').on('click', 'button', function() {
                 elems.push($elem[0]);
             }
         } else {
-            console.log(catagory, catagory_n_elem, most_repeted_freq - catagory_n_elem);
+            //console.log(catagory, catagory_n_elem, most_repeted_freq - catagory_n_elem);
         };
         // add catagory name 
         var $elem = $('<div class="building_square nullElem " col_header="a"/>'); // NOTICE - col_header
@@ -538,24 +547,26 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     // insert new elements
     $grid.isotope('insert', elems);
 
+    //console.log('added 1 to most repeted: ', most_repeted_freq); // to deal with added tags
+    most_repeted_freq += 1;
+
+
     // ------------------ Adjust container sizing ------------------- //
     // adjust container sizing if layout mode is changing from vertical or horizontal
     //console.log(document.body.clientWidth + ' wide by ' + document.body.clientHeight + ' high');
-    var $this = $(this);
 
-    most_repeted_freq += 1;
-    console.log('added 1 to most repeted: ', most_repeted_freq); // to deal with added tags
+
+    var $this = $(this);
 
     var isHorizontalMode = !!$this.attr('data-is-horizontal');
     if (isHorizontal !== isHorizontalMode) {
         // change container size if horiz/vert change
         // format vert height : number of items in largest catagory * gutter size * img size
         // width number is automatic - change columnWidth instead?
-        // num_largest_cat = 
         // img size is 70 × 47 + maring 5px
         var img_size = 55; // NOTICE 
         //grid_gutter = 70; // = rowHeight ?
-        console.log('most repeted: ', most_repeted_freq);
+        //console.log('most repeted: ', most_repeted_freq);
         var container_height = `${most_repeted_freq * img_size}px`; // grid_gutter
         //container_width = `${document.body.clientWidth}px`;
         //console.log(container_height, container_width);
@@ -572,11 +583,28 @@ $('.layout-mode-button-group').on('click', 'button', function() {
         isHorizontal = isHorizontalMode;
     }
 
+    window.colWidth = 1520; // change the value of the column's width
+    printcolwidth(); // check change in global
+    screen_width = document.body.clientWidth;
+    //console.log('cat_lst: ', cat_lst);
+    //console.log('cat_lst length: ', cat_lst.length);
+
+    window.colWidth = screen_width / cat_lst.length; // the user's screen divided by the number of catagories
 
     // change layout mode
     var layoutModeValue = $this.attr('data-layout-mode');
-    //alert(layoutModeValue);
     $grid.isotope({ layoutMode: layoutModeValue });
+
+    // adjust column width to fit number of catagories 
+    $grid.isotope({
+        cellsByColumn: {
+            columnWidth: colWidth, //120
+            //gutter: 150 //  not working
+            rowHeight: 52
+        }
+    });
+
+
 
     // ----------------- Sort -------------------- //
     var sortByValue = $(this).attr('data-sort-by');
@@ -585,12 +613,12 @@ $('.layout-mode-button-group').on('click', 'button', function() {
 });
 
 function frequency_lst(arr) {
-    console.info('Array passed: ', arr); // NOTICE already when passed - 0 found in array
+    //console.info('Array passed: ', arr); // NOTICE already when passed - 0 found in array
     const map = arr.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
     //console.info(['in frquency_lst func: ', ...map.entries()]);
-    console.info([...map.keys()]);
-    console.info([...map.values()]);
-    console.info([...map.entries()]);
+    //console.info([...map.keys()]);
+    //console.info([...map.values()]);
+    //console.info([...map.entries()]);
     return ([...map.entries()]);
 
 };
@@ -640,3 +668,7 @@ function frequency(arr, mod_item) {
     return (result.length); // NOTICE - subtracting 1 to fix issue
 };
 */
+
+function printcolwidth() {
+    console.info('global colwidth: ', window.colWidth);
+};
