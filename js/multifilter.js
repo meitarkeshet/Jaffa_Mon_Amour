@@ -446,7 +446,8 @@ $('.layout-mode-button-group').on('click', 'button', function() {
         if (!($(this).hasClass('nullElem'))) { // if it's not a null added item
             // and only if it's currently shown
             if ($(this).css('display') != 'none') { // NOTICE if the html divs are not ordered in a singel line = ERROR . look for <null> tag.
-                var tmp_primary = $(this).text().split('\n')[25].trim();
+                var tmp_primary = $(this).text().split('\n')[25].trim(); //$(this).text().split('\n')[25].trim(); trim not needed - spacing intentional
+                tmp_primary = ' ' + tmp_primary; // try to add single space before
                 if (tmp_primary == 0) {
                     console.log('This was passed as 0:');
                     console.log($(this).text());
