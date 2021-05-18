@@ -107,6 +107,14 @@ $(function() {
             filter: function(feature, layer) {
                 return feature.properties.show_on_map;
             },
+            style: function(feature) {
+                if (feature) {
+                    console.log(feature);
+                }
+                return {
+                    color: "green"
+                };
+            },
             pointToLayer: function(feature, latlng) {
                 return new L.CircleMarker(latlng, {
                     radius: 10,
@@ -153,10 +161,11 @@ geojsonLayer = L.geoJson(json_pins, {
     }
 });
 */
+
 //mymap.addLayer(geojsonLayer);
 
+// ---------- Scroll to elements  ---------- //
 
-// scroll to elements 
 
 $('#vis_grid').click(function() {
     //$('#nav_sticky').addClass('fixedscroll'); // try open bar first
@@ -190,4 +199,11 @@ $(document).ready(function() {
             }
         }
     });
+});
+
+// ---------- Group by ---------- //
+
+$('.layout-mode-button-group').on('click', 'button', function() {
+    console.log('---------- Map >> Group by ----------');
+
 });
