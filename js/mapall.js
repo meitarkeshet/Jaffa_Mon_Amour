@@ -119,73 +119,27 @@ $(function() {
             style: function(feature) {
                 if (flag_groupby == true) { // if we are grouping by
                     //console.log(feature.properties.item_group);
-                    let colorby_itemgroup = feature.properties.item_group;
-                    // color according the number of catagories:
-                    switch (num_groups) { // qualitative data
-                        case 3:
-                            var color_1 = '#a6cee3';
-                            var color_2 = '#1f78b4';
-                            var color_3 = '#b2df8a';
-                            break;
-                        case 4:
-                            var color_1 = '#a6cee3';
-                            var color_2 = '#1f78b4';
-                            var color_3 = '#b2df8a';
-                            var color_4 = '#33a02c';
-                            break;
-                        case 5:
-                            var color_1 = '#a6cee3';
-                            var color_2 = '#1f78b4';
-                            var color_3 = '#b2df8a';
-                            var color_4 = '#33a02c';
-                            var color_5 = '#fb9a99';
-                            break;
-                    };
+                    var colorby_itemgroup = feature.properties.item_group;
                     // a. list of all colors + list all catagories.
-                    var color_lst = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a', '#ffff99', '#b15928']
-                        //console.log(groupby_catlst);
-                        // b. create dictionary with catagory and color
-                        //Create Dictionary with Object
-                    var dict = {};
+                    var color_lst = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a', '#ffff99', '#b15928'];
 
+                    // b. create dictionary with catagory and color
                     var keys = groupby_catlst.map(Function.prototype.call, String.prototype.trim); // trim to avoid spacing problems
                     //console.log(keys);
                     var values = color_lst.slice(0, keys.length); // cut the list to have the same num. members as keys
                     //console.log(values);
-                    var result = {};
-                    console.log(zip(keys, values));
-                    //console.log(result);
-
-
+                    var dict = zip(keys, values); // create a dict with the catagory names and matching colors
+                    //console.log(dict);
                     // c. use itemgroup as KEY to return color VALUE
-
-                    switch (colorby_itemgroup) { // NOTICE spaces in names
-                        case 'international':
-                            return {
-                                color: color_1
-                            };
-                            break;
-                        case 'eclectic':
-                            return {
-                                color: color_2
-                            };
-                            break;
-                        case 'else':
-                            return {
-                                color: color_3
-                            };
-                            break;
-                        default:
-                            return {
-                                color: "purple"
-                            };
-                    }
-                    //console.log(sel_group_by);
-                    //console.log('grouping flag');
+                    //console.log(colorby_itemgroup);
+                    //console.log(dict[colorby_itemgroup]);
+                    return {
+                        color: dict[colorby_itemgroup]
+                    };
                 }
                 // if its not grouped by:
                 return {
-                    color: "green"
+                    color: '#1f78b4'
                 };
             },
             pointToLayer: function(feature, latlng) {
