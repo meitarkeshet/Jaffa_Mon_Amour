@@ -25,20 +25,28 @@ var layerGroup = L.layerGroup().addTo(mymap);
 // $('.img_filters').on('click', '.slider', function() {
 $(function() {
     var map_reload = function() {
-        //alert('yo');
+
+        if (flag_groupby == true) {
+            //console.log('Is grouped by');
+        }; // is grouped by?
+
         // empty string to push to
         var string_combined_arr = []
             // for every picture (both visible and invisible?)
         $(".building_square").each(function() {
             // if it wasn't added as a null item
-
+            var tmp_this = $(this);
             //console.log(index + ": " + $(this).text().split('\n')[1]); // use to get specific line form text 
             var obj = new Object();
             obj.type = "Feature";
             // dict prop.
             var properties = {};
+            // for Group-by
+            if (flag_groupby == true) {
+                let item_group = $(this).children(`.${sel_group_by}`);
+                properties.item_group = item_group.text().trim(); // trim to protect from spacing issues
+            }
             let id = $(this).attr('id');
-            //alert(id);
             // address?
             properties.name = "id"; // $(this).attr('id')
             if ($(this).css('display') == 'none') { // if the image is not currently showing (was filterd by user, don't )
@@ -95,6 +103,7 @@ $(function() {
         //$('#mapid').remove();
 
 
+
         if (layerGroup !== undefined) {
             // remove all the markers in one go
             layerGroup.clearLayers();
@@ -108,9 +117,73 @@ $(function() {
                 return feature.properties.show_on_map;
             },
             style: function(feature) {
-                if (feature) {
-                    console.log(feature);
+                if (flag_groupby == true) { // if we are grouping by
+                    //console.log(feature.properties.item_group);
+                    let colorby_itemgroup = feature.properties.item_group;
+                    // color according the number of catagories:
+                    switch (num_groups) { // qualitative data
+                        case 3:
+                            var color_1 = '#a6cee3';
+                            var color_2 = '#1f78b4';
+                            var color_3 = '#b2df8a';
+                            break;
+                        case 4:
+                            var color_1 = '#a6cee3';
+                            var color_2 = '#1f78b4';
+                            var color_3 = '#b2df8a';
+                            var color_4 = '#33a02c';
+                            break;
+                        case 5:
+                            var color_1 = '#a6cee3';
+                            var color_2 = '#1f78b4';
+                            var color_3 = '#b2df8a';
+                            var color_4 = '#33a02c';
+                            var color_5 = '#fb9a99';
+                            break;
+                    };
+                    // a. list of all colors + list all catagories.
+                    var color_lst = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a', '#ffff99', '#b15928']
+                        //console.log(groupby_catlst);
+                        // b. create dictionary with catagory and color
+                        //Create Dictionary with Object
+                    var dict = {};
+
+                    var keys = groupby_catlst.map(Function.prototype.call, String.prototype.trim); // trim to avoid spacing problems
+                    //console.log(keys);
+                    var values = color_lst.slice(0, keys.length); // cut the list to have the same num. members as keys
+                    //console.log(values);
+                    var result = {};
+                    console.log(zip(keys, values));
+                    //console.log(result);
+
+
+                    // c. use itemgroup as KEY to return color VALUE
+
+                    switch (colorby_itemgroup) { // NOTICE spaces in names
+                        case 'international':
+                            return {
+                                color: color_1
+                            };
+                            break;
+                        case 'eclectic':
+                            return {
+                                color: color_2
+                            };
+                            break;
+                        case 'else':
+                            return {
+                                color: color_3
+                            };
+                            break;
+                        default:
+                            return {
+                                color: "purple"
+                            };
+                    }
+                    //console.log(sel_group_by);
+                    //console.log('grouping flag');
                 }
+                // if its not grouped by:
                 return {
                     color: "green"
                 };
@@ -138,6 +211,11 @@ $(function() {
             });
     });
 });
+
+function zip(arr1, arr2, out = {}) {
+    arr1.map((val, idx) => { out[val] = arr2[idx]; });
+    return out;
+}
 
 
 

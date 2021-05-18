@@ -418,8 +418,20 @@ function mergeTooltips(slider, threshold, separator) {
             }
         });
     });
-}
+};
 
+
+// --------- For map colors ------------ //
+
+// Flags to indicite 1. Group-by, 2. Sort, or 3. None
+
+var flag_groupby = false;
+var flag_sortby = false;
+var flag_regular = true;
+
+var sel_group_by = '';
+var num_groups = 0;
+var groupby_catlst = '';
 
 
 // --------- Grouping ------------ //
@@ -431,15 +443,17 @@ var $window = $(window);
 
 $('.layout-mode-button-group').on('click', 'button', function() {
 
+    flag_groupby = false; // reset group by flag
+
     // ------------------ Null elem creation ------------------- //
     console.log('---------- Resetting layout ----------');
     // remove all previously added null items, if exist
     existing_nulls = document.getElementsByClassName('nullElem');
-    console.log('existing null before: ', existing_nulls);
+    //console.log('existing null before: ', existing_nulls);
     $grid.isotope('remove', existing_nulls);
-    console.log('existing null after isotope: ', existing_nulls);
+    //console.log('existing null after isotope: ', existing_nulls);
     $(existing_nulls).remove();
-    console.log('existing null after jquery remove: ', existing_nulls);
+    //console.log('existing null after jquery remove: ', existing_nulls);
 
     // layout remaining item elements
     $grid.isotope('layout'); // restart layout
@@ -484,7 +498,7 @@ $('.layout-mode-button-group').on('click', 'button', function() {
 
     });
     // set most_repeted_freq and cat_lst depending on the group selected by user
-    var sel_group_by = $(this).attr('data-group-by');
+    sel_group_by = $(this).attr('data-group-by');
     //console.log('mode primary_list returns: ', mode(primary_lst));
     switch (sel_group_by) {
         case 'primary':
@@ -589,6 +603,8 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     //console.log('cat_lst: ', cat_lst);
     //console.log('cat_lst length: ', cat_lst.length);
 
+    num_groups = cat_lst.length; // update global for coloring
+
     window.colWidth = screen_width / cat_lst.length; // the user's screen divided by the number of catagories
 
     // change layout mode
@@ -604,18 +620,24 @@ $('.layout-mode-button-group').on('click', 'button', function() {
         }
     });
 
-
-
     // ----------------- Sort -------------------- //
     var sortByValue = $(this).attr('data-sort-by');
     console.log('sorted by:', sortByValue);
     $grid.isotope({ sortBy: [sortByValue, 'col_header'] }); // [ sortByValue, 'col_header' ] // { sortBy: sortByValue }
+
+    // ----------------- Rise group-by flag -------------------- //
+    if (layoutModeValue == 'cellsByColumn') {
+        flag_groupby = true;
+    };
 });
+
 
 function frequency_lst(arr) {
     //console.info('Array passed: ', arr); // NOTICE already when passed - 0 found in array
     const map = arr.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
     //console.info(['in frquency_lst func: ', ...map.entries()]);
+    groupby_catlst = [...map.keys()];
+    console.log(groupby_catlst);
     //console.info([...map.keys()]);
     //console.info([...map.values()]);
     //console.info([...map.entries()]);
