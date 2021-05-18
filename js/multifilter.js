@@ -167,6 +167,17 @@ $('.filters').on('click', 'button', function() {
 $('#sorts').on('click', 'button', function() {
     var sortByValue = $(this).attr('data-sort-by');
     $grid.isotope({ sortBy: sortByValue });
+    if (sortByValue == 'original-order') {
+        flag_regular = true; // turn regular flag on
+        flag_groupby = false;
+        flag_sortby = false;
+    } else {
+        flag_regular = false;
+        flag_groupby = false;
+        flag_sortby = true; // turn sortby flag on
+    }
+    sorting_by = sortByValue;
+
 });
 
 
@@ -433,6 +444,8 @@ var sel_group_by = '';
 var num_groups = 0;
 var groupby_catlst = '';
 
+// for sorting 
+var sorting_by = '';
 
 // --------- Grouping ------------ //
 
@@ -628,6 +641,8 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     // ----------------- Rise group-by flag -------------------- //
     if (layoutModeValue == 'cellsByColumn') {
         flag_groupby = true;
+        flag_sortby = false;
+        flag_regular = false;
     };
 });
 
