@@ -192,10 +192,10 @@ $(function() {
                     };
 
 
-                    console.log(current_sortable_value);
-                    console.log(current_sortable_value / 100);
+                    //console.log(current_sortable_value);
+                    //console.log(current_sortable_value / 100);
                     var point_on_range = current_sortable_value / 100;
-                    console.log(interpolateColor(brightest_color, darkest_color, point_on_range));
+                    //console.log(interpolateColor(brightest_color, darkest_color, point_on_range));
                     rgb_val = interpolateColor(brightest_color, darkest_color, point_on_range);
                     return {
                         color: rgbToHex(rgb_val[0], rgb_val[1], rgb_val[2])
