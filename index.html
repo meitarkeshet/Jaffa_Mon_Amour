@@ -24,11 +24,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js ">
     </script>
     <!-- load isotop -->
-    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js "></script>
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js ">
+    </script>
     <!-- load isotope's cells by colomn -->
-    <script src="node_modules/isotope-cells-by-column/cells-by-column.js"></script>
+    <script src="node_modules/isotope-cells-by-column/cells-by-column.js">
+    </script>
     <!-- load isotope's cells by colomn -->
-    <script src="node_modules/isotope-fit-columns/fit-columns.js"></script>
+    <script src="node_modules/isotope-fit-columns/fit-columns.js">
+    </script>
     <!-- load swup -->
     <script defer="" src="node_modules/swup/dist/swup.min.js">
     </script>
@@ -36,20 +39,20 @@
     </script>
     <link href="./css/trans.css" rel="stylesheet" />
     <!-- load leaflet for map-->
-    <link crossorigin="" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" rel="stylesheet">
-    <link href="./css/mapall.css" rel="stylesheet" />
+    <link crossorigin="" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" rel="stylesheet" />
+    <link href="./css/mapall.css" rel="stylesheet">
     <!-- Make sure you put this AFTER Leaflet 's CSS -->
     <script crossorigin="" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js">
     </script>
     </link>
 </head>
 <!-- for sticky option on scroll-->
-<div id='nav_sticky' class='fixedscroll'>
+<div class="fixedscroll" id="nav_sticky">
     <!-- content that will not change  -->
     <!-- Navigation menu-->
     <input class="main-navigation-toggle" id="page-nav-toggle" type="checkbox" />
     <label for="page-nav-toggle">
-            <svg class="icon--menu-toggle" viewbox="0 0 60 30">
+   <svg class="icon--menu-toggle" viewbox="0 0 60 30">
     <g class="icon-group">
      <g class="icon--menu">
       <path d="M 6 0 L 54 0">
@@ -66,8 +69,8 @@
       </path>
      </g>
     </g>
-            </svg>
-        </label>
+   </svg>
+  </label>
     <nav class="main-navigation">
         <ul>
             <li>
@@ -88,7 +91,6 @@
         </ul>
     </nav>
     <!-- End burger navigation menu-->
-
     <!-- content that will be changed when navigating -->
     <header class="clearfix">
         <!-- KEEP HEADER BETWEEN PAGES -->
@@ -119,15 +121,14 @@
         </nav>
         -->
     </header>
-
     <!-- FILTER / SORT DROP MENUS-->
     <div class="main">
         <nav class="cbp-hrmenu" id="cbp-hrmenu">
             <ul>
                 <li>
                     <a href="#">
-        Filter
-       </a>
+       Filter
+      </a>
                     <div class="cbp-hrsub">
                         <div class="cbp-hrsub-inner">
                             <div>
@@ -138,58 +139,58 @@
                                     <div class="filters">
                                         <div class="ui-group">
                                             <a>
-              Would the house be touched in the case of sea level rising 5 m.
-             </a>
+             Would the house be touched in the case of sea level rising 5 m.
+            </a>
                                             <div class="button-group js-radio-button-group" data-filter-group="tsunami_flood_line_buttons">
                                                 <button class="button is-checked" data-filter="">
-               any
-              </button>
+              any
+             </button>
                                                 <button class="button" data-filter="tsunami_binary_true">
-               yes
-              </button>
+              yes
+             </button>
                                                 <button class="button" data-filter="tsunami_binary_false">
-               no
-              </button>
+              no
+             </button>
                                             </div>
                                         </div>
                                         <div class="ui-group">
                                             <a>
-              Neighbourhood
-             </a>
+             Neighbourhood
+            </a>
                                             <div class="button-group js-radio-button-group" data-filter-group="Max amount of bicycle parkings within 15 min. walking radius">
                                                 <button class="button is-checked" data-filter="">
-               any
-              </button>
+              any
+             </button>
                                                 <button class="button" data-filter=".0">
-               Mevo'ot Jafo
-              </button>
+              Mevo'ot Jafo
+             </button>
                                                 <button class="button" data-filter=".4">
-               College of Tel-Aviv-Yaffo
-              </button>
+              College of Tel-Aviv-Yaffo
+             </button>
                                                 <button class="button" data-filter=".10">
-               Neve Sha'anan
-              </button>
+              Neve Sha'anan
+             </button>
                                                 <button class="button" data-filter=".12">
-               Jaffa Center
-              </button>
+              Jaffa Center
+             </button>
                                                 <button class="button" data-filter=".12">
-               Jaffa North
-              </button>
+              Jaffa North
+             </button>
                                                 <button class="button" data-filter=".12">
-               Neve Golan
-              </button>
+              Neve Golan
+             </button>
                                                 <button class="button" data-filter=".12">
-               Florentine
-              </button>
+              Florentine
+             </button>
                                                 <button class="button" data-filter=".12">
-               Tzahalon &amp; Shikunei Hisachon
-              </button>
+              Tzahalon &amp; Shikunei Hisachon
+             </button>
                                                 <button class="button" data-filter=".12">
-               Shapira
-              </button>
+              Shapira
+             </button>
                                                 <button class="button" data-filter=".12">
-               Tel-Kabirת Neva Ofer, Jaffa B
-              </button>
+              Tel-Kabirת Neva Ofer, Jaffa B
+             </button>
                                             </div>
                                         </div>
                                     </div>
@@ -203,48 +204,48 @@
                                 <ul>
                                     <li>
                                         <a>
-             Bicycle parkings
-            </a>
+            Bicycle parkings
+           </a>
                                         <div class="slider" data-filter="bi_parking_min_max_slider" id="bi_parking_slider">
                                         </div>
                                         <br/>
                                     </li>
                                     <li>
                                         <a>
-             Tel-o-fun bicycles (max capacity)
-            </a>
+            Tel-o-fun bicycles (max capacity)
+           </a>
                                         <div class="slider" data-filter="n_tel_o_fun_min_max_slider" id="n_tel_o_fun_slider">
                                         </div>
                                         <br/>
                                     </li>
                                     <li>
                                         <a>
-             Auto-Tel Car sharing vehicles (max capacity)
-            </a>
+            Auto-Tel Car sharing vehicles (max capacity)
+           </a>
                                         <div class="slider" data-filter="n_auto_tel_min_max_slider" id="n_auto_tel_slider">
                                         </div>
                                         <br/>
                                     </li>
                                     <li>
                                         <a>
-             Green areas and parks
-            </a>
+            Green areas and parks
+           </a>
                                         <div class="slider" data-filter="n_parks_min_max_slider" id="n_parks_slider">
                                         </div>
                                         <br/>
                                     </li>
                                     <li>
                                         <a>
-             Playgrounds
-            </a>
+            Playgrounds
+           </a>
                                         <div class="slider" data-filter="n_playgrounds_min_max_slider" id="n_playgrounds_slider">
                                         </div>
                                         <br/>
                                     </li>
                                     <li>
                                         <a>
-             kindergardens
-            </a>
+            kindergardens
+           </a>
                                         <div class="slider" data-filter="n_kindergartens_min_max_slider" id="n_kindergartens_slider">
                                         </div>
                                         <br/>
@@ -261,8 +262,8 @@
                                     <ul>
                                         <li>
                                             <a>
-              Building's ID
-             </a>
+             Building's ID
+            </a>
                                             <div class="slider" data-filter="id_min_max_slider" id="id_slider">
                                             </div>
                                             <br/>
@@ -274,13 +275,13 @@
                                     <ul>
                                         <li>
                                             <a href="#">
-              reset
-             </a>
+             reset
+            </a>
                                         </li>
                                         <li>
                                             <a href="#">
-              extend options
-             </a>
+             extend options
+            </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -292,74 +293,61 @@
                 </li>
                 <li>
                     <a href="#">
-        Sort
-       </a>
+       Order
+      </a>
                     <div class="cbp-hrsub">
                         <div class="cbp-hrsub-inner">
                             <div>
                                 <h4>
-                                    Test
+                                    sort
                                 </h4>
                                 <ul>
                                     <div class="button-group" id="sorts">
                                         <button class="button is-checked" data-sort-by="original-order">
-             original order
-            </button>
+            original order
+           </button>
                                         <button class="button" data-sort-by="id">
-             id
-            </button>
+            id
+           </button>
                                         <button class="button" data-sort-by="n_bicycle_parking">
-             n_bicycle_parking
-            </button>
+            n_bicycle_parking
+           </button>
                                         <button class="button" data-sort-by="n_parks">
-             n_parks
-            </button>
+            n_parks
+           </button>
                                         <button class="button" data-sort-by="weight">
-             weight
-            </button>
+            weight
+           </button>
                                         <button class="button" data-sort-by="category">
-             category
-            </button>
+            category
+           </button>
                                     </div>
                                 </ul>
                                 <h4>
-                                    else
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- /cbp-hrsub-inner -->
-                    </div>
-                    <!-- /cbp-hrsub -->
-                </li>
-                <li>
-                    <a href="#">
-        Group-by
-       </a>
-                    <div class="cbp-hrsub">
-                        <div class="cbp-hrsub-inner">
-                            <div>
-                                <h4>
-                                    Possible groups
+                                    group by
                                 </h4>
                                 <ul>
                                     <div class="button-group layout-mode-button-group" id="group-sort">
-                                        <button class="button is-checked" data-layout-mode="fitRows" checked="checked" data-group-by='non' data-sort-by="original-order">original order</button>
-                                        <button class="button" data-layout-mode="cellsByColumn" data-is-horizontal="true" data-group-by='primary' data-sort-by='primary'>primary</button>
-                                        <button class="button" data-layout-mode="cellsByColumn" data-is-horizontal="true" data-group-by='secondary' data-sort-by='secondary'>secondary</button>
-                                        <button class="button" data-layout-mode="fitRows" checked="checked" data-group-by='non' data-sort-by="original-order">fitcolumns</button>
-
+                                        <button checked="checked" class="button is-checked" data-group-by="non" data-layout-mode="fitRows" data-sort-by="original-order">
+            original order
+           </button>
+                                        <button class="button" data-group-by="primary" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="primary">
+            primary
+           </button>
+                                        <button class="button" data-group-by="secondary" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="secondary">
+            secondary
+           </button>
+                                        <button checked="checked" class="button" data-group-by="non" data-layout-mode="fitRows" data-sort-by="original-order">
+            fitcolumns
+           </button>
                                     </div>
                                 </ul>
-                                <h4>
-                                    else
-                                </h4>
                             </div>
                         </div>
                         <!-- /cbp-hrsub-inner -->
                     </div>
                     <!-- /cbp-hrsub -->
                 </li>
-
             </ul>
         </nav>
         <script src="js/cbpHorizontalMenu.min.js">
@@ -370,7 +358,6 @@
             });
         </script>
         <!-- END Of filter drop down menus-->
-
     </div>
     <!-- End of div class="main"-->
     <!-- End of sticky bar -->
@@ -378,13 +365,10 @@
 <!-- End of id='nav_sticky'-->
 
 <body>
-
-
     <!-- map (first hidden)-->
     <div id="mapid" style="visibility: visible">
     </div>
     <!-- end of: map -->
-
     <!-- HIDE MAP / GRID 
             <script>
                 $('#vis').click(function() {
@@ -404,8 +388,6 @@
                 });
             </script>
             -->
-
-
     <!-- Start of grid items-->
     <div class="grid" id="gridid" style="visibility: visible">
         <!-- THIS WILL BE REPLACED WITH INSERTED-->
@@ -436,6 +418,5 @@
     </script>
 </body>
 <!-- close body-->
-
 
 </html>
