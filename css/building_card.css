@@ -6,6 +6,11 @@ body {
     min-height: 100vh;
 }
 
+.carousel-container {
+    position: absolute;
+    z-index: 1;
+}
+
 .center {
     width: 50%;
     position: fixed;
@@ -34,4 +39,65 @@ h2 {
 
 body {
     font-family: 'berlin';
+}
+
+.icon-close {
+    position: fixed;
+    top: calc(var(--space) * 1.5);
+    right: calc(var(--space) * 2);
+    cursor: pointer;
+    z-index: 5;
+}
+
+#topRightFixed {
+    position: fixed;
+    top: 2%;
+    right: 2%;
+    /*
+    background: #336600;
+    padding: 6px;
+    color: rgb(0, 0, 0);
+    font-size: 1.4em;
+    */
+}
+
+#buttonLeftFixed {
+    position: fixed;
+    bottom: 2%;
+    left: 2%;
+    /*
+    background: #336600;
+    padding: 6px;
+    color: rgb(0, 0, 0);
+    font-size: 1.4em;
+    */
+}
+
+#buttonRightFixed {
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+    /*
+    background: #336600;
+    padding: 6px;
+    color: rgb(0, 0, 0);
+    font-size: 1.4em;
+    */
+}
+
+#navigate_before {
+    position: fixed;
+}
+
+:root {
+    --color-primary: #9F6C58;
+    --color-secondary: #ffffff;
+    --duration: 1s;
+    --nav-duration: calc(var(--duration) / 4);
+    --ease: cubic-bezier(0.215, 0.61, 0.355, 1);
+    --space: 1rem;
+    --font-primary: "berlin";
+    --font-heading: "berlin";
+    --font-size: 180px;
+    --line-height: 1.5;
 }
