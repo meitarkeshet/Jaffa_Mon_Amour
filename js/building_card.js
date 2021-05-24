@@ -144,10 +144,19 @@ $('.info-button').click(function(e) {
 });
 
 // ----------- data table ----------- //
+
+// using data collected from output.html transmitted through app.js
 $(document).ready(function() {
     $('#table_id').DataTable();
 });
 
-import { lst_export } from './multifilter.js';
 
-Console.log(lst_export.name); //dharmik
+// var filtered_passed_multifilter = localStorage.getItem("filterd_passed")
+
+var filtered_passed_multifilter = sessionStorage.getArray('testArray');
+//console.log(typeof(filtered_passed_multifilter));
+//console.log(filtered_passed_multifilter);
+//console.log(filtered_passed_multifilter[0]);
+
+// look here:
+// https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage/44013834#44013834
