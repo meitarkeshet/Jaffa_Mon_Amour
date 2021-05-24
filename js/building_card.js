@@ -1,33 +1,39 @@
 // ----------- place items on page ----------- //
 
-var img_top_loc = $(".carousel").offset().top;
-var img_buttom_loc = img_top_loc + $(".carousel").height(); // $(window).height() - img_top_loc; //  - 
+$(document).ready(function() {
 
-$(".summary").css("top", `${img_top_loc}px`);
-$(".carousel-button").css("top", `${img_buttom_loc}px`);
+    var img_top_loc = $(".carousel").offset().top;
+    var img_buttom_loc = img_top_loc + $(".carousel").height(); // $(window).height() - img_top_loc; //  - 
 
-var navigate_next_loc_top = $(".navigate_next").offset().top;
-let elem = document.querySelector(".navigate_next");
-let rect = elem.getBoundingClientRect();
+    $(".summary").css("top", `${img_top_loc}px`);
+    $(".carousel-button").css("top", `${img_buttom_loc}px`);
 
-$("#navigate_before").css("top", `${navigate_next_loc_top}px`);
-$("#navigate_before").css("left", `${rect['left'] - rect['width']}px`);
+    var navigate_next_loc_top = $(".navigate_next").offset().top;
+    let elem = document.querySelector(".navigate_next");
+    let rect = elem.getBoundingClientRect();
+
+    $("#navigate_before").css("top", `${navigate_next_loc_top}px`);
+    $("#navigate_before").css("left", `${rect['left'] - rect['width']}px`);
+
+});
 
 // ----------- image carousel ----------- //
+// When clicking an image:
 $('img').click(function(e) {
     // is there more then one image available for this building?
     var numImgs = $('img').length;
     // if Yes: continue
     if (numImgs > 1) {
-        console.log('Multiple photos');
-        console.log(`There are ${numImgs} images found.`);
+        var next_photo_num = 1;
+        //console.log('Multiple photos');
+        //console.log(`There are ${numImgs} images found.`);
         // slide + hide current shown picture
         let screen_width = document.body.clientWidth; // NOTICE - negetive value?
         $(this).animate({ "left": `${-screen_width}px`, 'opacity': '1' }, "slow", function() { // once the first img moved
             $(this).hide(); // turn invisible
             var photo_num = Number($(this).attr("photo_num")); // NOTICE - parsing to number
-            console.log(`This is image number: ${photo_num}`);
-            var next_photo_num = 1;
+            //console.log(`This is image number: ${photo_num}`);
+            // next_photo_num = 1;
             if (photo_num != numImgs) { // if this isn't the last photo
                 next_photo_num = String(photo_num + 1);
                 console.log('The next image will be number: ', next_photo_num);
@@ -45,20 +51,71 @@ $('img').click(function(e) {
                 "slow"
             );
 
-            //next_image.animate({ right: $(window).width() / 2 * (-1) }, 'slow');
-        });
-
-        // preset location out of screen
-        //dist_screen_limit = rect['left'] - screen_width;
-        //console.log(dist_screen_limit);
-    } // Close: if (numImgs > 1)
+            // change radio buttons
+            // find current radio button 'radio_button_checked' and change to 'radio_button_unchecked'
+            var before_radio_sel = $("span:contains('radio_button_checked')");
+            before_radio_sel.text("radio_button_unchecked");
+            // find radio button that should be changed to 'radio_button_checked' and do it
+            // NOTICE - indeces for 'eq' are zero based
+            var after_radio_sel = $("span").eq(next_photo_num);
+            after_radio_sel.text("radio_button_checked");
+        }); // close $(this).animate({ "left": `${-screen_width}px`, 'opacity': '1' }, "slow", function() 
+    }; // Close: if (numImgs > 1)
     // if No: do nothing.
 });
+
+// When clicking a radio button
+
+$("div.carousel-button span").click(function() { // NOTICE - clicking a 'radio_button_checked' does nothing
+    // $("div.carousel-button span:contains('radio_button_unchecked')")
+    // NOTICE - moving images and then clicking creates error
+
+    // change radio buttons
+    // find current radio button 'radio_button_checked' and change to 'radio_button_unchecked'
+    var before_radio_sel = $("div.carousel-button span:contains('radio_button_checked')"); //.carousel-button > 
+    //console.log(before_radio_sel.text().trim());
+    before_radio_sel.text("radio_button_unchecked");
+    //console.log(before_radio_sel.text().trim());
+    // Turn the radio button that was clicked to 'radio_button_checked'
+    $(this).text("radio_button_checked");
+    // change image to now 'radio_button_checked'
+    var button_num = $(this).attr("button_num");
+    // select the photo that corrisponds to the radio button clicked
+    selected_img = $(`[photo_num=${button_num}]`);
+    // if this is not the image currently showing - NOTICE safety mesaure if code breaks
+    var shown_img = $('img').filter(function(index) { return ($(this).is(":visible")) }); //
+    //console.log(shown_img);
+    if (selected_img == shown_img) {
+        //console.log('Button and image selection are same. Do nothing.');
+    } else {
+        //console.log('Changing images.');
+        var next_photo_num = 1;
+        // slide + hide current shown picture
+        let screen_width = document.body.clientWidth; // NOTICE - negetive value?
+        shown_img.animate({ "left": `${-screen_width}px`, 'opacity': '1' }, "slow", function() { // once the first img moved
+            shown_img.hide(); // turn invisible
+            selected_img.show(); // make visible
+            selected_img.css({ left: screen_width + selected_img.width() }); // move out of window
+            selected_img.animate({
+                    "left": `${screen_width - selected_img.width()}px`
+                },
+                "slow"
+            );
+
+        }); // close $(this).animate({ "left": `${-screen_width}px`, 'opacity': '1' }, "slow", function() 
+
+
+    }
+
+
+
+});
+
 
 // ----------- Fade out hide / show ----------- //
 $(document).ready(function() {
     $('.detailed-page').hide();
-    console.log('hiding detailed');
+    //console.log('hiding detailed');
     $("div img").hide(); // hide all images
     $("div img:first-child").show(); // show only the first one
 });
