@@ -709,3 +709,14 @@ function frequency(arr, mod_item) {
 function printcolwidth() {
     console.info('global colwidth: ', window.colWidth);
 };
+
+
+// ----------------- Export filtered data as array -------------------- //
+
+const lst_export = {
+    name: 'dharmik',
+    age: '21'
+};
+
+
+export { lst_export };

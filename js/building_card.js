@@ -142,3 +142,12 @@ $('.info-button').click(function(e) {
         });
     };
 });
+
+// ----------- data table ----------- //
+$(document).ready(function() {
+    $('#table_id').DataTable();
+});
+
+import { lst_export } from './multifilter.js';
+
+Console.log(lst_export.name); //dharmik

@@ -121,7 +121,7 @@ body {
 
 .bottom_container {
     flex: 50;
-    background: blue;
+    background: rgb(255, 255, 255);
 }
 
 .simplex_box {
