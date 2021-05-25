@@ -146,17 +146,37 @@ $('.info-button').click(function(e) {
 // ----------- data table ----------- //
 
 // using data collected from output.html transmitted through app.js
+
+
 $(document).ready(function() {
-    $('#table_id').DataTable();
+    $('.info-button').click(function(e) {
+        var data = localStorage.getArray('passed_grid_elems')[0];
+        $('#table_id').DataTable({
+            "processing": true,
+            retrieve: true,
+            //paging: false,
+            data: data,
+            columns: [
+                { 'data': 'id' },
+                //{ 'data': 'long' },
+                //{ 'data': 'lat' },
+                { 'data': "primary" },
+                { 'data': 'n_bicycle_parking' }, // 
+
+            ]
+
+        });
+        console.log('building card log: ', localStorage.getArray('passed_grid_elems'));
+        console.log('building card log inside: ', data[0]);
+
+    });
 });
 
-
-// var filtered_passed_multifilter = localStorage.getItem("filterd_passed")
-
-var filtered_passed_multifilter = sessionStorage.getArray('testArray');
-//console.log(typeof(filtered_passed_multifilter));
-//console.log(filtered_passed_multifilter);
-//console.log(filtered_passed_multifilter[0]);
-
-// look here:
-// https://stackoverflow.com/questions/2010892/storing-objects-in-html5-localstorage/44013834#44013834
+Storage.prototype.getArray = function(arrayName) {
+    var thisArray = [];
+    var fetchArrayObject = this.getItem(arrayName);
+    if (typeof fetchArrayObject !== 'undefined') {
+        if (fetchArrayObject !== null) { thisArray = JSON.parse(fetchArrayObject); }
+    }
+    return thisArray;
+}
