@@ -166,8 +166,8 @@ $(document).ready(function() {
             ]
 
         });
-        console.log('building card log: ', localStorage.getArray('passed_grid_elems'));
-        console.log('building card log inside: ', data[0]);
+        // console.log('building card log: ', localStorage.getArray('passed_grid_elems'));
+        //console.log('building card log inside: ', data[0]);
 
     });
 });
@@ -180,3 +180,20 @@ Storage.prototype.getArray = function(arrayName) {
     }
     return thisArray;
 }
+
+// ----------- graphs ----------- //
+
+// isolate the selected building and the rest 
+$(document).ready(function() {
+    $('.info-button').click(function(e) {
+        var all_data = localStorage.getArray('passed_grid_elems')[0];
+        var building_id = $('#building_id').text().split(' ')[1]; // NOTICE - using space as splitter
+        var sel_data = []; // create empty
+        $.each(all_data, function(key, value) {
+            if (value.id == building_id) {
+                sel_data = value;
+            };
+        });
+        console.log(sel_data);
+    });
+});

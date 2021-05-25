@@ -715,35 +715,30 @@ function printcolwidth() {
 
 $(function() {
     var pass_all_variables = function() {
-        var filterd_elems = $grid.isotope('getItemElements'); // getFilteredItemElements
+        var all_elems = $grid.isotope('getItemElements'); // getFilteredItemElements
+        passing_func(all_elems);
+    }; // close: var pass_all_variables = function() {
+    var pass_filtered_variables = function() {
+        var filtered_elems = $grid.isotope('getFilteredItemElements'); // 
+        passing_func(filtered_elems);
+    };
+    var passing_func = function(pass_elems) {
         localStorage.clear(); // clear all itmes saved before
-
         var arr_of_obj = []; // create an empty array to push to
-        $.each(filterd_elems, function(key, value) {
+        $.each(pass_elems, function(key, value) {
             //Create Dictionary with Object
             var dict = {};
-
-            //console.log(key + ": " + value);
-            //console.log(value.innerHTML);
             var p_tags = $(this).find('p');
             $.each(p_tags, function(key, value) {
                 var colname = value.className;
                 var colvalue = value.innerHTML;
-                // dict.`${colname}` = colvalue;
                 dict[`${colname}`] = colvalue;
-                //console.log(value.className, value.innerHTML);
             });
             arr_of_obj.push(dict);
         });
         localStorage.pushArrayItem('passed_grid_elems', arr_of_obj);
-        //console.log('multifilter all elems: ', localStorage.getArray('passed_grid_elems')); // NOTICE - passing empty 
-        //console.log('filterd_elems contains: ', arr_of_obj); // typeof filterd_elems == object
-    }; // close: var pass_all_variables = function() {
-    var pass_filtered_variables = function() {
-        var elems = $grid.isotope('getFilteredItemElements'); // 
-        localStorage.clear(); // clear all itmes saved before
-        localStorage.pushArrayItem('passed_grid_elems', elems); // var elems = $grid.isotope('getItemElements')
-    }
+    };
+
     pass_all_variables(); // run one on doc start;
     $(document).ready(function() { // run on every change in grid;
         $grid.on('arrangeComplete', // 
