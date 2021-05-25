@@ -197,3 +197,7 @@ $(document).ready(function() {
         console.log(sel_data);
     });
 });
+
+// 1. Radar - selected vs. total avg over sevral tests
+// 2. multi-series pie
+// 3.  Scatter?
