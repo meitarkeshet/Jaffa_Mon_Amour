@@ -347,6 +347,8 @@ $('.layout-mode-button-group').on('click', 'button', function() {
 
 $('.building_square').hover(function() {
     // detect matching item on map
+    // extrect item's lat / lon
+
     //console.log($(this));
     //console.log('hovering');
 });
@@ -380,20 +382,3 @@ $(document).ready(function() {
     });
 
 });
-
-/*
-
-$(document).ready(function() {
-    
-    console.log(layerGroup._layers);
-    var layer_test = layerGroup._layers;
-    // Set an array containing all the markers
-    console.log(markers);
-    console.log(typeof markers);
-    console.log(mymap);
-
-    //console.log(layerGroup._targets);
-
-});
-
-*/
