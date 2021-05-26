@@ -158,10 +158,35 @@ $(document).ready(function() {
             data: data,
             columns: [
                 { 'data': 'id' },
+                { 'data': "primary" },
+                { 'data': "secondary" },
+                { 'data': " building's street-facing front Distance from parcel limits (0 line) in meters" },
+                //{ 'data': 'Amount of walkalbe Religious buildings (15 min.)' },
+                //{ 'data': 'Amount of walkable street workout equipment (15 min.)' },
+                { 'data': 'Amount of gas stations in 1k radius' },
+                // { 'data': 'Amount of walkable hospitals and clinics 15. m radius' },
+                { 'data': "Building's height (simple)" },
+                { 'data': "Building's volume in cubic meter" },
+                { 'data': 'Built density (2d built area / void) in 250 meter radius' },
+                //{ 'data': 'Centrality (gravity) score for each building within 15 min. walk r.' },
+                { 'data': 'Distance from the Sea in meteres' },
+                //{ 'data': 'Distance from the Sea in meteres' },
+                //{ 'data': 'Distance from the Sea in meteres' },
+                //{ 'data': 'Distance from the Sea in meteres' },
+                { 'data': 'Distance to nearest bicycle route in meters' },
+                //{ 'data': 'Geo point via Flicker ' },
+                // { 'data': 'Historical buildings within 15 min. walk' },
+                //{ 'data': 'n_auto_tel' },
+                //{ 'data': 'n_kindergartens' },
+                //{ 'data': 'n_parks' },
+                //{ 'data': 'n_playgrounds' },
+                //{ 'data': 'n_tel_o_fun' },
+                //{ 'data': 'Parcel size (square meters)' },
+                //{ 'data': 'n_playgrounds' },
+                //{ 'data': 'n_bicycle_parking' }, // 
+                //{ 'data': 'tsunami_flood_line' },
                 //{ 'data': 'long' },
                 //{ 'data': 'lat' },
-                { 'data': "primary" },
-                { 'data': 'n_bicycle_parking' }, // 
 
             ]
 
@@ -203,6 +228,8 @@ $(document).ready(function() {
 // 3.  Scatter?
 
 // ------- General chart test -------- //
+
+// 1. radar
 
 const data = {
     labels: [
@@ -253,6 +280,90 @@ var radar_chart_elem = $('#radar_chart');
 var radar_chart = new Chart(radar_chart_elem, config);
 
 console.log(radar_chart_elem);
+
+// multi-series pie
+
+const DATA_COUNT = 5;
+const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
+
+const labels = [1, 2, 3, 4, 5];
+const data_pie = {
+    labels: ['Overall Yay', 'Overall Nay', 'Group A Yay', 'Group A Nay', 'Group B Yay', 'Group B Nay', 'Group C Yay', 'Group C Nay'],
+    datasets: [{
+            backgroundColor: ['#AAA', '#777'],
+            data: [21, 79]
+        },
+        {
+            backgroundColor: ['hsl(0, 100%, 60%)', 'hsl(0, 100%, 35%)'],
+            data: [33, 67]
+        },
+        {
+            backgroundColor: ['hsl(100, 100%, 60%)', 'hsl(100, 100%, 35%)'],
+            data: [20, 80]
+        },
+        {
+            backgroundColor: ['hsl(180, 100%, 60%)', 'hsl(180, 100%, 35%)'],
+            data: [10, 90]
+        }
+    ]
+};
+
+const config_pie = {
+    type: 'pie',
+    data: data_pie,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                labels: {
+                    generateLabels: function(chart) {
+                        // Get the default label list
+                        const original = Chart.overrides.pie.plugins.legend.labels.generateLabels;
+                        const labelsOriginal = original.call(this, chart);
+
+                        // Build an array of colors used in the datasets of the chart
+                        var datasetColors = chart.data.datasets.map(function(e) {
+                            return e.backgroundColor;
+                        });
+                        datasetColors = datasetColors.flat();
+
+                        // Modify the color and hide state of each label
+                        labelsOriginal.forEach(label => {
+                            // There are twice as many labels as there are datasets. This converts the label index into the corresponding dataset index
+                            label.datasetIndex = (label.index - label.index % 2) / 2;
+
+                            // The hidden state must match the dataset's hidden state
+                            label.hidden = !chart.isDatasetVisible(label.datasetIndex);
+
+                            // Change the color to match the dataset
+                            label.fillStyle = datasetColors[label.index];
+                        });
+
+                        return labelsOriginal;
+                    }
+                },
+                onClick: function(mouseEvent, legendItem, legend) {
+                    // toggle the visibility of the dataset from what it currently is
+                    legend.chart.getDatasetMeta(
+                        legendItem.datasetIndex
+                    ).hidden = legend.chart.isDatasetVisible(legendItem.datasetIndex);
+                    legend.chart.update();
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        const labelIndex = (context.datasetIndex * 2) + context.dataIndex;
+                        return context.chart.data.labels[labelIndex] + ': ' + context.formattedValue;
+                    }
+                }
+            }
+        }
+    },
+};
+
+var pie_chart_elem = $('#multi_series_pie_chart');
+var pie_chart = new Chart(pie_chart_elem, config_pie);
 
 /*
 
