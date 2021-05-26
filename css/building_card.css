@@ -133,5 +133,11 @@ body {
 
 .graph_box {
     flex: 50;
-    background: purple;
+    background: white;
+    max-height: 100%;
+}
+
+canvas {
+    max-height: 90%;
+    padding-bottom: 25px;
 }
