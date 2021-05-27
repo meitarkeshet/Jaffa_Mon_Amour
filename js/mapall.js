@@ -370,10 +370,15 @@ $(function() {
                 var currently_shown_items = $grid.isotope('getFilteredItemElements');
                 //console.log('before filter: ', currently_shown_items);
                 var relevent_grid_item = currently_shown_items.filter(function(value, index) {
-                    console.log('value passed: ', value);
-                    item_lat_val = $(value).children('p.lat')[0].innerHTML; // NOTICE [0]
-                    //console.log(item_lat_val);
-                    return (item_lat_val == marker_geo_lat)
+                    if ($(value).hasClass('nullElem')) {
+                        return false;
+                    } else {
+                        console.log('value passed: ', value);
+                        item_lat_val = $(value).children('p.lat')[0].innerHTML; // NOTICE [0]
+                        //console.log(item_lat_val);
+                        return (item_lat_val == marker_geo_lat)
+                    }
+
                 });
                 enlarge_grid_item = relevent_grid_item[0];
                 //console.log(enlarge_grid_item);
