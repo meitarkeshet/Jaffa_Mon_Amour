@@ -184,7 +184,58 @@ img {
 }
 
 
-/* color-shape */
+/* color text for Group-by 
+var color_lst = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', 
+'#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a', '#ffff99', '#b15928'];
+*/
+
+.groupByColor0 {
+    color: #a6cee3;
+}
+
+.groupByColor1 {
+    color: #1f78b4;
+}
+
+.groupByColor2 {
+    color: #b2df8a;
+}
+
+.groupByColor3 {
+    color: #33a02c;
+}
+
+.groupByColor4 {
+    color: #fb9a99;
+}
+
+.groupByColor5 {
+    color: #e31a1c;
+}
+
+.groupByColor6 {
+    color: #fdbf6f;
+}
+
+.groupByColor7 {
+    color: #ff7f00;
+}
+
+.groupByColor8 {
+    color: #cab2d6;
+}
+
+.groupByColor9 {
+    color: #6a3d9a;
+}
+
+.groupByColor10 {
+    color: #ffff99;
+}
+
+.groupByColor11 {
+    color: #b15928;
+}
 
 
 /* CHANGE PICTURE SIZE */

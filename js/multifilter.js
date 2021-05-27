@@ -564,10 +564,7 @@ $('.layout-mode-button-group').on('click', 'button', function() {
         } else {
             //console.log(catagory, catagory_n_elem, most_repeted_freq - catagory_n_elem);
         };
-        // add catagory name 
-        var $elem = $('<div class="building_square nullElem " col_header="a"/>'); // NOTICE - col_header
-        $elem.append(`<h4 class="${sel_group_by} ignore">` + catagory + '</h4>'); // remove display:none to show // WIP HERE
-        elems.push($elem[0]);
+
         console.log(groupby_catlst);
         console.log(typeof groupby_catlst);
         used_cat = [...groupby_catlst]
@@ -579,10 +576,17 @@ $('.layout-mode-button-group').on('click', 'button', function() {
         //console.log(cat_lst, catagory); // cat_lst is not good // .findIndex(`${catagory}`);
         cat_index_cat_lst = used_cat.findIndex((element, index) => {
             console.log('element passed for index: ', element);
-            if (element.letter === 'b') {
+            if (element.includes(`${catagory}`)) {
+                console.log('found: ', element);
                 return true
             }
         });
+        console.log("this catagory's index is: ", cat_index_cat_lst);
+
+        // add catagory name 
+        var $elem = $('<div class="building_square nullElem " col_header="a"/>'); // NOTICE - col_header
+        $elem.append(`<h4 class="${sel_group_by} ignore groupByColor${cat_index_cat_lst}">` + catagory + '</h4>'); // remove display:none to show // WIP HERE
+        elems.push($elem[0]);
         // catagory
     });
 
