@@ -566,8 +566,24 @@ $('.layout-mode-button-group').on('click', 'button', function() {
         };
         // add catagory name 
         var $elem = $('<div class="building_square nullElem " col_header="a"/>'); // NOTICE - col_header
-        $elem.append(`<h4 class="${sel_group_by} ignore">` + catagory + '</h4>'); // remove display:none to show
+        $elem.append(`<h4 class="${sel_group_by} ignore">` + catagory + '</h4>'); // remove display:none to show // WIP HERE
         elems.push($elem[0]);
+        console.log(groupby_catlst);
+        console.log(typeof groupby_catlst);
+        used_cat = [...groupby_catlst]
+        console.log(used_cat);
+        console.log(typeof used_cat);
+
+        console.log('catagory: ', catagory);
+
+        //console.log(cat_lst, catagory); // cat_lst is not good // .findIndex(`${catagory}`);
+        cat_index_cat_lst = used_cat.findIndex((element, index) => {
+            console.log('element passed for index: ', element);
+            if (element.letter === 'b') {
+                return true
+            }
+        });
+        // catagory
     });
 
 
@@ -610,15 +626,13 @@ $('.layout-mode-button-group').on('click', 'button', function() {
         isHorizontal = isHorizontalMode;
     }
 
-    window.colWidth = 1520; // change the value of the column's width
-    printcolwidth(); // check change in global
-    screen_width = document.body.clientWidth;
-    //console.log('cat_lst: ', cat_lst);
-    //console.log('cat_lst length: ', cat_lst.length);
-
     num_groups = cat_lst.length; // update global for coloring
+    screen_width = document.body.clientWidth;
 
-    window.colWidth = screen_width / cat_lst.length; // the user's screen divided by the number of catagories
+    colWidth = screen_width / cat_lst.length; // the user's screen divided by the number of catagories
+
+    printcolwidth(); // check change in global
+
 
     // change layout mode
     var layoutModeValue = $this.attr('data-layout-mode');
@@ -628,7 +642,6 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     $grid.isotope({
         cellsByColumn: {
             columnWidth: colWidth, //120
-            //gutter: 150 //  not working
             rowHeight: 52
         }
     });
@@ -652,7 +665,7 @@ function frequency_lst(arr) {
     const map = arr.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
     //console.info(['in frquency_lst func: ', ...map.entries()]);
     groupby_catlst = [...map.keys()];
-    console.log(groupby_catlst);
+    //console.log('groupby_catlst in frequency_lst:', groupby_catlst);
     //console.info([...map.keys()]);
     //console.info([...map.values()]);
     //console.info([...map.entries()]);
