@@ -462,11 +462,11 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     console.log('---------- Resetting layout ----------');
     // remove all previously added null items, if exist
     existing_nulls = document.getElementsByClassName('nullElem');
-    //console.log('existing null before: ', existing_nulls);
+    console.log('existing null before: ', existing_nulls);
     $grid.isotope('remove', existing_nulls);
     //console.log('existing null after isotope: ', existing_nulls);
     $(existing_nulls).remove();
-    //console.log('existing null after jquery remove: ', existing_nulls);
+    console.log('existing null after jquery remove: ', existing_nulls);
 
     // layout remaining item elements
     $grid.isotope('layout'); // restart layout
@@ -531,7 +531,8 @@ $('.layout-mode-button-group').on('click', 'button', function() {
             var cat_lst = [];
     }
 
-    // create list dump for elements
+    console.log('cat_lst.length', cat_lst.length)
+        // create list dump for elements
     var elems = [];
     var occu_lst = [];
 
@@ -565,23 +566,18 @@ $('.layout-mode-button-group').on('click', 'button', function() {
             //console.log(catagory, catagory_n_elem, most_repeted_freq - catagory_n_elem);
         };
 
-        console.log(groupby_catlst);
-        console.log(typeof groupby_catlst);
-        used_cat = [...groupby_catlst]
-        console.log(used_cat);
-        console.log(typeof used_cat);
-
-        console.log('catagory: ', catagory);
+        used_cat = [...groupby_catlst];
+        //console.log('catagory: ', catagory);
 
         //console.log(cat_lst, catagory); // cat_lst is not good // .findIndex(`${catagory}`);
         cat_index_cat_lst = used_cat.findIndex((element, index) => {
-            console.log('element passed for index: ', element);
+            //console.log('element passed for index: ', element);
             if (element.includes(`${catagory}`)) {
-                console.log('found: ', element);
+                //console.log('found: ', element);
                 return true
             }
         });
-        console.log("this catagory's index is: ", cat_index_cat_lst);
+        //console.log("this catagory's index is: ", cat_index_cat_lst);
 
         // add catagory name 
         var $elem = $('<div class="building_square nullElem " col_header="a"/>'); // NOTICE - col_header
