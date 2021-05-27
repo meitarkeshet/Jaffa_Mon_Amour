@@ -161,10 +161,7 @@ $('.filters').on('click', 'button', function() {
     //alert($this.parents('.button-group'));
     // arrange, and use filter fn
     $grid.isotope();
-    // get currently pressed group-by button for screen adjusments
-    var groupby_status = $('#group-sort > button.is-checked');
-    console.log(groupby_status); // pass me to function WIP
-    console.log(groupby_status.attr('data-group-by'));
+
 });
 
 // bind sort button click
@@ -590,7 +587,7 @@ $(function() {
 
                     // add catagory name 
                     var $elem = $('<div class="building_square nullElem " col_header="a"/>'); // NOTICE - col_header
-                    $elem.append(`<h4 class="${sel_group_by} ignore groupByColor${cat_index_cat_lst}">` + catagory + '</h4>'); // remove display:none to show // WIP HERE
+                    $elem.append(`<h4 class="${sel_group_by} ignore groupByColor${cat_index_cat_lst}">` + catagory + '</h4>'); // remove display:none to show ERE
                     elems.push($elem[0]);
                     // catagory
                 });
@@ -684,9 +681,25 @@ $(function() {
     $('.layout-mode-button-group').on('click', 'button', function() {
         groupby_reinnit($(this));
     });
+    $('.filters').on('click', function() { // re-innit function when button filtered
+        // get currently pressed group-by button for screen adjusments
+        var groupby_status_button = $('#group-sort > button.is-checked');
+        console.log('TOUCHED button FILTER');
+        console.log(groupby_status_button); // pass me to function WIP
+        //console.log(groupby_status.attr('data-group-by'));
+        groupby_reinnit(groupby_status_button);
+    });
+    $('.noUi-touch-area').on('click', function() { // re-innit function when slider filters are touched
+        // get currently pressed group-by button for screen adjusments
+        var groupby_status_button = $('#group-sort > button.is-checked');
+        console.log('TOUCHED slider FILTER');
+        console.log(groupby_status_button); // pass me to function WIP
+        //console.log(groupby_status.attr('data-group-by'));
+        groupby_reinnit(groupby_status_button);
+    });
 });
 
-
+console.log($('.filters'));
 
 
 
