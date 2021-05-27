@@ -353,32 +353,42 @@ $('.building_square').hover(function() {
     //console.log('hovering');
 });
 
-$(document).ready(function() {
-    var enlarge_grid_item = ''; // placeholder
-    locations_layer.on("mouseover", function(event) {
-        // find the lat-lng of the dot you being hoverd
-        var clickedMarker = event.layer;
-        var marker_geo = clickedMarker._latlng;
-        // console.log(marker_geo.lat, marker_geo.lng);
-        marker_geo_lat = marker_geo.lat;
-        marker_geo_lng = marker_geo.lng;
-        // find the matching building squere
-        // retrieve the values of only the currently shown locations - not all locations
+$(function() {
+    var marker_enlarge_img = function() {
+        $(document).ready(function() {
+            var enlarge_grid_item = ''; // placeholder
+            locations_layer.on("mouseover", function(event) {
+                // find the lat-lng of the dot you being hoverd
+                var clickedMarker = event.layer;
+                var marker_geo = clickedMarker._latlng;
+                // console.log(marker_geo.lat, marker_geo.lng);
+                marker_geo_lat = marker_geo.lat;
+                marker_geo_lng = marker_geo.lng;
+                // find the matching building squere
+                // retrieve the values of only the currently shown locations - not all locations
 
-        var currently_shown_items = $grid.isotope('getFilteredItemElements');
-        console.log('before filter: ', currently_shown_items);
-        var relevent_grid_item = currently_shown_items.filter(function(value, index) {
-            //console.log('value passed: ', value);
-            item_lat_val = $(value).children('p.lat')[0].innerHTML; // NOTICE [0]
-            //console.log(item_lat_val);
-            return (item_lat_val == marker_geo_lat)
+                var currently_shown_items = $grid.isotope('getFilteredItemElements');
+                //console.log('before filter: ', currently_shown_items);
+                var relevent_grid_item = currently_shown_items.filter(function(value, index) {
+                    console.log('value passed: ', value);
+                    item_lat_val = $(value).children('p.lat')[0].innerHTML; // NOTICE [0]
+                    //console.log(item_lat_val);
+                    return (item_lat_val == marker_geo_lat)
+                });
+                enlarge_grid_item = relevent_grid_item[0];
+                //console.log(enlarge_grid_item);
+                enlarge_grid_item.classList.add("enlarge_img");
+            });
+            locations_layer.on("mouseout", function(event) {
+                enlarge_grid_item.classList.remove("enlarge_img");
+            });
         });
-        enlarge_grid_item = relevent_grid_item[0];
-        //console.log(enlarge_grid_item);
-        enlarge_grid_item.classList.add("enlarge_img");
+    };
+    marker_enlarge_img(); // run one on doc start;
+    $(document).ready(function() { // run on every change in grid;
+        $grid.on('arrangeComplete', // 
+            function(event, filteredItems) {
+                marker_enlarge_img();
+            });
     });
-    locations_layer.on("mouseout", function(event) {
-        enlarge_grid_item.classList.remove("enlarge_img");
-    });
-
 });
