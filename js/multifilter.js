@@ -454,6 +454,13 @@ var sorting_by = '';
 var isHorizontal = false;
 var $window = $(window);
 
+
+$(function() {
+    var map_reload = function(layoutModeButtonGroup_button) {}
+});
+
+
+
 $('.layout-mode-button-group').on('click', 'button', function() {
 
     flag_groupby = false; // reset group by flag
@@ -532,67 +539,71 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     }
 
     console.log('cat_lst.length', cat_lst.length)
+
+    if (cat_lst.length > 0) {
         // create list dump for elements
-    var elems = [];
-    var occu_lst = [];
+        var elems = [];
+        var occu_lst = [];
 
-    cat_lst.forEach(function(Element, index) {
-        var catagory_n_elem = Element[1];
-        occu_lst.push(catagory_n_elem);
-    });
-    //console.log(occu_lst);
-    var most_repeted_freq = occu_lst.reduce(function(x, y) {
-        return Math.max(x, y);
-    });
-    //console.log(most_repeted_freq);
-
-
-    cat_lst.forEach(function(Element, index) {
-        var catagory = Element[0];
-        if (catagory == 0) {
-            console.log('Empty items in frequency_lst are returned as 0.');
-        }
-        var catagory_n_elem = Element[1];
-        if (catagory != 0) {
-            //console.log(catagory, catagory_n_elem, most_repeted_freq - catagory_n_elem);
-            for (var i = 0; i < most_repeted_freq - catagory_n_elem; i++) { // loop until getting to the differnce between #catagory and #max
-                var $elem = $('<div class="building_square nullElem" />');
-                // add tag names
-                $elem.append(`<p class="${sel_group_by} ignore" style="display:none">` + catagory + 'a' + '</p>'); // add a to make sure the added Nulls are under 
-                //console.log($elem[0]);
-                elems.push($elem[0]);
-            }
-        } else {
-            //console.log(catagory, catagory_n_elem, most_repeted_freq - catagory_n_elem);
-        };
-
-        used_cat = [...groupby_catlst];
-        //console.log('catagory: ', catagory);
-
-        //console.log(cat_lst, catagory); // cat_lst is not good // .findIndex(`${catagory}`);
-        cat_index_cat_lst = used_cat.findIndex((element, index) => {
-            //console.log('element passed for index: ', element);
-            if (element.includes(`${catagory}`)) {
-                //console.log('found: ', element);
-                return true
-            }
+        cat_lst.forEach(function(Element, index) {
+            var catagory_n_elem = Element[1];
+            occu_lst.push(catagory_n_elem);
         });
-        //console.log("this catagory's index is: ", cat_index_cat_lst);
-
-        // add catagory name 
-        var $elem = $('<div class="building_square nullElem " col_header="a"/>'); // NOTICE - col_header
-        $elem.append(`<h4 class="${sel_group_by} ignore groupByColor${cat_index_cat_lst}">` + catagory + '</h4>'); // remove display:none to show // WIP HERE
-        elems.push($elem[0]);
-        // catagory
-    });
+        //console.log(occu_lst);
+        var most_repeted_freq = occu_lst.reduce(function(x, y) {
+            return Math.max(x, y);
+        });
+        //console.log(most_repeted_freq);
 
 
-    // insert new elements
-    $grid.isotope('insert', elems);
+        cat_lst.forEach(function(Element, index) {
+            var catagory = Element[0];
+            if (catagory == 0) {
+                console.log('Empty items in frequency_lst are returned as 0.');
+            }
+            var catagory_n_elem = Element[1];
+            if (catagory != 0) {
+                //console.log(catagory, catagory_n_elem, most_repeted_freq - catagory_n_elem);
+                for (var i = 0; i < most_repeted_freq - catagory_n_elem; i++) { // loop until getting to the differnce between #catagory and #max
+                    var $elem = $('<div class="building_square nullElem" />');
+                    // add tag names
+                    $elem.append(`<p class="${sel_group_by} ignore" style="display:none">` + catagory + 'a' + '</p>'); // add a to make sure the added Nulls are under 
+                    //console.log($elem[0]);
+                    elems.push($elem[0]);
+                }
+            } else {
+                //console.log(catagory, catagory_n_elem, most_repeted_freq - catagory_n_elem);
+            };
 
-    //console.log('added 1 to most repeted: ', most_repeted_freq); // to deal with added tags
-    most_repeted_freq += 1;
+            used_cat = [...groupby_catlst];
+            //console.log('catagory: ', catagory);
 
+            //console.log(cat_lst, catagory); // cat_lst is not good // .findIndex(`${catagory}`);
+            cat_index_cat_lst = used_cat.findIndex((element, index) => {
+                //console.log('element passed for index: ', element);
+                if (element.includes(`${catagory}`)) {
+                    //console.log('found: ', element);
+                    return true
+                }
+            });
+            //console.log("this catagory's index is: ", cat_index_cat_lst);
+
+            // add catagory name 
+            var $elem = $('<div class="building_square nullElem " col_header="a"/>'); // NOTICE - col_header
+            $elem.append(`<h4 class="${sel_group_by} ignore groupByColor${cat_index_cat_lst}">` + catagory + '</h4>'); // remove display:none to show // WIP HERE
+            elems.push($elem[0]);
+            // catagory
+        });
+
+
+        // insert new elements
+        $grid.isotope('insert', elems);
+
+        //console.log('added 1 to most repeted: ', most_repeted_freq); // to deal with added tags
+        most_repeted_freq += 1;
+
+
+    }; // avoid on return to non grouped-by
 
     // ------------------ Adjust container sizing ------------------- //
     // adjust container sizing if layout mode is changing from vertical or horizontal
@@ -607,7 +618,7 @@ $('.layout-mode-button-group').on('click', 'button', function() {
         // format vert height : number of items in largest catagory * gutter size * img size
         // width number is automatic - change columnWidth instead?
         // img size is 70 × 47 + maring 5px
-        var img_size = 55; // NOTICE 
+        var img_size = 52; // NOTICE 
         //grid_gutter = 70; // = rowHeight ?
         //console.log('most repeted: ', most_repeted_freq);
         var container_height = `${most_repeted_freq * img_size}px`; // grid_gutter
@@ -624,7 +635,15 @@ $('.layout-mode-button-group').on('click', 'button', function() {
         };
         $grid.css(containerStyle);
         isHorizontal = isHorizontalMode;
-    }
+    } else {
+        console.log('Stayed in cells by column');
+        var img_size = 52; // NOTICE 55
+        var container_height = `${most_repeted_freq * img_size}px`; // grid_gutter
+        var containerStyle = {
+            height: container_height
+        };
+        $grid.css(containerStyle);
+    };
 
     num_groups = cat_lst.length; // update global for coloring
     screen_width = document.body.clientWidth;
@@ -638,11 +657,15 @@ $('.layout-mode-button-group').on('click', 'button', function() {
     var layoutModeValue = $this.attr('data-layout-mode');
     $grid.isotope({ layoutMode: layoutModeValue });
 
-    // adjust column width to fit number of catagories 
+    /*
+    var all_grid_elems = $grid.isotope('getItemElements');
+    first_img_height = $(all_grid_elems[0]).height();
+*/
+
     $grid.isotope({
         cellsByColumn: {
             columnWidth: colWidth, //120
-            rowHeight: 52
+            rowHeight: 52 // 52 first_img_height
         }
     });
 
