@@ -345,8 +345,14 @@ $('.layout-mode-button-group').on('click', 'button', function() {
 
 // ---------- make map item larger on building hover ---------- //
 
-$('.building_square')
-    .hover(function() { // on
+// enlarge markers when hovering on image
+
+$(function() {
+    $(document).ready(function() {
+        var enlarge_grid_item = ''; // placeholder
+        var map_marker = ''; // empty var to replace
+        $('.building_square').on("mouseover", function(event) {
+            // on
             // detect matching item on map
             // avoid null items when 'grouped-by'
             if (!($(this).hasClass('nullElem'))) {
@@ -358,8 +364,7 @@ $('.building_square')
                 //console.log('map layers: ', map_layers);
                 //console.log('val: ', map_layers[44]);
                 //console.log('val latlng: ', map_layers[44]._latlng);
-                var map_marker = ''; // empty var to replace
-                console.log('marker before: ', map_marker);
+                //console.log('marker before: ', map_marker);
                 // iterate over the map layers and return the map object that matches the img_lat
                 for (const key in map_layers) {
                     checked_map_item = map_layers[key];
@@ -369,18 +374,25 @@ $('.building_square')
                         map_marker = checked_map_item;
                     }
                 }
-                console.log('marker after: ', map_marker);
-                console.log('marker radius before: ', map_marker._radius);
+                //console.log('marker after: ', map_marker);
+                //console.log('marker radius before: ', map_marker._radius);
                 map_marker._radius *= 1.5; // make the map marker larger
-                console.log('marker radius after: ', map_marker._radius);
+                //console.log('marker radius after: ', map_marker._radius);
                 mymap.stop(); // reinnit the map by zooming in place
                 mymap.invalidateSize();
             }
-        }, alert('hover off!')
 
+        }); // end of: .on("mouseover"
+        $('.building_square').on("mouseout", function(event) {
+            map_marker._radius /= 1.5; // make the map marker larger
+            mymap.stop(); // reinnit the map by zooming in place
+            mymap.invalidateSize();
+        }); // end of: .on("mouseover"
 
-    );
+    })
+});
 
+// enlarge images when hovering on marker
 
 $(function() {
     var marker_enlarge_img = function() {
