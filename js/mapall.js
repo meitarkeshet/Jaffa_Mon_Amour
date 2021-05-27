@@ -345,13 +345,42 @@ $('.layout-mode-button-group').on('click', 'button', function() {
 
 // ---------- make map item larger on building hover ---------- //
 
-$('.building_square').hover(function() {
-    // detect matching item on map
-    // extrect item's lat / lon
+$('.building_square')
+    .hover(function() { // on
+            // detect matching item on map
+            // avoid null items when 'grouped-by'
+            if (!($(this).hasClass('nullElem'))) {
+                // extrect item's lat / lon
+                img_lat = $(this).children('p.lat')[0].innerHTML; // NOTICE [0]
+                //console.log(img_lat);
+                // find mathing map marker 
+                var map_layers = locations_layer._layers;
+                //console.log('map layers: ', map_layers);
+                //console.log('val: ', map_layers[44]);
+                //console.log('val latlng: ', map_layers[44]._latlng);
+                var map_marker = ''; // empty var to replace
+                console.log('marker before: ', map_marker);
+                // iterate over the map layers and return the map object that matches the img_lat
+                for (const key in map_layers) {
+                    checked_map_item = map_layers[key];
+                    check_latlng = checked_map_item._latlng;
+                    check_lat = check_latlng.lat;
+                    if (check_lat == img_lat) { // is the markers lat matches the img lat - pass it on
+                        map_marker = checked_map_item;
+                    }
+                }
+                console.log('marker after: ', map_marker);
+                console.log('marker radius before: ', map_marker._radius);
+                map_marker._radius *= 1.5; // make the map marker larger
+                console.log('marker radius after: ', map_marker._radius);
+                mymap.stop(); // reinnit the map by zooming in place
+                mymap.invalidateSize();
+            }
+        }, alert('hover off!')
 
-    //console.log($(this));
-    //console.log('hovering');
-});
+
+    );
+
 
 $(function() {
     var marker_enlarge_img = function() {
@@ -373,7 +402,6 @@ $(function() {
                     if ($(value).hasClass('nullElem')) {
                         return false;
                     } else {
-                        console.log('value passed: ', value);
                         item_lat_val = $(value).children('p.lat')[0].innerHTML; // NOTICE [0]
                         //console.log(item_lat_val);
                         return (item_lat_val == marker_geo_lat)
