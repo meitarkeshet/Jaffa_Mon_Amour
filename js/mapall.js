@@ -336,7 +336,7 @@ $(document).ready(function() {
     });
 });
 
-// ---------- Group by ---------- //
+// ---------- Group by alarm ---------- //
 
 $('.layout-mode-button-group').on('click', 'button', function() {
     console.log('---------- Map >> Group by ----------');

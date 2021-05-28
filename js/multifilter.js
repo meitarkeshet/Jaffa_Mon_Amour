@@ -467,7 +467,7 @@ var $window = $(window);
 
 $(function() {
     var groupby_reinnit = function(layoutModeButtonGroup_button) {
-        console.log('this is "THIS": ', $(this));
+        //console.log('this is "THIS": ', $(this));
         console.log('this is "passed": ', layoutModeButtonGroup_button);
 
         flag_groupby = false; // reset group by flag
@@ -699,27 +699,53 @@ $(function() {
         };
         // now groupby
         groupby_reinnit($(this));
+        //return true;
     });
+
     $('.filters').on('click', function() { // re-innit function when button filtered
         // get currently pressed group-by button for screen adjusments
         var groupby_status_button = $('#group-sort > button.is-checked');
+        if (!(groupby_status_button.attr('data-group-by') == 'non')) { // if group-by is off - ignore
+            // first, reset by getting "groupby" back to "original order"
+            var defualt_groupby_setting = function default_state() {
+                console.log('< -------- RETURNING TO DEFUALT GROUPBY SETTING -------->');
+                ($("#group-sort > button:first").click())
+            };
+            var og_groupby_setting = function og_state() {
+                console.log('< -------- RETURNING TO GROUPBY SETTING BEFORE FILTER -------->');
+                (groupby_reinnit(groupby_status_button))
+            };
+            //og_groupby_setting(defualt_groupby_setting);
+            $.when(defualt_groupby_setting()).then(og_groupby_setting());
+            $.when(og_groupby_setting()).then(og_groupby_setting());
+
+            //groupby_reinnit($("#group-sort > button:first"));
+            // groupby_reinnit(groupby_status_button); // WIP
+
+            /*
+               $grid.on('arrangeComplete',
+                   function(event, filteredItems) {
+                       groupby_status_button.click();
+                   });
+              */
+            // now we can return groupby to how it was before
+            //groupby_reinnit(groupby_status_button);
+        }; // close  $('.filters').on('click', function() {
         console.log('TOUCHED button FILTER');
-        console.log(groupby_status_button); // pass me to function WIP
-        //console.log(groupby_status.attr('data-group-by'));
-        groupby_reinnit(groupby_status_button);
+        console.log('button filter pass:', groupby_status_button); // pass me to function WIP
+        console.log('attr:', groupby_status_button.attr('data-group-by')); // pass me to function WIP
+
+
     });
     $('.noUi-touch-area').on('click', function() { // re-innit function when slider filters are touched
         // get currently pressed group-by button for screen adjusments
         var groupby_status_button = $('#group-sort > button.is-checked');
         console.log('TOUCHED slider FILTER');
-        console.log(groupby_status_button); // pass me to function 
+        //console.log(groupby_status_button); // pass me to function 
         //console.log(groupby_status.attr('data-group-by'));
-        groupby_reinnit(groupby_status_button);
+        //groupby_reinnit(groupby_status_button);
     });
 });
-
-console.log($('.filters'));
-
 
 
 
