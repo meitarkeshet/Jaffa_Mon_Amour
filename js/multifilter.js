@@ -716,8 +716,13 @@ $(function() {
                 (groupby_reinnit(groupby_status_button))
             };
             //og_groupby_setting(defualt_groupby_setting);
-            $.when(defualt_groupby_setting()).then(og_groupby_setting());
-            $.when(og_groupby_setting()).then(og_groupby_setting());
+            //$.when(defualt_groupby_setting()).then(og_groupby_setting());
+            //$.when(og_groupby_setting()).then(og_groupby_setting()); // WIP
+            og_groupby_setting();
+            setTimeout(function() {
+                console.log('< -------- STARTING NEXT FUNCTION -------->');
+                og_groupby_setting();
+            }, 20000);
 
             //groupby_reinnit($("#group-sort > button:first"));
             // groupby_reinnit(groupby_status_button); // WIP
