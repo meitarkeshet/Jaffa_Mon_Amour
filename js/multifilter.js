@@ -3,6 +3,7 @@
 /* global isotope.pkgd.js, noUiSlider */
 //-----------------------------------
 
+
 // filter functions
 var filterFns = {
     //binary_true
@@ -458,6 +459,9 @@ var groupby_catlst = '';
 // for sorting 
 var sorting_by = '';
 
+// to avoid reload in mapall
+var flag_refresh_groupby = false;
+
 // --------- Grouping ------------ //
 
 // to enable multiple layouts
@@ -687,10 +691,10 @@ $(function() {
             flag_sortby = false;
             flag_regular = false;
         };
-        //setTimeout(1000); // NOTICE sleep / wait 
+        setTimeout(1000); // NOTICE sleep / wait 
         console.log('< -------- FINISHED  -------->');
         return 'Done';
-    }
+    };
     $('.layout-mode-button-group').on('click', 'button', function() {
         // we can't sort and groupby at the same time
         // to make sure 'sort' is on 'original order' - click it.
@@ -710,24 +714,17 @@ $(function() {
         var groupby_status_button = $('#group-sort > button.is-checked');
         if (!(groupby_status_button.attr('data-group-by') == 'non')) { // if group-by is off - ignore
 
-            function testAsync() {
-                return new Promise((resolve, reject) => {
-                    //here our function should be implemented 
-                    setTimeout(() => {
-                        console.log("Hello from inside the testAsync function");
-                        groupby_reinnit(groupby_status_button);
-                        resolve();
-                    }, 2000);
-                });
-            };
-
             async function refresh_groupby() {
+                flag_refresh_groupby = true; // to avoid map refresh in mapall.js
                 console.log("Before first click");
-                await testAsync();
+                await testAsync(groupby_status_button);
                 console.log("After first click");
                 console.log("Before second click");
-                await testAsync();
+                await testAsync(groupby_status_button);
                 console.log("After second waiting");
+                console.log("Before mapall called from multifilter");
+                await mapall_reinnit();
+                console.log("After mapall called from multifilter");
             }
             refresh_groupby();
 
@@ -742,34 +739,49 @@ $(function() {
         var groupby_status_button = $('#group-sort > button.is-checked');
         if (!(groupby_status_button.attr('data-group-by') == 'non')) { // if group-by is off - ignore
 
-            function testAsync() {
-                return new Promise((resolve, reject) => {
-                    //here our function should be implemented 
-                    setTimeout(() => {
-                        console.log("Hello from inside the testAsync function");
-                        groupby_reinnit(groupby_status_button);
-                        resolve();
-                    }, 2000);
-                });
-            };
-
             async function refresh_groupby() {
+                flag_refresh_groupby = true; // to avoid map refresh in mapall.js
                 console.log("Before first click");
-                await testAsync();
+                await testAsync(groupby_status_button);
                 console.log("After first click");
                 console.log("Before second click");
-                await testAsync();
-                console.log("After second waiting");
+                await testAsync(groupby_status_button);
+                console.log("After second click");
+                console.log("Before mapall called from multifilter");
+                await mapall_reinnit();
+                console.log("After mapall called from multifilter");
             }
             refresh_groupby();
-
         }; // CLOSE: if (!(groupby_status_button.attr('data-group-by') == 'non'))
+    }); // CLOSE: ('.noUi-touch-area').on('click', function() {
 
-        console.log('TOUCHED slider FILTER');
+    function testAsync(groupby_status_button) {
+        return new Promise((resolve, reject) => {
+            //here our function should be implemented 
+            setTimeout(() => {
+                console.log("Inside the testAsync function");
+                groupby_reinnit(groupby_status_button);
+                //groupby_status_button.click();
+                resolve();
+            }, 2000);
+        });
+    };
 
-    });
-});
+    function mapall_reinnit() {
+        return new Promise((resolve, reject) => {
+            //here our function should be implemented 
+            setTimeout(() => {
+                console.log("Inside the mapall_reinnit function");
+                flag_refresh_groupby = false; // make isotope arrangeComplete detectable for mapall.js
+                // relunch the grid to reinnit the map in mapall.js WIP
+                $grid.isotope();
+                //$grid.isotope('reloadItems');
+                resolve();
+            }, 2000);
+        });
+    };
 
+}); // CLOSE : $(function() {
 
 
 function frequency_lst(arr) {

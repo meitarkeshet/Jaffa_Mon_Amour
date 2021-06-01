@@ -224,9 +224,11 @@ $(function() {
     $(document).ready(function() { // run on every change in grid;
         $grid.on('arrangeComplete', // 
             function(event, filteredItems) {
-                console.log('Isotope arrange completed on ' +
-                    filteredItems.length + ' items');
-                map_reload();
+                if (flag_refresh_groupby == false) {
+                    console.log('Isotope arrange completed on ' +
+                        filteredItems.length + ' items');
+                    map_reload();
+                };
             });
     });
 });
@@ -340,7 +342,6 @@ $(document).ready(function() {
 
 $('.layout-mode-button-group').on('click', 'button', function() {
     console.log('---------- Map >> Group by ----------');
-
 });
 
 // ---------- make map item larger on building hover ---------- //
