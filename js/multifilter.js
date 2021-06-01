@@ -718,7 +718,6 @@ $(function() {
                         groupby_reinnit(groupby_status_button);
                         resolve();
                     }, 2000);
-
                 });
             };
 
@@ -732,24 +731,42 @@ $(function() {
             }
             refresh_groupby();
 
-
-
-
-
-        }; // close  $('.filters').on('click', function() {
+        }; // CLOSE: if (!(groupby_status_button.attr('data-group-by') == 'non'))
         console.log('TOUCHED button FILTER');
         console.log('button filter pass:', groupby_status_button); // pass me to function WIP
         console.log('attr:', groupby_status_button.attr('data-group-by')); // pass me to function WIP
-
-
     });
+
     $('.noUi-touch-area').on('click', function() { // re-innit function when slider filters are touched
         // get currently pressed group-by button for screen adjusments
         var groupby_status_button = $('#group-sort > button.is-checked');
+        if (!(groupby_status_button.attr('data-group-by') == 'non')) { // if group-by is off - ignore
+
+            function testAsync() {
+                return new Promise((resolve, reject) => {
+                    //here our function should be implemented 
+                    setTimeout(() => {
+                        console.log("Hello from inside the testAsync function");
+                        groupby_reinnit(groupby_status_button);
+                        resolve();
+                    }, 2000);
+                });
+            };
+
+            async function refresh_groupby() {
+                console.log("Before first click");
+                await testAsync();
+                console.log("After first click");
+                console.log("Before second click");
+                await testAsync();
+                console.log("After second waiting");
+            }
+            refresh_groupby();
+
+        }; // CLOSE: if (!(groupby_status_button.attr('data-group-by') == 'non'))
+
         console.log('TOUCHED slider FILTER');
-        //console.log(groupby_status_button); // pass me to function 
-        //console.log(groupby_status.attr('data-group-by'));
-        //groupby_reinnit(groupby_status_button);
+
     });
 });
 
