@@ -687,6 +687,9 @@ $(function() {
             flag_sortby = false;
             flag_regular = false;
         };
+        //setTimeout(1000); // NOTICE sleep / wait 
+        console.log('< -------- FINISHED  -------->');
+        return 'Done';
     }
     $('.layout-mode-button-group').on('click', 'button', function() {
         // we can't sort and groupby at the same time
@@ -699,42 +702,40 @@ $(function() {
         };
         // now groupby
         groupby_reinnit($(this));
-        //return true;
+
     });
 
     $('.filters').on('click', function() { // re-innit function when button filtered
         // get currently pressed group-by button for screen adjusments
         var groupby_status_button = $('#group-sort > button.is-checked');
         if (!(groupby_status_button.attr('data-group-by') == 'non')) { // if group-by is off - ignore
-            // first, reset by getting "groupby" back to "original order"
-            var defualt_groupby_setting = function default_state() {
-                console.log('< -------- RETURNING TO DEFUALT GROUPBY SETTING -------->');
-                ($("#group-sort > button:first").click())
-            };
-            var og_groupby_setting = function og_state() {
-                console.log('< -------- RETURNING TO GROUPBY SETTING BEFORE FILTER -------->');
-                (groupby_reinnit(groupby_status_button))
-            };
-            //og_groupby_setting(defualt_groupby_setting);
-            //$.when(defualt_groupby_setting()).then(og_groupby_setting());
-            //$.when(og_groupby_setting()).then(og_groupby_setting()); // WIP
-            og_groupby_setting();
-            setTimeout(function() {
-                console.log('< -------- STARTING NEXT FUNCTION -------->');
-                og_groupby_setting();
-            }, 20000);
 
-            //groupby_reinnit($("#group-sort > button:first"));
-            // groupby_reinnit(groupby_status_button); // WIP
+            function testAsync() {
+                return new Promise((resolve, reject) => {
+                    //here our function should be implemented 
+                    setTimeout(() => {
+                        console.log("Hello from inside the testAsync function");
+                        groupby_reinnit(groupby_status_button);
+                        resolve();
+                    }, 2000);
 
-            /*
-               $grid.on('arrangeComplete',
-                   function(event, filteredItems) {
-                       groupby_status_button.click();
-                   });
-              */
-            // now we can return groupby to how it was before
-            //groupby_reinnit(groupby_status_button);
+                });
+            };
+
+            async function refresh_groupby() {
+                console.log("Before first click");
+                await testAsync();
+                console.log("After first click");
+                console.log("Before second click");
+                await testAsync();
+                console.log("After second waiting");
+            }
+            refresh_groupby();
+
+
+
+
+
         }; // close  $('.filters').on('click', function() {
         console.log('TOUCHED button FILTER');
         console.log('button filter pass:', groupby_status_button); // pass me to function WIP
