@@ -208,24 +208,102 @@ Storage.prototype.getArray = function(arrayName) {
 
 // ----------- graphs ----------- //
 
+var sel_data = []; // create empty
+var single_building_data = [];
+var all_avg_data = []; // create empty
+
+
 // isolate the selected building and the rest 
 $(document).ready(function() {
     $('.info-button').click(function(e) {
         var all_data = localStorage.getArray('passed_grid_elems')[0];
         var building_id = $('#building_id').text().split(' ')[1]; // NOTICE - using space as splitter
-        var sel_data = []; // create empty
+
+        /*
+        var all_sun_radiation = all_building_height = all_historical_buildings = all_centrality = all_density =
+            all_parcel_size = all_zero_line = []; // create empty arrays to hold all filterd buildings values by catagoreis
+*/
+
+        var all_sun_radiation = [];
+        all_building_height = [];
+        all_historical_buildings = [];
+        all_centrality = [];
+        all_density = [];
+        all_parcel_size = [];
+        all_zero_line = [];
+
         $.each(all_data, function(key, value) {
+            console.log("Building's height (simple)", Number(value["Building's height (simple)"]));
+            console.log("Historical buildings within 15 min. walk", Number(value["Historical buildings within 15 min. walk"]));
+
+            all_sun_radiation.push(0); //  NOTICE change once there's more data - also lower in script 
+            all_building_height.push(Number(value["Building's height (simple)"]));
+            all_historical_buildings.push(Number(value["Historical buildings within 15 min. walk"]));
+            all_centrality.push(Number(value["Centrality (gravity) score for each building within 15 min. walk r."]));
+            all_density.push(Number(value["Built density (2d built area / void) in 250 meter radius"]));
+            all_parcel_size.push(Number(value["Parcel size (square meters)"]));
+            all_zero_line.push(Number(value[" building's street-facing front Distance from parcel limits (0 line) in meters"]));
+
+            // find current selected building matching to the page
             if (value.id == building_id) {
                 sel_data = value;
             };
         });
-        console.log(sel_data);
+
+        console.log('all_building_height: ', all_building_height);
+        console.log('all_historical_buildings: ', all_historical_buildings);
+
+        // return avrages for entire filtered values 
+
+        function getAvg(arr) {
+            const total = arr.reduce((acc, c) => acc + c, 0);
+            return total / arr.length;
+        }
+
+        var avg_sun_radiation = getAvg(all_sun_radiation);
+        var avg_building_height = getAvg(all_building_height);
+        console.log('avg_building_height: ', avg_building_height);
+        var avg_historical_buildings = getAvg(all_historical_buildings);
+        var avg_centrality = getAvg(all_centrality);
+        var avg_density = getAvg(all_density);
+        var avg_parcel_size = getAvg(all_parcel_size);
+        var avg_zero_line = getAvg(all_zero_line);
+
+        all_avg_data = [avg_sun_radiation, avg_building_height, avg_historical_buildings,
+            avg_centrality, avg_density, avg_parcel_size, avg_zero_line
+        ];
+
+
+        // array order: 'sun radiation',V'height',V'historical buildings around',V'centrality',V'built density',V'parcel size','distance from 0 line'
+        var single_sun_radiation = 0; // NOTICE change once there's more data - also up in script
+        var single_building_height = Number(sel_data["Building's height (simple)"]);
+        var single_historical_buildings = Number(sel_data["Historical buildings within 15 min. walk"]);
+        var single_centrality = Number(sel_data["Centrality (gravity) score for each building within 15 min. walk r."]);
+        var single_density = Number(sel_data["Built density (2d built area / void) in 250 meter radius"]);
+        var single_parcel_size = Number(sel_data["Parcel size (square meters)"]);
+        var single_zero_line = Number(sel_data[" building's street-facing front Distance from parcel limits (0 line) in meters"]);
+        // create array holding data for selected building - for radar
+        single_building_data = [single_sun_radiation, single_building_height, single_historical_buildings,
+            single_centrality, single_density, single_parcel_size, single_zero_line
+        ];
+
+        console.log('all_avg_data', all_avg_data);
+        console.log('single_building_data: ', single_building_data); // see
+        // Normelaize values according to the largest number as max
+        function normalizer(val, max, min) { return (val - min) / (max - min); }
+
     });
 });
+
+
+
+
+
 
 // 1. Radar - selected vs. total avg over sevral tests
 // 2. multi-series pie
 // 3.  Scatter?
+
 
 // ------- General chart test -------- //
 
@@ -233,17 +311,17 @@ $(document).ready(function() {
 
 const data = {
     labels: [
-        'Eating',
-        'Drinking',
-        'Sleeping',
-        'Designing',
-        'Coding',
-        'Cycling',
-        'Running'
+        'sun radiation',
+        'height',
+        'historical buildings around',
+        'centrality',
+        'built density',
+        'parcel size',
+        'distance from 0 line'
     ],
     datasets: [{
-        label: 'My First Dataset',
-        data: [65, 59, 90, 81, 56, 55, 40],
+        label: 'All buildings filtered (avg.)',
+        data: all_avg_data,
         fill: true,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgb(255, 99, 132)',
@@ -252,8 +330,8 @@ const data = {
         pointHoverBackgroundColor: '#fff',
         pointHoverBorderColor: 'rgb(255, 99, 132)'
     }, {
-        label: 'My Second Dataset',
-        data: [28, 48, 40, 19, 96, 27, 100],
+        label: 'Selected building',
+        data: single_building_data,
         fill: true,
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
         borderColor: 'rgb(54, 162, 235)',
