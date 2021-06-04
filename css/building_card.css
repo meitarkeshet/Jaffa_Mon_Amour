@@ -123,21 +123,30 @@ body {
     flex: 30;
     background: rgb(255, 255, 255);
     padding-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* NOTICE to keep off from button */
 }
 
 .simplex_box {
     flex: 50;
-    background: red;
+    display: flex;
+    background: rgb(255, 255, 255);
+    align-items: center;
+    justify-content: center;
 }
 
 .graph_box {
     flex: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: white;
     max-height: 100%;
 }
 
 canvas {
     max-height: 90%;
-    padding-bottom: 25px;
+    /*padding-bottom: 25px; */
 }

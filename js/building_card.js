@@ -304,9 +304,12 @@ $(document).ready(function() {
         normalized_all_buildings[0] = 0.2; // NOTICE change once there's more data - look up for the same phrase x2
         normalized_single_building[0] = 0.5; // NOTICE change once there's more data - look up for the same phrase x3
 
-        // ----------- simplex ----------- //
+        // ----------- match top row heights ----------- //
+        //get height of simplex_box
+        var simplex_iframe_height = $('#simplexinlineFrame').height();
+        document.getElementById("radar_chart").style.height = `${simplex_iframe_height}px`;
 
-        // end of simplex 
+        console.log('simplex height =', simplex_iframe_height);
     }); // close     $('.info-button').click(function(e) {
 
 });
