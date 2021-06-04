@@ -305,6 +305,8 @@ $(document).ready(function() {
         normalized_single_building[0] = 0.5; // NOTICE change once there's more data - look up for the same phrase x3
 
         // ----------- simplex ----------- //
+
+        // end of simplex 
     }); // close     $('.info-button').click(function(e) {
 
 });
