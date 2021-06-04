@@ -304,62 +304,7 @@ $(document).ready(function() {
         normalized_all_buildings[0] = 0.2; // NOTICE change once there's more data - look up for the same phrase x2
         normalized_single_building[0] = 0.5; // NOTICE change once there's more data - look up for the same phrase x3
 
-// ----------- simplex ----------- //
-
-let _isMeimadOk = false; /* global flag that states if viewer is ready. */
-/*an infinite loop or recursion that on each time frame (200 milliseconds) checks if the viewer is ready. The actual check is performed by
-another method listent’s to viewer’s message event with appropriate ‘pong’ response. This is why we have a global flag */
-
-function pingMeimad(){
-window.frames.inlineFrameExample.contentWindow.postMessage("ping","*");
-setTimeout(()=>{
-if(!_isMeimadOk)
-pingMeimad();
-},200);
-}
-
-/*It is advised start checking internal embedded viewer only after the parent page is loaded or other logic that should performed before
-anything else (this might be on another event/async method*/
-window.addEventListener("load", function(event) {
-        if (!_isMeimadOk) {
-            setTimeout(pingMeimad, 200);
-            return;
-        }
-    })
-    /*Here we listen to the viewer’s ready response and we also initialize what events we would like to be notified about and even special
-    data that would be returned by that event*/
-window.addEventListener("message", function(event) {
-    if (!_isMeimadOk) { /*This is the first time initialization saying to to parent window that negotiation started*/
-        if (event.data == "pong") {
-            _isMeimadOk = true;
-            let data = {
-                registerToEvents: [{
-                        name: "screenSpaceEvent",
-                        screenSpaceEventType: "LEFT_CLICK",
-                        options: {
-                            featureInfo: true /* return also feature properties */
-                        },
-                    },
-                    {
-                        name: "screenSpaceEvent",
-                        screenSpaceEventType: "MOUSE_MOVE",
-                        featureInfo: false
-                    }
-                ]
-            }
-            event.source.postMessage(data, "*");
-        }
-        Else
-        return;
-    } else if (event.data) {
-        console.log(event.data.name);
-        console.log(event.data.geoPosition);
-        if (event.data.featureInfo) {
-            console.log(event.data.featureInfo);
-            /*in case featureInfo is true this object contains an array of key value objects related to clicked/moved over feature)*/
-        }
-    }
-});
+        // ----------- simplex ----------- //
     }); // close     $('.info-button').click(function(e) {
 
 });
@@ -416,4 +361,3 @@ var radar_chart_elem = $('#radar_chart');
 var radar_chart = new Chart(radar_chart_elem, config);
 
 // ----------- close tab ----------- //
-
