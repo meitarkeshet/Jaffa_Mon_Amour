@@ -233,10 +233,7 @@ $(document).ready(function() {
         all_zero_line = [];
 
         $.each(all_data, function(key, value) {
-            console.log("Building's height (simple)", Number(value["Building's height (simple)"]));
-            console.log("Historical buildings within 15 min. walk", Number(value["Historical buildings within 15 min. walk"]));
-
-            all_sun_radiation.push(0); //  NOTICE change once there's more data - also lower in script 
+            all_sun_radiation.push(1); //  NOTICE change once there's more data - also lower in script + pushing 1 to avoid dividing 0/0 when normalizing
             all_building_height.push(Number(value["Building's height (simple)"]));
             all_historical_buildings.push(Number(value["Historical buildings within 15 min. walk"]));
             all_centrality.push(Number(value["Centrality (gravity) score for each building within 15 min. walk r."]));
@@ -258,11 +255,10 @@ $(document).ready(function() {
         function getAvg(arr) {
             const total = arr.reduce((acc, c) => acc + c, 0);
             return total / arr.length;
-        }
+        };
 
         var avg_sun_radiation = getAvg(all_sun_radiation);
         var avg_building_height = getAvg(all_building_height);
-        console.log('avg_building_height: ', avg_building_height);
         var avg_historical_buildings = getAvg(all_historical_buildings);
         var avg_centrality = getAvg(all_centrality);
         var avg_density = getAvg(all_density);
@@ -275,7 +271,7 @@ $(document).ready(function() {
 
 
         // array order: 'sun radiation',V'height',V'historical buildings around',V'centrality',V'built density',V'parcel size','distance from 0 line'
-        var single_sun_radiation = 0; // NOTICE change once there's more data - also up in script
+        var single_sun_radiation = 2; // NOTICE change once there's more data - also up in script pushing 2 to avoid dividing 0/0 when normalizing
         var single_building_height = Number(sel_data["Building's height (simple)"]);
         var single_historical_buildings = Number(sel_data["Historical buildings within 15 min. walk"]);
         var single_centrality = Number(sel_data["Centrality (gravity) score for each building within 15 min. walk r."]);
@@ -287,10 +283,33 @@ $(document).ready(function() {
             single_centrality, single_density, single_parcel_size, single_zero_line
         ];
 
-        console.log('all_avg_data', all_avg_data);
-        console.log('single_building_data: ', single_building_data); // see
-        // Normelaize values according to the largest number as max
-        function normalizer(val, max, min) { return (val - min) / (max - min); }
+        // create a list holding the lists of values chacked - before avrage or any other math action
+        var lst_radar_lst = [all_sun_radiation, all_building_height, all_historical_buildings,
+            all_centrality, all_density, all_parcel_size, all_zero_line
+        ];
+        // create empty lists to hold normalized values - once for single building and once for all buildings
+        normalized_all_buildings = [];
+        normalized_single_building = [];
+
+        // function to Normelaize values between 0 and 1
+        function normalizer(val, max, min) {
+            return (val - min) / (max - min);
+        };
+
+        // for each list in list of lists: 1. find max, find min, pass matching single building value - to normalize 
+        var i;
+        for (i = 0; i < single_building_data.length; i++) { // run until matching number of catagories chacked for rader (currently 7)
+            // normalizer(val, max, min)
+            // normalize all (avraged) values
+            normalized_all_buildings[i] = normalizer(all_avg_data[i], Math.max.apply(Math, lst_radar_lst[i]), Math.min.apply(Math, lst_radar_lst[i]));
+            normalized_single_building[i] = normalizer(single_building_data[i], Math.max.apply(Math, lst_radar_lst[i]), Math.min.apply(Math, lst_radar_lst[i]));
+        }
+        normalized_all_buildings[0] = 0.2; // NOTICE change once there's more data - look up for the same phrase x2
+        normalized_single_building[0] = 0.5; // NOTICE change once there's more data - look up for the same phrase x3
+
+        // WIP
+
+
 
     });
 });
