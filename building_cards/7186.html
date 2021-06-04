@@ -1,0 +1,120 @@
+ <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/building_card.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    <!--To load jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
+    <!--To dataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    <!--To pass variables -->
+    <script type="text/javascript" src="../js/app.js"></script>
+    <!--To load chartjs -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.0/chart.min.js"></script>
+    <title>7186</title> 
+    </head>
+    
+<body>
+    <div class='summary-page'>
+        <span class="material-icons-outlined" id="topRightFixed">
+            close
+            </span>
+        <div class="summary">
+            <h2>1</h2>
+            <p>parcel : 2</p>
+            <p>section: 3</p>
+            <p>complex: 4</p>
+            <p>status: 5 b</p>
+            <p>City Building Plan: 6</p>
+            <p id="building_id">ID: 7186</p>
+        </div>
+        <div class="carousel-container">
+            <img alt="test" photo_num='1' class="center carousel" src="../photos/אאורבך-4(2)_12146.jpg">
+            <img alt="test" photo_num='2' class="center carousel" src="../photos/אאורבך-4_12146.jpg">
+        </div>
+
+        <div class="carousel-button">
+            <span class="material-icons-outlined" button_num='1'>
+                    radio_button_checked
+                    </span>
+            <span class="material-icons-outlined" button_num='2'>
+                        radio_button_unchecked
+                        </span>
+
+
+        </div>
+        <span class="material-icons-outlined info-button info-summary" id="buttonLeftFixed">info</span>
+        <span class="material-icons-outlined" id="navigate_before">
+        navigate_before
+        </span>
+        <span class="material-icons-outlined navigate_next" id="buttonRightFixed">
+        navigate_next
+        </span>
+    </div>
+
+    <div class='detailed-page'>
+        <!-- Entire page-->
+        <div class="top_container">
+            <!-- simplex / powerBI - simplex height="550px" width="100%"            -->
+
+            <div class='simplex_box'>
+                <iframe id="simplexinlineFrame" height="95%" width="90%" title="Meimad Iframe" 
+                src='https://simplex-smart3d.com/ces/TLV/app-ANPLUS/?pos=34.756111,32.055,1100&ori=0,-90,0#lookAt={%22lat%22:32.0438991,%22lon%22:34.7639062,%20%22elev%22:0.1,%22heading%22:180,%22pitch%22:45,%22dist%22:100,%22duration%22:3,%22fly%22:true,%22showPin%22:%20false,%22circle%22:true,%22rpm%22:1}&layout=clean'> </iframe>
+            </div>
+            <div class=' graph_box '>
+                <!-- Graph -->
+                <canvas id="radar_chart"></canvas>
+                <!--  <canvas id="multi_series_pie_chart"></canvas> -->
+            </div>
+        </div>
+        <!-- close: class="top_container"-->
+
+        <div class="bottom_container">
+            <!-- table -->
+            <div class='table_box '>
+
+
+                <table id="table_id" class="display">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>primary</th>
+                            <th>secondary</th>
+                            <th>n_bicycle_parking.</th>
+                            <th>placeholder.</th>
+                            <th>placeholder.</th>
+                            <th>placeholder.</th>
+                            <th>placeholder.</th>
+                            <th>placeholder.</th>
+                            <th>placeholder.</th>
+
+
+                        </tr>
+                    </thead>
+                </table>
+                <!-- table -->
+            </div>
+            <!-- close: class="bottom_container"-->
+
+        </div>
+        <!-- close entire page div -->
+        <span class="material-icons-outlined info-button info-detailed" id="buttonLeftFixed">info</span>
+
+    </div>
+    <!-- close: class='detailed-page '-->
+</body>
+
+<footer>
+
+    <!--To load javascript page -->
+    <script src="../js/building_card.js"></script>
+
+
+</footer>
+
+</html>
