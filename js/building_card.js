@@ -211,6 +211,9 @@ Storage.prototype.getArray = function(arrayName) {
 var sel_data = []; // create empty
 var single_building_data = [];
 var all_avg_data = []; // create empty
+// create empty lists to hold normalized values - once for single building and once for all buildings
+var normalized_all_buildings = [];
+var normalized_single_building = [];
 
 
 // isolate the selected building and the rest 
@@ -246,9 +249,6 @@ $(document).ready(function() {
                 sel_data = value;
             };
         });
-
-        console.log('all_building_height: ', all_building_height);
-        console.log('all_historical_buildings: ', all_historical_buildings);
 
         // return avrages for entire filtered values 
 
@@ -287,9 +287,6 @@ $(document).ready(function() {
         var lst_radar_lst = [all_sun_radiation, all_building_height, all_historical_buildings,
             all_centrality, all_density, all_parcel_size, all_zero_line
         ];
-        // create empty lists to hold normalized values - once for single building and once for all buildings
-        normalized_all_buildings = [];
-        normalized_single_building = [];
 
         // function to Normelaize values between 0 and 1
         function normalizer(val, max, min) {
@@ -307,24 +304,66 @@ $(document).ready(function() {
         normalized_all_buildings[0] = 0.2; // NOTICE change once there's more data - look up for the same phrase x2
         normalized_single_building[0] = 0.5; // NOTICE change once there's more data - look up for the same phrase x3
 
-        // WIP
+// ----------- simplex ----------- //
 
+let _isMeimadOk = false; /* global flag that states if viewer is ready. */
+/*an infinite loop or recursion that on each time frame (200 milliseconds) checks if the viewer is ready. The actual check is performed by
+another method listent’s to viewer’s message event with appropriate ‘pong’ response. This is why we have a global flag */
 
+function pingMeimad(){
+window.frames.inlineFrameExample.contentWindow.postMessage("ping","*");
+setTimeout(()=>{
+if(!_isMeimadOk)
+pingMeimad();
+},200);
+}
 
-    });
+/*It is advised start checking internal embedded viewer only after the parent page is loaded or other logic that should performed before
+anything else (this might be on another event/async method*/
+window.addEventListener("load", function(event) {
+        if (!_isMeimadOk) {
+            setTimeout(pingMeimad, 200);
+            return;
+        }
+    })
+    /*Here we listen to the viewer’s ready response and we also initialize what events we would like to be notified about and even special
+    data that would be returned by that event*/
+window.addEventListener("message", function(event) {
+    if (!_isMeimadOk) { /*This is the first time initialization saying to to parent window that negotiation started*/
+        if (event.data == "pong") {
+            _isMeimadOk = true;
+            let data = {
+                registerToEvents: [{
+                        name: "screenSpaceEvent",
+                        screenSpaceEventType: "LEFT_CLICK",
+                        options: {
+                            featureInfo: true /* return also feature properties */
+                        },
+                    },
+                    {
+                        name: "screenSpaceEvent",
+                        screenSpaceEventType: "MOUSE_MOVE",
+                        featureInfo: false
+                    }
+                ]
+            }
+            event.source.postMessage(data, "*");
+        }
+        Else
+        return;
+    } else if (event.data) {
+        console.log(event.data.name);
+        console.log(event.data.geoPosition);
+        if (event.data.featureInfo) {
+            console.log(event.data.featureInfo);
+            /*in case featureInfo is true this object contains an array of key value objects related to clicked/moved over feature)*/
+        }
+    }
+});
+    }); // close     $('.info-button').click(function(e) {
+
 });
 
-
-
-
-
-
-// 1. Radar - selected vs. total avg over sevral tests
-// 2. multi-series pie
-// 3.  Scatter?
-
-
-// ------- General chart test -------- //
 
 // 1. radar
 
@@ -340,7 +379,7 @@ const data = {
     ],
     datasets: [{
         label: 'All buildings filtered (avg.)',
-        data: all_avg_data,
+        data: normalized_all_buildings,
         fill: true,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgb(255, 99, 132)',
@@ -350,7 +389,7 @@ const data = {
         pointHoverBorderColor: 'rgb(255, 99, 132)'
     }, {
         label: 'Selected building',
-        data: single_building_data,
+        data: normalized_single_building,
         fill: true,
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
         borderColor: 'rgb(54, 162, 235)',
@@ -376,130 +415,5 @@ const config = {
 var radar_chart_elem = $('#radar_chart');
 var radar_chart = new Chart(radar_chart_elem, config);
 
-console.log(radar_chart_elem);
+// ----------- close tab ----------- //
 
-// multi-series pie
-
-const DATA_COUNT = 5;
-const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
-
-const labels = [1, 2, 3, 4, 5];
-const data_pie = {
-    labels: ['Overall Yay', 'Overall Nay', 'Group A Yay', 'Group A Nay', 'Group B Yay', 'Group B Nay', 'Group C Yay', 'Group C Nay'],
-    datasets: [{
-            backgroundColor: ['#AAA', '#777'],
-            data: [21, 79]
-        },
-        {
-            backgroundColor: ['hsl(0, 100%, 60%)', 'hsl(0, 100%, 35%)'],
-            data: [33, 67]
-        },
-        {
-            backgroundColor: ['hsl(100, 100%, 60%)', 'hsl(100, 100%, 35%)'],
-            data: [20, 80]
-        },
-        {
-            backgroundColor: ['hsl(180, 100%, 60%)', 'hsl(180, 100%, 35%)'],
-            data: [10, 90]
-        }
-    ]
-};
-
-const config_pie = {
-    type: 'pie',
-    data: data_pie,
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                labels: {
-                    generateLabels: function(chart) {
-                        // Get the default label list
-                        const original = Chart.overrides.pie.plugins.legend.labels.generateLabels;
-                        const labelsOriginal = original.call(this, chart);
-
-                        // Build an array of colors used in the datasets of the chart
-                        var datasetColors = chart.data.datasets.map(function(e) {
-                            return e.backgroundColor;
-                        });
-                        datasetColors = datasetColors.flat();
-
-                        // Modify the color and hide state of each label
-                        labelsOriginal.forEach(label => {
-                            // There are twice as many labels as there are datasets. This converts the label index into the corresponding dataset index
-                            label.datasetIndex = (label.index - label.index % 2) / 2;
-
-                            // The hidden state must match the dataset's hidden state
-                            label.hidden = !chart.isDatasetVisible(label.datasetIndex);
-
-                            // Change the color to match the dataset
-                            label.fillStyle = datasetColors[label.index];
-                        });
-
-                        return labelsOriginal;
-                    }
-                },
-                onClick: function(mouseEvent, legendItem, legend) {
-                    // toggle the visibility of the dataset from what it currently is
-                    legend.chart.getDatasetMeta(
-                        legendItem.datasetIndex
-                    ).hidden = legend.chart.isDatasetVisible(legendItem.datasetIndex);
-                    legend.chart.update();
-                }
-            },
-            tooltip: {
-                callbacks: {
-                    label: function(context) {
-                        const labelIndex = (context.datasetIndex * 2) + context.dataIndex;
-                        return context.chart.data.labels[labelIndex] + ': ' + context.formattedValue;
-                    }
-                }
-            }
-        }
-    },
-};
-
-var pie_chart_elem = $('#multi_series_pie_chart');
-var pie_chart = new Chart(pie_chart_elem, config_pie);
-
-/*
-
-$(document).ready(function() {
-    var ctx = document.getElementById('myChart');
-    console.log(ctx);
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-});
-*/
