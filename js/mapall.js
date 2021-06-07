@@ -429,12 +429,7 @@ $(function() {
                 enlarge_grid_item.classList.remove("enlarge_img");
             });
             locations_layer.on("click", function(event) { // to open building card page
-                console.log('clicked on the map item related to: ', enlarge_grid_item);
-                //console.log('image: ', enlarge_grid_item);
-                var prev = $(enlarge_grid_item).prev();
-                console.log('parent elem: ', $(enlarge_grid_item).prev());
-                console.log('parent elem image: ', $(prev).children("a"));
-                $(prev).children("a").click();
+                $(enlarge_grid_item).prev().children("a").click();
             });
         });
     };
