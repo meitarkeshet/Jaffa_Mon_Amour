@@ -176,7 +176,7 @@ $(function() {
                             current_sortable_value = Number(current_sortable_value[0].innerHTML); // extract inner brackets value
                         };
                     });
-                    var brightest_color = [247, 251, 255];
+                    var brightest_color = [198, 219, 239];
                     var darkest_color = [8, 48, 107];
                     // move to zero
                     min_sortable = 0;
