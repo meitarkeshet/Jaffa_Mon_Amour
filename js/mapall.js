@@ -12,19 +12,21 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: 'pk.eyJ1IjoiamFmZmFtb25hbW91ciIsImEiOiJja29laTQ4YzMwNW5jMnZsejZkMWNxMW1nIn0.FZF-e-4X_LuaFTbc199few'
 }).addTo(mymap);
 
+var layerGroup = L.layerGroup().addTo(mymap);
 
 var locations_layer;
 
 
 // var marker = L.marker([32.049357, 34.758355]).addTo(mymap);
 
-var layerGroup = L.layerGroup().addTo(mymap);
 
 /* when images are filterd - modify JSON file to visible / invisible */
 
 // $('.img_filters').on('click', '.slider', function() {
 $(function() {
     var map_reload = function() {
+
+
 
         if (flag_groupby == true) {
             //console.log('Is grouped by');
@@ -219,7 +221,91 @@ $(function() {
 
         // Adding layer group to map
         layerGroup.addTo(mymap);
+
+        // Zoom to fit all markers map WIP 
+
+        // var map is an instance of a Leaflet map
+        // this function assumes you have added markers as GeoJSON to the map
+        // it will return an array of all features currently shown in the
+        // active bounding region.
+
+
+        function getFeaturesInView() {
+            var latlng_lst = [];
+            var features = [];
+            mymap.eachLayer(function(layer) {
+                if (layer instanceof L.CircleMarker) {
+                    if (mymap.getBounds().contains(layer.getLatLng())) {
+                        latlng_lst.push(layer.getLatLng());
+                        features.push(layer.feature);
+                    };
+                };
+            });
+            return latlng_lst;
+            //return features;
+        };
+        mymap.setZoom(7); // zoom out to make sure to have all points in view before testing with getFeaturesInView()
+
+        var in_view = getFeaturesInView();
+
+        // Ensure there's at least one visible Marker
+        if (in_view.length > 0) {
+            //console.log(in_view);
+
+            var min_lat, min_lon, max_lat, max_lon;
+            min_lat = in_view[0].lat; // innit values using the first point in the array that's 'in_view_
+            max_lat = in_view[0].lat;
+            min_lon = in_view[0].lng;
+            max_lon = in_view[0].lng;
+
+            var upper_right_corner = [max_lat, max_lon]; // max lat, max lon
+            var buttom_left_corner = [min_lat, min_lon]; // min lat, min lon
+            //console.log('Innitial bounds: ', buttom_left_corner, upper_right_corner);
+            var i;
+
+            for (i = 1; i < in_view.length; i++) {
+                var tmp_lat = in_view[i].lat;
+                var tmp_lon = in_view[i].lng;
+                // change LAT
+                if (tmp_lat > max_lat) {
+                    max_lat = tmp_lat;
+                    upper_right_corner[0] = max_lat;
+                };
+                if (tmp_lat < min_lat) {
+                    min_lat = tmp_lat;
+                    buttom_left_corner[0] = min_lat;
+                };
+                // change LNG
+                if (tmp_lon > max_lon) {
+                    max_lon = tmp_lon;
+                    upper_right_corner[1] = max_lon;
+                };
+                if (tmp_lon < min_lon) {
+                    min_lon = tmp_lon;
+                    buttom_left_corner[1] = min_lon;
+                };
+                //console.log('latlng_lst', latlng_lst[i].lat);
+                //console.log('lng bounds', latlng_lst[i].lng);
+            }
+            //console.log('passing bounds: ', buttom_left_corner, upper_right_corner);
+            var bounds = L.latLngBounds(upper_right_corner, buttom_left_corner);
+            var bounds_center = bounds.getCenter();
+            //console.log('bounds, center: ', bounds, bounds_center);
+            //console.log(bounds_center.lat, bounds_center.lng);
+            mymap.panTo(new L.LatLng(bounds_center.lat, bounds_center.lng)); // center
+            mymap.fitBounds(bounds); // zoom in
+        };
+
+
+        //console.log(in_view.getBounds());
+        //console.log('circle bounds: ', L.CircleMarker.getBounds());
+
+        //console.log('layer bounds: ', locations_layer.getBounds());
+        //mymap.fitBounds(locations_layer.getBounds().pad(0.5)); //works!
+
+        //mymap.setView(locations_layer.getBounds().getCenter());
     };
+
     map_reload(); // run one on doc start;
     $(document).ready(function() { // run on every change in grid;
         $grid.on('arrangeComplete', // 
