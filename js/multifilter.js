@@ -110,6 +110,13 @@ var $grid = $('.grid').isotope({
     getSortData: {
         primary: '.primary',
         secondary: '.secondary',
+        built_density: '.built_density',
+        centrality: '.centrality',
+        dist_parcel_limit: '.dist_parcel_limit',
+        bld_vol: '.bld_vol',
+        n_historical_bld: '.n_historical_bld',
+        arrnona_year: '.arrnona_year',
+        radiation: '.radiation',
         col_header: '[col_header]',
         id: '.id',
         n_bicycle_parking: '.n_bicycle_parking',
