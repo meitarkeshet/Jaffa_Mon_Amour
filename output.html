@@ -246,6 +246,7 @@
                     <div class="cbp-hrsub">
                         <div class="cbp-hrsub-inner">
                             <div>
+                                <!-- open sort div -->
                                 <h4>
                                     sort
                                 </h4>
@@ -271,30 +272,37 @@
            </button>
                                     </div>
                                 </ul>
+                            </div>
+                            <!-- close sort div -->
+                            <div>
+                                <!-- open group by div -->
                                 <h4>
                                     group by
                                 </h4>
                                 <ul>
                                     <div class="button-group layout-mode-button-group" id="group-sort">
                                         <button checked="checked" class="button is-checked" data-group-by="non" data-layout-mode="fitRows" data-sort-by="original-order">
-            original order
-           </button>
+                                            original order
+                                        </button>
                                         <button class="button" data-group-by="primary" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="primary">
-            primary
-           </button>
+                                            primary
+                                        </button>
                                         <button class="button" data-group-by="secondary" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="secondary">
-            secondary
-           </button>
+                                            secondary
+                                        </button>
                                         <button checked="checked" class="button" data-group-by="non" data-layout-mode="fitRows" data-sort-by="original-order">
-            fitcolumns
-           </button>
+                                            fitcolumns
+                                        </button>
                                     </div>
+                                    <!-- close  class="button-group layout-mode-button-group" id="group-sort" -->
                                 </ul>
                             </div>
+                            <!-- close group by div -->
                         </div>
                         <!-- /cbp-hrsub-inner -->
                     </div>
                     <!-- /cbp-hrsub -->
+
                 </li>
             </ul>
         </nav>
@@ -38167,10 +38175,9 @@
         <span href=# class="material-icons-outlined info-button" id="topLeftFixed">info</span>
     </div>
     <script>
-        var map_zoom_control = $('.leaflet-control-zoom-in')
-
-        console.log('zoom control left offset: ', $(map_zoom_control).offset().left);
-        console.log('zoom control size: ', $(map_zoom_control).width());
+        var map_zoom_control = $('.leaflet-control-zoom-in');
+        //console.log('zoom control left offset: ', $(map_zoom_control).offset().left);
+        //console.log('zoom control size: ', $(map_zoom_control).width());
 
         $('#topLeftFixed').css("left", $(map_zoom_control).offset().left + ($(map_zoom_control).width() / 4)); // notice pushing qurter of the button size (30px)
     </script>
