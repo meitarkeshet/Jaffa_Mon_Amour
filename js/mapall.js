@@ -72,6 +72,8 @@ $(function() {
             var geometry = {};
             geometry.type = "Point";
             if (!($(this).hasClass('nullElem'))) { // consider null items that are added
+                console.log('Text passed:', $(this).text());
+                console.log('passed this:', $(this).text().split('\n')[2]);
                 var lon = parseFloat($(this).text().split('\n')[2].trim()); // grab the long column (as string) and trim the excess spaces and parse to float
                 var lat = parseFloat($(this).text().split('\n')[3].trim());
             } else {
