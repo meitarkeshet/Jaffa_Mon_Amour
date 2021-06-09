@@ -72,8 +72,8 @@ $(function() {
             var geometry = {};
             geometry.type = "Point";
             if (!($(this).hasClass('nullElem'))) { // consider null items that are added
-                console.log('Text passed:', $(this).text());
-                console.log('passed this:', $(this).text().split('\n')[2]);
+                //console.log('Text passed:', $(this).text());
+                //console.log('passed this:', $(this).text().split('\n')[2]);
                 var lon = parseFloat($(this).text().split('\n')[2].trim()); // grab the long column (as string) and trim the excess spaces and parse to float
                 var lat = parseFloat($(this).text().split('\n')[3].trim());
             } else {
@@ -134,7 +134,7 @@ $(function() {
                     var values = color_lst.slice(0, keys.length); // cut the list to have the same num. members as keys
                     //console.log(values);
                     var dict = zip(keys, values); // create a dict with the catagory names and matching colors
-                    //console.log(dict);
+                    console.log('color dict:', dict);
                     // c. use itemgroup as KEY to return color VALUE
                     return {
                         color: dict[colorby_itemgroup]

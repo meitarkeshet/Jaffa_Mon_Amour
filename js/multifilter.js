@@ -508,7 +508,8 @@ $(function() {
                 // and only if it's currently shown
                 if ($(this).css('display') != 'none') { // NOTICE if the html divs are not ordered in a singel line = ERROR . look for <null> tag.
                     //console.log($(this).text().split('\n')[25]);
-                    var tmp_primary = $(this).text().split('\n')[25].trim(); //$(this).text().split('\n')[25].trim(); trim not needed - spacing intentional
+                    var tmp_primary = $(this).text().split('\n')[24].trim(); //$(this).text().split('\n')[25].trim(); trim not needed - spacing intentional
+                    //console.log('passing this primary:', tmp_primary);
                     //var first_char = tmp_primary.charAt(0); // get first char of string
                     //var pre_char = alpha_swap(first_char);
                     //console.log(pre_char);
@@ -520,13 +521,14 @@ $(function() {
                         //console.log($(this).text());
                     }
                     //console.log(tmp_primary); // NOTICE some are passed as '0'. why?
-                    var tmp_secondary = $(this).text().split('\n')[26].trim();
+                    var tmp_secondary = $(this).text().split('\n')[25].trim();
                     // console.log('This I can see.');
                     primary_lst.push(tmp_primary);
                     secondary_lst.push(tmp_secondary);
                 } else {
                     //console.log('Skipped a filtered item.');
                 };
+                //console.log('primary list:', primary_lst); // WORKS UNTIL HERE
             } else {
                 //var tmp_primary = '';
                 //var lat = '';
@@ -544,6 +546,7 @@ $(function() {
                 // check the max number of entries in a catagory
                 //var most_repeted_freq = frequency(primary_lst, mode(primary_lst));
                 var cat_lst = frequency_lst(primary_lst);
+                //console.log('catagory list: ', cat_lst);  // WORKS UNTIL HERE
                 break;
             case 'secondary':
                 //console.log('You have selected: Secondary');
