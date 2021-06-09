@@ -11,7 +11,6 @@
     <meta content="Blueprint: Horizontal Drop-Down Menu" name="description" />
     <meta content="horizontal menu, microsoft menu, drop-down menu, mega menu, javascript, jquery, simple menu" name="keywords" />
     <meta content="Codrops" name="author" />
-    <!-- <link rel="shortcut icon" href="../favicon.ico"> REMOVE ME -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.0/nouislider.min.css" rel="stylesheet" />
     <link href="css/default.css" rel="stylesheet" type="text/css" />
     <link href="css/component.css" rel="stylesheet" type="text/css" />
@@ -20,8 +19,7 @@
     </script>
     <!-- style menu -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet" />
     <!--To load Jquery-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js ">
     </script>
@@ -39,103 +37,44 @@
     </script>
      -->
     <!--To pass variables -->
-    <script type="text/javascript" src="../js/app.js"></script>
-    <link href="./css/trans.css" rel="stylesheet" />
+    <script src="../js/app.js" type="text/javascript">
+    </script>
+    <link href="./css/trans.css" rel="stylesheet">
     <!-- load leaflet for map-->
     <link crossorigin="" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" rel="stylesheet" />
     <link href="./css/mapall.css" rel="stylesheet" />
     <!-- Make sure you put this AFTER Leaflet 's CSS -->
     <script crossorigin="" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js">
     </script>
+    </link>
 </head>
 <!-- for sticky option on scroll-->
+
 <div class="fixedscroll" id="nav_sticky">
-    <!-- content that will not change  -->
-    <!-- Navigation menu-->
-    <input class="main-navigation-toggle" id="page-nav-toggle" type="checkbox" />
-    <label for="page-nav-toggle">
-   <svg class="icon--menu-toggle" viewbox="0 0 60 30">
-    <g class="icon-group">
-     <g class="icon--menu">
-      <path d="M 6 0 L 54 0">
-      </path>
-      <path d="M 6 15 L 54 15">
-      </path>
-      <path d="M 6 30 L 54 30">
-      </path>
-     </g>
-     <g class="icon--close">
-      <path d="M 15 0 L 45 30">
-      </path>
-      <path d="M 15 30 L 45 0">
-      </path>
-     </g>
-    </g>
-   </svg>
-  </label>
-    <nav class="main-navigation">
-        <ul>
-            <li>
-                <a href="./output.html">
-      Machine
-     </a>
-            </li>
-            <li>
-                <a href="#0">
-      Data stories
-     </a>
-            </li>
-            <li>
-                <a href="./about.html">
-      About
-     </a>
-            </li>
-        </ul>
-    </nav>
-    <!-- End burger navigation menu-->
-    <!-- content that will be changed when navigating -->
-    <header class="clearfix">
-        <!-- KEEP HEADER BETWEEN PAGES -->
-        <button id="vis_grid">
-            <span class="material-icons-outlined">
-                grid_view
-                </span>
-   </button>
-        <button id="vis_map">
-            <span class="material-icons-outlined">
-                map
-                </span>
-   </button>
-        <!--
+    <!-- scrolling to buildings and back on click
 
-        <span>
-     Jaffa
+    <a href="#" id="vis_grid">
+        <span class="material-icons-outlined">
+     grid_view
     </span>
-        <h1>
-            Machine
-        </h1>
+    </a>
+    <a href="#" id="vis_map">
+        <span class="material-icons-outlined">
+     map
+    </span>
+    </a>
+    -->
 
-        -->
-        <!--
-        <nav>
-            <a class="icon-arrow-left" data-info="previous Blueprint" href="http://tympanus.net/Blueprints/FullWidthImageSlider/">
-      Previous Blueprint
-     </a>
-            <a class="icon-drop" data-info="back to the Codrops article" href="http://tympanus.net/codrops/?p=14426">
-      back to the Codrops article
-     </a>
-        </nav>
-        -->
-    </header>
     <!-- FILTER / SORT DROP MENUS-->
     <div class="main">
         <nav class="cbp-hrmenu" id="cbp-hrmenu">
             <ul>
+                <!-- holding outide buttons-->
                 <li>
                     <a href="#">
-                        <span class="material-icons-outlined" button_num='1'>
-                            filter_list
-                            </span>
+                        <span button_num="1" class="material-icons-outlined">
+        filter_list
+       </span>
                     </a>
                     <div class="cbp-hrsub">
                         <div class="cbp-hrsub-inner">
@@ -173,7 +112,7 @@
               Mevo'ot Jafo
              </button>
                                                 <button class="button" data-filter=".4">
-              Jaffa A & College of Tel-Aviv-Yaffo
+              Jaffa A &amp; College of Tel-Aviv-Yaffo
              </button>
                                                 <button class="button" data-filter=".10">
               Neve Sha'anan
@@ -302,61 +241,61 @@
                 <li>
                     <a href="#">
                         <span class="material-icons-outlined">
-                            sync_alt
-                            </span>
+        sync_alt
+       </span>
                     </a>
                     <div class="cbp-hrsub">
                         <div class="cbp-hrsub-inner">
                             <div>
+                                <!-- open sort div -->
                                 <h4>
                                     sort
                                 </h4>
                                 <ul>
                                     <div class="button-group" id="sorts">
-                                        <button class="button is-checked" data-sort-by="original-order">
-            original order
-           </button>
-                                        <button class="button" data-sort-by="id">
-            id
-           </button>
-                                        <button class="button" data-sort-by="n_bicycle_parking">
-            n_bicycle_parking
-           </button>
-                                        <button class="button" data-sort-by="n_parks">
-            n_parks
-           </button>
-                                        <button class="button" data-sort-by="weight">
-            weight
-           </button>
-                                        <button class="button" data-sort-by="category">
-            category
-           </button>
+                                        <button class="button is-checked" data-sort-by="original-order">original order</button>
+                                        <button class="button" data-sort-by="built_density">built density</button>
+                                        <button class="button" data-sort-by="centrality">centrality</button>
+                                        <button class="button" data-sort-by="dist_parcel_limit">dist_parcel_limit</button>
+                                        <button class="button" data-sort-by="bld_vol">bld_vol</button>
+                                        <button class="button" data-sort-by="n_historical_bld">n_historical_bld</button>
+                                        <button class="button" data-sort-by="dist_sea">dist_sea</button>
+                                        <button class="button" data-sort-by="arrnona_year">arrnona_year</button>
+                                        <button class="button" data-sort-by="radiation">radiation</button>
+
                                     </div>
                                 </ul>
+                            </div>
+                            <!-- close sort div -->
+                            <div>
+                                <!-- open group by div -->
                                 <h4>
                                     group by
                                 </h4>
                                 <ul>
                                     <div class="button-group layout-mode-button-group" id="group-sort">
                                         <button checked="checked" class="button is-checked" data-group-by="non" data-layout-mode="fitRows" data-sort-by="original-order">
-            original order
-           </button>
+                                            original order
+                                        </button>
                                         <button class="button" data-group-by="primary" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="primary">
-            primary
-           </button>
+                                            primary
+                                        </button>
                                         <button class="button" data-group-by="secondary" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="secondary">
-            secondary
-           </button>
+                                            secondary
+                                        </button>
                                         <button checked="checked" class="button" data-group-by="non" data-layout-mode="fitRows" data-sort-by="original-order">
-            fitcolumns
-           </button>
+                                            fitcolumns
+                                        </button>
                                     </div>
+                                    <!-- close  class="button-group layout-mode-button-group" id="group-sort" -->
                                 </ul>
                             </div>
+                            <!-- close group by div -->
                         </div>
                         <!-- /cbp-hrsub-inner -->
                     </div>
                     <!-- /cbp-hrsub -->
+
                 </li>
             </ul>
         </nav>
@@ -424,6 +363,17 @@
     </script>
     <!-- load js file with the button controls etc.-->
     <script src="./js/multifilter.js ">
+    </script>
+
+    <div>
+        <span href=# class="material-icons-outlined info-button" id="topLeftFixed">info</span>
+    </div>
+    <script>
+        var map_zoom_control = $('.leaflet-control-zoom-in');
+        //console.log('zoom control left offset: ', $(map_zoom_control).offset().left);
+        //console.log('zoom control size: ', $(map_zoom_control).width());
+
+        $('#topLeftFixed').css("left", $(map_zoom_control).offset().left + ($(map_zoom_control).width() / 4)); // notice pushing qurter of the button size (30px)
     </script>
 </body>
 <!-- close body-->
