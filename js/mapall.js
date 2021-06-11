@@ -134,7 +134,7 @@ $(function() {
                     var values = color_lst.slice(0, keys.length); // cut the list to have the same num. members as keys
                     //console.log(values);
                     var dict = zip(keys, values); // create a dict with the catagory names and matching colors
-                    console.log('color dict:', dict);
+                    //console.log('color dict:', dict);
                     // c. use itemgroup as KEY to return color VALUE
                     return {
                         color: dict[colorby_itemgroup]
