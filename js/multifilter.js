@@ -507,8 +507,12 @@ $(function() {
                 // and only if it's currently shown
                 if ($(this).css('display') != 'none') { // NOTICE if the html divs are not ordered in a singel line = ERROR . look for <null> tag.
                     if (sel_group_by != 'non') { // to be able to undo group by
-                        var tmp_user_sel_val = $(this).children('.' + sel_group_by)[0].innerText; // .innerHTML
-                        user_sel_lst.push(" " + tmp_user_sel_val.trim()); // NOTICE added space for sotring after cat header text + trimming to avoid spacing mistakes
+                        var tmp_user_sel_val = $(this).children('.' + sel_group_by)[0].innerText;
+                        if (sel_group_by == 'primary') {
+                            user_sel_lst.push(" " + tmp_user_sel_val.trim()); // NOTICE added space for sotring after cat header text - legacy mistake
+                        } else {
+                            user_sel_lst.push(tmp_user_sel_val.trim()); // trimming to avoid spacing mistakes
+                        }
                     };
                 } else {
                     console.log('Skipped a filtered item.');
