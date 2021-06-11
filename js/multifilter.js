@@ -110,6 +110,15 @@ var $grid = $('.grid').isotope({
     getSortData: {
         primary: '.primary',
         secondary: '.secondary',
+        complex: '.complex',
+        technology: '.technology',
+        status: '.status',
+        finishing_materials: '.finishing_materials',
+        roof: '.roof',
+        typology: '.typology',
+        positioning: '.positioning',
+        physical_condition: '.physical_condition',
+        general_evaluation: '.general_evaluation',
         built_density: '.built_density',
         centrality: '.centrality',
         dist_parcel_limit: '.dist_parcel_limit',
@@ -512,7 +521,7 @@ $(function() {
                             user_sel_lst.push(" " + tmp_user_sel_val.trim()); // NOTICE added space for sotring after cat header text - legacy mistake
                         } else {
                             user_sel_lst.push(tmp_user_sel_val.trim()); // trimming to avoid spacing mistakes
-                        }
+                        };
                     };
                 } else {
                     console.log('Skipped a filtered item.');
