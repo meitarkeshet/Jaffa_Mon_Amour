@@ -498,84 +498,48 @@ $(function() {
         $grid.isotope('reloadItems'); // work?
 
         var null_flag = false;
+        var user_sel_lst = []; // create an empty list to hold the values for all buildings depending on the user's groupby selection
+        sel_group_by = layoutModeButtonGroup_button.attr('data-group-by'); // update global for mapall
 
-        // create empty list containers for the possible groups
-        let primary_lst = [];
-        let secondary_lst = [];
         // collect the information from the currently shown pictures *NOTICE is is working after Filter?
         $(".building_square").each(function(index) {
             if (!($(this).hasClass('nullElem'))) { // if it's not a null added item
                 // and only if it's currently shown
                 if ($(this).css('display') != 'none') { // NOTICE if the html divs are not ordered in a singel line = ERROR . look for <null> tag.
-                    //console.log($(this).text().split('\n')[25]);
-                    var tmp_primary = $(this).text().split('\n')[24].trim(); //$(this).text().split('\n')[25].trim(); trim not needed - spacing intentional
-                    //console.log('passing this primary:', tmp_primary);
-                    //var first_char = tmp_primary.charAt(0); // get first char of string
-                    //var pre_char = alpha_swap(first_char);
-                    //console.log(pre_char);
-                    //tmp_primary = pre_char + tmp_primary; 
-                    tmp_primary = " " + tmp_primary; // try to add single space before
-                    //console.log(tmp_primary);
-                    if (tmp_primary == 0) {
-                        //console.log('This was passed as 0:');
-                        //console.log($(this).text());
-                    }
-                    //console.log(tmp_primary); // NOTICE some are passed as '0'. why?
-                    var tmp_secondary = $(this).text().split('\n')[25].trim();
-                    // console.log('This I can see.');
-                    primary_lst.push(tmp_primary);
-                    secondary_lst.push(tmp_secondary);
+                    if (sel_group_by != 'non') { // to be able to undo group by
+                        var tmp_user_sel_val = $(this).children('.' + sel_group_by)[0].innerText; // .innerHTML
+                        user_sel_lst.push(" " + tmp_user_sel_val.trim()); // NOTICE added space for sotring after cat header text + trimming to avoid spacing mistakes
+                    };
                 } else {
-                    //console.log('Skipped a filtered item.');
+                    console.log('Skipped a filtered item.');
                 };
-                //console.log('primary list:', primary_lst); // WORKS UNTIL HERE
             } else {
-                //var tmp_primary = '';
-                //var lat = '';
                 console.log('nullElem have not been removed.');
                 null_flag = true;
             };
+        }); // END >  $(".building_square").each(function(index) {
 
-        });
         // set most_repeted_freq and cat_lst depending on the group selected by user
-        sel_group_by = layoutModeButtonGroup_button.attr('data-group-by');
-        //console.log('mode primary_list returns: ', mode(primary_lst));
-        switch (sel_group_by) {
-            case 'primary':
-                // console.log('You have selected: Primary');
-                // check the max number of entries in a catagory
-                //var most_repeted_freq = frequency(primary_lst, mode(primary_lst));
-                var cat_lst = frequency_lst(primary_lst);
-                //console.log('catagory list: ', cat_lst);  // WORKS UNTIL HERE
-                break;
-            case 'secondary':
-                //console.log('You have selected: Secondary');
-                //var most_repeted_freq = frequency(secondary_lst, mode(secondary_lst));
-                var cat_lst = frequency_lst(secondary_lst);
-                break;
-            default:
-                //console.log('default');
-                //var most_repeted_freq = 0;
-                var cat_lst = [];
-        }
-
-        console.log('cat_lst.length', cat_lst.length)
+        if (user_sel_lst.length > 0) {
+            var cat_lst = frequency_lst(user_sel_lst);
+        } else {
+            var cat_lst = [];
+        };
+        console.log('cat_lst.length', cat_lst);
+        console.log('cat_lst.length', cat_lst.length);
 
         if (cat_lst.length > 0) {
             // create list dump for elements
             var elems = [];
             var occu_lst = [];
 
-            cat_lst.forEach(function(Element, index) {
+            cat_lst.forEach(function(Element, index) { // extract number of repets per catagory 
                 var catagory_n_elem = Element[1];
                 occu_lst.push(catagory_n_elem);
             });
-            //console.log(occu_lst);
             var most_repeted_freq = occu_lst.reduce(function(x, y) {
                 return Math.max(x, y);
             });
-            //console.log(most_repeted_freq);
-
 
             cat_lst.forEach(function(Element, index) {
                 var catagory = Element[0];
