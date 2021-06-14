@@ -517,10 +517,17 @@ $(function() {
                 if ($(this).css('display') != 'none') { // NOTICE if the html divs are not ordered in a singel line = ERROR . look for <null> tag.
                     if (sel_group_by != 'non') { // to be able to undo group by
                         var tmp_user_sel_val = $(this).children('.' + sel_group_by)[0].innerText;
+                        // change spaces to underscores to avoid sorting issues with catagories starting with same word (e.g 'stone' / 'stone and..')
+                        console.log('tmp_user_sel_val: ', tmp_user_sel_val.trim());
+                        //var tmp_user_sel_val_underscore = tmp_user_sel_val.trim().replace(/ /g, '_'); // NOTICE g for global 
+                        var tmp_user_sel_val_underscore = tmp_user_sel_val.trim().replace(/ /, '_'); // NOTICE chatches only first occurence
+
+                        console.log('underscore version: ', tmp_user_sel_val_underscore);
                         if (sel_group_by == 'primary') {
                             user_sel_lst.push(" " + tmp_user_sel_val.trim()); // NOTICE added space for sotring after cat header text - legacy mistake
                         } else {
                             user_sel_lst.push(tmp_user_sel_val.trim()); // trimming to avoid spacing mistakes
+                            //user_sel_lst.push(tmp_user_sel_val_underscore);
                         };
                     };
                 } else {
@@ -556,6 +563,7 @@ $(function() {
 
             cat_lst.forEach(function(Element, index) {
                 var catagory = Element[0];
+                console.log('catagory passed: ', catagory);
                 if (catagory == 0) {
                     console.log('Empty items in frequency_lst are returned as 0.');
                 }
