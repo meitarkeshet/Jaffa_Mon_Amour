@@ -16,12 +16,20 @@
 }
 
 
-/* first level ul style */
+/* first level ul style 
+.cbp-hrmenu*/
 
-.cbp-hrmenu>ul,
-.cbp-hrmenu .cbp-hrsub-inner {
+.cbp-hrmenu>ul {
     width: 90%;
     max-width: 70em;
+    margin: 0 auto;
+    padding: 0 1.875em;
+}
+
+.cbp-hrsub-inner {
+    display: flex;
+    justify-content: center;
+    width: 90%;
     margin: 0 auto;
     padding: 0 1.875em;
 }
@@ -68,7 +76,9 @@
 }
 
 .cbp-hrmenu .cbp-hrsub-inner>div {
+    /*
     width: 33%;
+    NOTICE*/
     float: left;
     padding: 0 2em 0;
 }
