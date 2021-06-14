@@ -526,7 +526,7 @@ $(function() {
                         if (sel_group_by == 'primary') {
                             user_sel_lst.push(" " + tmp_user_sel_val.trim()); // NOTICE added space for sotring after cat header text - legacy mistake
                         } else {
-                            user_sel_lst.push(tmp_user_sel_val.trim()); // trimming to avoid spacing mistakes
+                            user_sel_lst.push(tmp_user_sel_val); // trimming to avoid spacing mistakes // .trim()
                             //user_sel_lst.push(tmp_user_sel_val_underscore);
                         };
                     };
