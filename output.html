@@ -244,44 +244,71 @@
                     </a>
                     <div class="cbp-hrsub">
                         <div class="cbp-hrsub-inner">
+                            <!-- RESET
+                            <div>
+                            <a>Reset:</a>
+                            <div class="order_reset">
+                                <div class="button-group layout-mode-button-group" id="group-sort">
+                                    <button checked="checked" class="button is-checked" data-group-by="non" data-layout-mode="fitRows" data-sort-by="original-order">
+                                        original order
+                                        </button>
+                                </div>
+                            </div>
+                        </div>
+                        -->
+
                             <div>
                                 <!-- open sort div -->
                                 <h4>
                                     Sort by:
                                 </h4>
-                                <ul>
-                                    <div class="button-group" id="sorts">
-                                        <button class="button is-checked" data-sort-by="original-order">
-            original order
-           </button>
-                                        <button class="button" data-sort-by="built_density">
-            built density
-           </button>
-                                        <button class="button" data-sort-by="centrality">
-            centrality
-           </button>
-                                        <button class="button" data-sort-by="dist_parcel_limit">
-            dist_parcel_limit
-           </button>
-                                        <button class="button" data-sort-by="bld_vol">
-            bld_vol
-           </button>
-                                        <button class="button" data-sort-by="n_historical_bld">
-            n_historical_bld
-           </button>
-                                        <button class="button" data-sort-by="dist_sea">
-            dist_sea
-           </button>
+                                <div>
+                                    <!-- sort container-->
+                                    <ul class="sortby_flex">
+                                        <li>
+                                            <a>
+                                            unit
+                                            </a>
+                                            <div class="button-group" id="sorts">
+                                                <button class="button" data-sort-by="dist_parcel_limit">
+                                                        dist_parcel_limit
+                                                    </button>
+                                                <button class="button" data-sort-by="bld_vol">
+                                                        bld_vol
+                                                    </button>
+                                                <button class="button" data-sort-by="dist_sea">
+                                                        dist_sea
+                                                   </button>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a>
+                                                system
+                                            </a>
+                                            <div class="button-group" id="sorts">
+                                                <button class="button" data-sort-by="built_density">
+                                                    built density
+                                                </button>
+                                                <button class="button" data-sort-by="centrality">
+                                                    centrality
+                                                </button>
+                                                <button class="button" data-sort-by="n_historical_bld">
+                                                    n_historical_bld
+                                               </button>
+                                            </div>
+                                        </li>
+
                                         <!-- 
                                         <button class="button" data-sort-by="arrnona_year">
-            arrnona_year
-           </button>
+                                            arrnona_year
+                                        </button>
                                         <button class="button" data-sort-by="radiation">
-            radiation
-           </button>
-           -->
-                                    </div>
-                                </ul>
+                                            radiation
+                                        </button>
+                                        -->
+                                    </ul>
+                                </div>
+                                <!-- close sortby container-->
                             </div>
                             <!-- close sort div -->
                             <div>
@@ -289,15 +316,18 @@
                                 <h4>
                                     Group by:
                                 </h4>
-                                <div class="groupby_flex">
-                                    <ul>
+                                <div>
+                                    <ul class="groupby_flex">
+                                        <!-- 
                                         <li>
+                                            <a>non</a>
                                             <div class="button-group layout-mode-button-group" id="group-sort">
                                                 <button checked="checked" class="button is-checked" data-group-by="non" data-layout-mode="fitRows" data-sort-by="original-order">
                                             original order
                                             </button>
                                             </div>
                                         </li>
+                                        -->
                                         <li>
                                             <a>architectural style</a>
                                             <div class="button-group layout-mode-button-group" id="group-sort">

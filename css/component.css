@@ -28,6 +28,7 @@
 
 .cbp-hrsub-inner {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     width: 90%;
     margin: 0 auto;
@@ -109,6 +110,20 @@
 
 .groupby_flex {
     display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.order_reset {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 
