@@ -244,6 +244,7 @@
                     </a>
                     <div class="cbp-hrsub">
                         <div class="cbp-hrsub-inner">
+
                             <!-- RESET
                             <div>
                             <a>Reset:</a>
@@ -259,7 +260,7 @@
 
                             <div>
                                 <!-- open sort div -->
-                                <h4>
+                                <h4 id='sortby_text'>
                                     Sort by:
                                 </h4>
                                 <div>
@@ -271,13 +272,13 @@
                                             </a>
                                             <div class="button-group" id="sorts">
                                                 <button class="button" data-sort-by="dist_parcel_limit">
-                                                        dist_parcel_limit
+                                                        dist. to parcel limit
                                                     </button>
                                                 <button class="button" data-sort-by="bld_vol">
-                                                        bld_vol
+                                                        volume
                                                     </button>
                                                 <button class="button" data-sort-by="dist_sea">
-                                                        dist_sea
+                                                        dist. to sea
                                                    </button>
                                             </div>
                                         </li>
@@ -293,7 +294,7 @@
                                                     centrality
                                                 </button>
                                                 <button class="button" data-sort-by="n_historical_bld">
-                                                    n_historical_bld
+                                                    #neighbouring historical buildings
                                                </button>
                                             </div>
                                         </li>
@@ -436,6 +437,11 @@
                                 <!-- close groupby_flex -->
                             </div>
                             <!-- close group by div -->
+                            <a href="#" id='order_restart'>
+                                <span class="material-icons-outlined">
+                                restart_alt
+                                </span>
+                            </a>
                         </div>
                         <!-- /cbp-hrsub-inner -->
                     </div>

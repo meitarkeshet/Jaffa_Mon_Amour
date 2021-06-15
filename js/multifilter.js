@@ -939,3 +939,24 @@ common methods to manipulate arrays:
 .getArray(arrayName); -> returns entire array
 .deleteArray(arrayName); -> removes entire array from storage
 */
+
+
+/*
+$("#cbp-hrmenu > ul > li:nth-child(2) > a").click(function() {
+    $(document).ready(function() {
+        orderby_height = document.querySelector("#sortby_text");
+        console.log('orderby_height', orderby_height);
+        console.log('orderby_height', $(orderby_height).position().top);
+        console.log('orderby_height offset', $(orderby_height).offset().top);
+
+        //orderby_height = $(orderby_height).position().top;
+        orderby_height = $(orderby_height).offset().top;
+        console.log('set to bottom: ', `${orderby_height}px`);
+        console.log('set this elem:', $("#order_restart"));
+
+        $("#order_restart").css('bottom', `${orderby_height}px`);
+        console.log('after css change:', $("#order_restart"));
+
+    });
+});
+*/

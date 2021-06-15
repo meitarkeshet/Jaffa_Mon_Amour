@@ -108,22 +108,57 @@
     font-weight: 300;
 }
 
-.groupby_flex {
+.order_reset {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: left;
     align-content: center;
     align-items: center;
     flex-wrap: wrap;
 }
 
-.order_reset {
+.groupby_flex {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: left;
     align-content: center;
     align-items: center;
     flex-wrap: wrap;
+}
+
+.groupby_flex>li {
+    padding-left: 1.5em;
+}
+
+
+/*
+cbp-hrsub-inner>span {
+    color: white;
+}
+*/
+
+#order_restart {
+    color: white;
+    /*
+    display: none;
+    */
+    position: relative;
+    left: 98%;
+    bottom: 20em;
+}
+
+.sortby_flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    /* space-around */
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.sortby_flex>li {
+    padding-left: 1.5em;
 }
 
 
