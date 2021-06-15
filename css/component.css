@@ -94,6 +94,8 @@
 }
 
 .cbp-hrmenu .cbp-hrsub-inner>div a {
+    font-size: 140%;
+    font-weight: 300;
     line-height: 2em;
 }
 
@@ -103,6 +105,10 @@
     margin: 0;
     font-size: 160%;
     font-weight: 300;
+}
+
+.groupby_flex {
+    display: flex;
 }
 
 
