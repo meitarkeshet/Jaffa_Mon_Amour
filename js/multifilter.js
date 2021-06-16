@@ -90,6 +90,33 @@ var filterFns = {
         return (parseInt(arrnona_year_num, 10) >= slider_min && parseInt(arrnona_year_num, 10) <= slider_max);
 
     },
+    // accesability_score
+    accesability_score: function() {
+        var accesability_score_num = $(this).find('.accesability_score').text();
+        var slider_min = parseInt(accesability_score_slider.noUiSlider.get()[0]);
+        //alert(slider_min)
+        var slider_max = parseInt(accesability_score_slider.noUiSlider.get()[1]);
+        //console.log(slider_min);
+        return (parseInt(accesability_score_num, 100) >= slider_min && parseInt(accesability_score_num, 100) <= slider_max); // NOTICE - parsing 10 for decimels 
+    },
+    // amenities_score
+    amenities_score: function() {
+        var amenities_score_num = $(this).find('.amenities_score').text();
+        var slider_min = parseInt(amenities_score_slider.noUiSlider.get()[0]);
+        //alert(slider_min)
+        var slider_max = parseInt(amenities_score_slider.noUiSlider.get()[1]);
+        //console.log(slider_min);
+        return (parseInt(amenities_score_num, 10) >= slider_min && parseInt(amenities_score_num, 10) <= slider_max); // NOTICE - parsing 10 for decimels 
+    },
+    // tourism_score
+    tourism_score: function() {
+        var tourism_score_num = $(this).find('.amenities_score').text();
+        var slider_min = parseInt(tourism_score_slider.noUiSlider.get()[0]);
+        //alert(slider_min)
+        var slider_max = parseInt(tourism_score_slider.noUiSlider.get()[1]);
+        //console.log(slider_min);
+        return (parseInt(tourism_score_num, 10) >= slider_min && parseInt(tourism_score_num, 10) <= slider_max); // NOTICE - parsing 10 for decimels 
+    },
     // n_kindergartens_slider
     n_kindergartens_min_max_slider: function() {
         var n_kindergartens_num = $(this).find('.n_kindergartens').text();
@@ -396,7 +423,7 @@ $('.img_filters').on('click', '.slider', function() {
     //var filters_concat = concatValues(combo_filters);
     //alert(filters_concat);
     // arrange, and use filter fn
-    $grid.isotope();
+    $grid.isotope(); // WIP
     /*
         $grid.isotope({
             filter: filters + ', .ignore'
@@ -565,13 +592,19 @@ $(function() {
         var null_flag = false;
         var user_sel_lst = []; // create an empty list to hold the values for all buildings depending on the user's groupby selection
         sel_group_by = layoutModeButtonGroup_button.attr('data-group-by'); // update global for mapall
-
+        console.log('sel_group_by: ', sel_group_by);
+        if (sel_group_by === undefined) { // NOTICE to work with filter
+            console.log('passing undefined order');
+            sel_group_by = 'non';
+        };
+        console.log("sel_group_by after verification:", sel_group_by);
         // collect the information from the currently shown pictures *NOTICE is is working after Filter?
         $(".building_square").each(function(index) {
             if (!($(this).hasClass('nullElem'))) { // if it's not a null added item
                 // and only if it's currently shown
                 if ($(this).css('display') != 'none') { // NOTICE if the html divs are not ordered in a singel line = ERROR . look for <null> tag.
                     if (sel_group_by != 'non') { // to be able to undo group by
+                        console.log('sel_group_by shouldnt be non', sel_group_by);
                         var tmp_user_sel_val = $(this).children('.' + sel_group_by)[0].innerText;
                         // change spaces to underscores to avoid sorting issues with catagories starting with same word (e.g 'stone' / 'stone and..')
                         //console.log('tmp_user_sel_val: ', tmp_user_sel_val.trim());
@@ -717,6 +750,14 @@ $(function() {
 
         // change layout mode
         var layoutModeValue = $this.attr('data-layout-mode');
+
+        console.log('layoutModeValue: ', layoutModeValue);
+        if (layoutModeValue === undefined) { // NOTICE to work with filter
+            console.log('passing undefined order');
+            layoutModeValue = 'fitRows';
+        };
+        console.log("sel_group_by after verification:", layoutModeValue);
+
         $grid.isotope({ layoutMode: layoutModeValue });
 
         /*
