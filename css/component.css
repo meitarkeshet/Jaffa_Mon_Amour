@@ -49,8 +49,8 @@
 
 #innerfilter {
     display: flex;
-    flex-direction: row;
-    justify-content: left;
+    flex-direction: column;
+    justify-content: center;
     width: 90%;
     margin: 0 auto;
     padding: 0 1.875em;
@@ -179,6 +179,20 @@ cbp-hrsub-inner>span {
 }
 
 .sortby_flex>li {
+    padding-left: 1.5em;
+}
+
+.filterby_flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    /* space-around */
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filterby_flex>li {
     padding-left: 1.5em;
 }
 

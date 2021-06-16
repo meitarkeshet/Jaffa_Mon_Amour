@@ -229,6 +229,7 @@ $('.button-group').each(function(i, buttonGroup) {
 // V -------------- Create Sliders -------------- V
 
 // ID 
+/*
 
 var id_slider = document.getElementById('id_slider');
 
@@ -242,6 +243,7 @@ noUiSlider.create(id_slider, {
         'max': 65938
     }
 });
+*/
 
 // Merging overlapping tooltips - Dosn't work at the same time as showing tooltips only when using
 
@@ -259,6 +261,7 @@ noUiSlider.create(bi_parking_slider, {
         'max': 42
     }
 });
+/*
 
 // n_tel_o_fun_slider
 noUiSlider.create(n_tel_o_fun_slider, {
@@ -319,6 +322,7 @@ noUiSlider.create(n_kindergartens_slider, {
         'max': 49
     }
 });
+*/
 
 // --------- FOR SLIDERS ------------
 
