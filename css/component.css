@@ -185,15 +185,16 @@ cbp-hrsub-inner>span {
 .filterby_flex {
     display: flex;
     flex-direction: row;
-    justify-content: left;
-    /* space-around */
+    justify-content: space-between;
     align-content: center;
-    align-items: center;
     flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
 }
 
 .filterby_flex>li {
     padding-left: 1.5em;
+    width: 20%;
 }
 
 

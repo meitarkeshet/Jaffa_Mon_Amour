@@ -80,6 +80,16 @@ var filterFns = {
         return (parseInt(n_playgrounds_num, 10) >= slider_min && parseInt(n_playgrounds_num, 10) <= slider_max);
 
     },
+    // arrnona_year
+    arrnona_year: function() {
+        var arrnona_year_num = $(this).find('.arrnona_year').text();
+        var slider_min = parseInt(arrnona_year_slider.noUiSlider.get()[0]);
+        //alert(slider_min)
+        var slider_max = parseInt(arrnona_year_slider.noUiSlider.get()[1]);
+        //console.log(slider_min);
+        return (parseInt(arrnona_year_num, 10) >= slider_min && parseInt(arrnona_year_num, 10) <= slider_max);
+
+    },
     // n_kindergartens_slider
     n_kindergartens_min_max_slider: function() {
         var n_kindergartens_num = $(this).find('.n_kindergartens').text();
@@ -88,7 +98,6 @@ var filterFns = {
         var slider_max = parseInt(n_kindergartens_slider.noUiSlider.get()[1]);
         //console.log(slider_min);
         return (parseInt(n_kindergartens_num, 10) >= slider_min && parseInt(n_kindergartens_num, 10) <= slider_max);
-
     }
 };
 
@@ -249,6 +258,7 @@ noUiSlider.create(id_slider, {
 
 // mergeTooltips(id_slider, 15, ' - ');
 
+/*
 
 // n_bicycle_parking: Amount of bicycle parkings within a 15 min. walk 
 noUiSlider.create(bi_parking_slider, {
@@ -261,7 +271,6 @@ noUiSlider.create(bi_parking_slider, {
         'max': 42
     }
 });
-/*
 
 // n_tel_o_fun_slider
 noUiSlider.create(n_tel_o_fun_slider, {
@@ -324,6 +333,49 @@ noUiSlider.create(n_kindergartens_slider, {
 });
 */
 
+noUiSlider.create(accesability_score_slider, {
+
+    start: [0, 49],
+    tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })],
+    connect: true,
+    range: { // change according to each slider's value
+        'min': 0,
+        'max': 49
+    }
+});
+
+noUiSlider.create(amenities_score_slider, {
+
+    start: [0, 500],
+    tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })],
+    connect: true,
+    range: { // change according to each slider's value
+        'min': 0,
+        'max': 500
+    }
+});
+
+noUiSlider.create(tourism_score_slider, {
+
+    start: [0, 500],
+    tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })],
+    connect: true,
+    range: { // change according to each slider's value
+        'min': 0,
+        'max': 500
+    }
+});
+
+noUiSlider.create(arrnona_year_slider, {
+
+    start: [1900, 2014],
+    tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })],
+    connect: true,
+    range: { // change according to each slider's value
+        'min': 1900,
+        'max': 2014
+    }
+});
 // --------- FOR SLIDERS ------------
 
 
