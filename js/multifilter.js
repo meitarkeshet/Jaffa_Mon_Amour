@@ -335,34 +335,34 @@ noUiSlider.create(n_kindergartens_slider, {
 
 noUiSlider.create(accesability_score_slider, {
 
-    start: [0, 49],
-    tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })],
+    start: [0, 1],
+    tooltips: [wNumb({ decimals: 1 }), wNumb({ decimals: 1 })],
     connect: true,
     range: { // change according to each slider's value
         'min': 0,
-        'max': 49
+        'max': 1
     }
 });
 
 noUiSlider.create(amenities_score_slider, {
 
-    start: [0, 500],
-    tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })],
+    start: [0, 1],
+    tooltips: [wNumb({ decimals: 1 }), wNumb({ decimals: 1 })],
     connect: true,
     range: { // change according to each slider's value
         'min': 0,
-        'max': 500
+        'max': 1
     }
 });
 
 noUiSlider.create(tourism_score_slider, {
 
-    start: [0, 500],
-    tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })],
+    start: [0, 1],
+    tooltips: [wNumb({ decimals: 1 }), wNumb({ decimals: 1 })],
     connect: true,
     range: { // change according to each slider's value
         'min': 0,
-        'max': 500
+        'max': 1
     }
 });
 
