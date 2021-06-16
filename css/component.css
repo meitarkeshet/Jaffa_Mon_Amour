@@ -26,10 +26,31 @@
     padding: 0 1.875em;
 }
 
+
+/*
 .cbp-hrsub-inner {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0 1.875em;
+}
+*/
+
+#innerorder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0 1.875em;
+}
+
+#innerfilter {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
     width: 90%;
     margin: 0 auto;
     padding: 0 1.875em;
