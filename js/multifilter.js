@@ -92,30 +92,34 @@ var filterFns = {
     },
     // accesability_score
     accesability_score: function() {
-        var accesability_score_num = $(this).find('.accesability_score').text();
-        var slider_min = parseInt(accesability_score_slider.noUiSlider.get()[0]);
+        var accesability_score_num = $(this).find('.accesability_score_normalized').text();
+        var slider_min = parseFloat(accesability_score_slider.noUiSlider.get()[0]);
         //alert(slider_min)
-        var slider_max = parseInt(accesability_score_slider.noUiSlider.get()[1]);
+        var slider_max = parseFloat(accesability_score_slider.noUiSlider.get()[1]);
         //console.log(slider_min);
-        return (parseInt(accesability_score_num, 100) >= slider_min && parseInt(accesability_score_num, 100) <= slider_max); // NOTICE - parsing 10 for decimels 
+        return (parseFloat(accesability_score_num, 10) >= slider_min && parseFloat(accesability_score_num, 10) <= slider_max); // NOTICE - parseFloat for decimaals 
     },
     // amenities_score
     amenities_score: function() {
-        var amenities_score_num = $(this).find('.amenities_score').text();
-        var slider_min = parseInt(amenities_score_slider.noUiSlider.get()[0]);
+        var amenities_score_num = $(this).find('.amenities_score_normalized').text();
+        var slider_min = parseFloat(amenities_score_slider.noUiSlider.get()[0]);
         //alert(slider_min)
-        var slider_max = parseInt(amenities_score_slider.noUiSlider.get()[1]);
+        var slider_max = parseFloat(amenities_score_slider.noUiSlider.get()[1]);
         //console.log(slider_min);
-        return (parseInt(amenities_score_num, 10) >= slider_min && parseInt(amenities_score_num, 10) <= slider_max); // NOTICE - parsing 10 for decimels 
+        return (parseFloat(amenities_score_num, 10) >= slider_min && parseFloat(amenities_score_num, 10) <= slider_max); // NOTICE - parseFloat for decimaals
     },
     // tourism_score
     tourism_score: function() {
-        var tourism_score_num = $(this).find('.amenities_score').text();
-        var slider_min = parseInt(tourism_score_slider.noUiSlider.get()[0]);
+        var tourism_score_num = $(this).find('.amenities_score_normalized').text();
+        var slider_min = parseFloat(tourism_score_slider.noUiSlider.get()[0]);
         //alert(slider_min)
-        var slider_max = parseInt(tourism_score_slider.noUiSlider.get()[1]);
-        //console.log(slider_min);
-        return (parseInt(tourism_score_num, 10) >= slider_min && parseInt(tourism_score_num, 10) <= slider_max); // NOTICE - parsing 10 for decimels 
+        var slider_max = parseFloat(tourism_score_slider.noUiSlider.get()[1]);
+        //console.log('tourism max: ', slider_min, 'tourism min: ', 'tourism max:', slider_max);
+        //console.log('not parsed:', tourism_score_num);
+        //console.log('pasred int 10:', parseInt(tourism_score_num, 10));
+        //console.log('pasred float 10:', parseFloat(tourism_score_num, 10));
+
+        return (parseFloat(tourism_score_num, 10) >= slider_min && parseFloat(tourism_score_num, 10) <= slider_max); // NOTICE - parseFloat for decimaals
     },
     // n_kindergartens_slider
     n_kindergartens_min_max_slider: function() {
