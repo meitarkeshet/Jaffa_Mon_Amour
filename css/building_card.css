@@ -111,6 +111,16 @@ body {
     flex-direction: column;
     width: 100vw;
     height: 100vh;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    /*
+     display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+*/
 }
 
 .top_container {
