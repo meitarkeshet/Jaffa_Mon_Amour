@@ -151,11 +151,34 @@ $('.info-button').click(function(e) {
 $(document).ready(function() {
     $('.info-button').click(function(e) {
         var data = localStorage.getArray('passed_grid_elems')[0];
+        var counter = 1;
         $('#table_id').DataTable({
             "processing": true,
             retrieve: true,
             //paging: false,
             data: data,
+            dom: 'Bfrtip',
+            lengthMenu: [
+                [10, 25, 50, -1],
+                ['10 rows', '25 rows', '50 rows', 'Show all']
+            ],
+            buttons: [
+                'pageLength',
+                {
+                    text: 'All filtered buildings',
+                    action: function(e, dt, node, config) {
+                        clear_bld_selection();
+                    }
+                },
+                {
+                    text: 'Selected building',
+                    action: function(e, dt, node, config) {
+                        type_selected_bld();
+                    }
+                },
+                { extend: 'csv', text: 'Export to CSV' }
+            ],
+
             columns: [
                 { 'data': 'id' },
                 { 'data': "primary" },
@@ -205,10 +228,33 @@ $(document).ready(function() {
             ]
 
         });
-        // console.log('building card log: ', localStorage.getArray('passed_grid_elems'));
-        //console.log('building card log inside: ', data[0]);
+        type_selected_bld(); // innit with single building
 
-    });
+        function clear_bld_selection() {
+            var searchbar = $("input[type=search]");
+            searchbar.focus();
+            searchbar.val('');
+            setTimeout(function() {
+                e = $.Event('keyup');
+                e.keyCode = 13; // enter
+                $('input').trigger(e);
+            }, 500);
+        };
+
+        function type_selected_bld() {
+            var searchbar = $("input[type=search]");
+            searchbar.focus();
+            var bld_num = $('#building_id').text().split(' ')[1]; // NOTICE - using space as splitter
+            console.log('bld_num: ', bld_num);
+            searchbar.val(bld_num);
+            setTimeout(function() {
+                e = $.Event('keyup');
+                e.keyCode = 13; // enter
+                $('input').trigger(e);
+            }, 500);
+        };
+
+    }); // close: $('#table_id').DataTable({
 });
 
 Storage.prototype.getArray = function(arrayName) {
@@ -219,6 +265,8 @@ Storage.prototype.getArray = function(arrayName) {
     }
     return thisArray;
 }
+
+
 
 // ----------- graphs ----------- //
 
