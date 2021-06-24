@@ -298,14 +298,14 @@ $(document).ready(function() {
         all_zero_line = [];
 
         $.each(all_data, function(key, value) {
-            all_sun_radiation.push(1); //  NOTICE change once there's more data - also lower in script + pushing 1 to avoid dividing 0/0 when normalizing
-            all_building_height.push(Number(value["Building's height (simple)"]));
-            all_historical_buildings.push(Number(value["Historical buildings within 15 min. walk"]));
-            all_centrality.push(Number(value["Centrality (gravity) score for each building within 15 min. walk r."]));
-            all_density.push(Number(value["Built density (2d built area / void) in 250 meter radius"]));
-            all_parcel_size.push(Number(value["Parcel size (square meters)"]));
-            all_zero_line.push(Number(value[" building's street-facing front Distance from parcel limits (0 line) in meters"]));
-
+            all_sun_radiation.push(Number(value["radiation"])); //  NOTICE change once there's more data - also lower in script + pushing 1 to avoid dividing 0/0 when normalizing
+            all_building_height.push(Number(value["bld_height"]));
+            all_historical_buildings.push(Number(value["n_historical_bld"]));
+            all_centrality.push(Number(value["centrality"]));
+            all_density.push(Number(value["built_density"]));
+            all_parcel_size.push(Number(value["parcel_size"]));
+            all_zero_line.push(Number(value["dist_parcel_limit"]));
+            console.log('all_historical_buildings: ', all_historical_buildings);
             // find current selected building matching to the page
             if (value.id == building_id) {
                 sel_data = value;
@@ -333,13 +333,13 @@ $(document).ready(function() {
 
 
         // array order: 'sun radiation',V'height',V'historical buildings around',V'centrality',V'built density',V'parcel size','distance from 0 line'
-        var single_sun_radiation = 2; // NOTICE change once there's more data - also up in script pushing 2 to avoid dividing 0/0 when normalizing
-        var single_building_height = Number(sel_data["Building's height (simple)"]);
-        var single_historical_buildings = Number(sel_data["Historical buildings within 15 min. walk"]);
-        var single_centrality = Number(sel_data["Centrality (gravity) score for each building within 15 min. walk r."]);
-        var single_density = Number(sel_data["Built density (2d built area / void) in 250 meter radius"]);
-        var single_parcel_size = Number(sel_data["Parcel size (square meters)"]);
-        var single_zero_line = Number(sel_data[" building's street-facing front Distance from parcel limits (0 line) in meters"]);
+        var single_sun_radiation = Number(sel_data["radiation"]); // NOTICE change once there's more data - also up in script pushing 2 to avoid dividing 0/0 when normalizing
+        var single_building_height = Number(sel_data["bld_height"]);
+        var single_historical_buildings = Number(sel_data["n_historical_bld"]);
+        var single_centrality = Number(sel_data["centrality"]);
+        var single_density = Number(sel_data["built_density"]);
+        var single_parcel_size = Number(sel_data["parcel_size"]);
+        var single_zero_line = Number(sel_data["dist_parcel_limit"]);
         // create array holding data for selected building - for radar
         single_building_data = [single_sun_radiation, single_building_height, single_historical_buildings,
             single_centrality, single_density, single_parcel_size, single_zero_line
