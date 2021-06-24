@@ -305,7 +305,6 @@ $(document).ready(function() {
             all_density.push(Number(value["built_density"]));
             all_parcel_size.push(Number(value["parcel_size"]));
             all_zero_line.push(Number(value["dist_parcel_limit"]));
-            console.log('all_historical_buildings: ', all_historical_buildings);
             // find current selected building matching to the page
             if (value.id == building_id) {
                 sel_data = value;
@@ -427,4 +426,13 @@ const config = {
 var radar_chart_elem = $('#radar_chart');
 var radar_chart = new Chart(radar_chart_elem, config);
 
-// ----------- close tab ----------- //
+// ----------- Navigate to previews and next pages ----------- //
+$(document).ready(function() {
+    $('.navigate_next').click(function(e) {
+        console.log('clicked next!');
+    });
+    $('#navigate_before').click(function(e) {
+        console.log('clicked previews!');
+    });
+
+});
