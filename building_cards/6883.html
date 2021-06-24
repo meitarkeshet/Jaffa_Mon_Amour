@@ -12,6 +12,8 @@
     <!--To dataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/ju/dt-1.10.25/b-1.7.1/b-html5-1.7.1/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/ju/dt-1.10.25/b-1.7.1/b-html5-1.7.1/datatables.min.js"></script>
     <!--To pass variables -->
     <script type="text/javascript" src="../js/app.js"></script>
     <!--To load chartjs -->
@@ -21,9 +23,10 @@
     
 <body>
     <div class='summary-page'>
-        <span class="material-icons-outlined" id="topRightFixed">
-            close
-            </span>
+    
+        <span class="material-icons-outlined" id="topRightFixed"> close </span> 
+            
+            
         <div class="summary">
             <h2>Sderot Yerushalayim 68</h2>
             <p>parcel : 104</p>
@@ -38,13 +41,19 @@
         <img alt="Sderot Yerushalayim 68" photo_num='1' class="center carousel" src="../photos/שדרות-ירושלים-68_6883.jpg"> </div>  <div class="carousel-button">
     <span class="material-icons-outlined" button_num='1'>radio_button_checked</span>
         </div>
+        <a href="#">
         <span class="material-icons-outlined info-button info-summary" id="buttonLeftFixed">info</span>
+        </a>
+        <a href="#">
         <span class="material-icons-outlined" id="navigate_before">
         navigate_before
         </span>
+        </a>
+        <a href="#">
         <span class="material-icons-outlined navigate_next" id="buttonRightFixed">
         navigate_next
         </span>
+        </a>
     </div>
 
     <div class='detailed-page'>
@@ -99,8 +108,9 @@
 
         </div>
         <!-- close entire page div -->
+        <a href="#">
         <span class="material-icons-outlined info-button info-detailed" id="buttonLeftFixed">info</span>
-
+        </a>
     </div>
     <!-- close: class='detailed-page '-->
 </body>

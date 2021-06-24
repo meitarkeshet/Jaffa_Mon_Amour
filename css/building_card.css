@@ -54,6 +54,7 @@ body {
     position: fixed;
     top: 2%;
     right: 2%;
+    display: none;
     /*
     background: #336600;
     padding: 6px;
