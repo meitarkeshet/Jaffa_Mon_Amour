@@ -426,13 +426,38 @@ const config = {
 var radar_chart_elem = $('#radar_chart');
 var radar_chart = new Chart(radar_chart_elem, config);
 
+
+
 // ----------- Navigate to previews and next pages ----------- //
+var passed_data_all = localStorage.getArray('passed_grid_elems')[0];
+//console.log('passed_data:', passed_data_id);
+//console.log('passed_data:', passed_data.id);
+
 $(document).ready(function() {
+    fltr_lnk_lst = []; // create an empty array to hold the IDs of all filtered buildings
+    $.each(passed_data_all, function(key, value) {
+        fltr_lnk_lst.push(value.id);
+    });
+    // find the selected building's ID position in the filtered list
+    var window_bld_id = $('#building_id').text().split(' ')[1]; // NOTICE - using space as splitter
+    console.log(fltr_lnk_lst);
+    console.log(window_bld_id);
+    var bld_index_in_fltr_lnk_lst = $.inArray(window_bld_id, fltr_lnk_lst);
+    //console.log('this, after, before: ', bld_index_in_fltr_lnk_lst, index_next, index_before);
     $('.navigate_next').click(function(e) {
         console.log('clicked next!');
+        // get list of ID's
+        var index_next = bld_index_in_fltr_lnk_lst + 1;
+        var bld_id_next = fltr_lnk_lst[index_next];
+        var next_html_location = `../building_cards/${bld_id_next}.html`; // WIP
+        window.location.href = next_html_location;
     });
     $('#navigate_before').click(function(e) {
         console.log('clicked previews!');
+        var index_before = bld_index_in_fltr_lnk_lst - 1;
+        var bld_id_before = fltr_lnk_lst[index_before];
+        var previews_html_location = `../building_cards/${bld_id_before}.html`; // WIP
+        window.location.href = previews_html_location;
     });
 
 });
