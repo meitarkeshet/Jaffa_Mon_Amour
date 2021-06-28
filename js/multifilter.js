@@ -223,7 +223,8 @@ $('.filters').on('click', 'button', function() {
 });
 
 // bind sort button click
-$('#sorts').on('click', 'button', function() {
+$('#sorts_1, #sorts_2, #hidden_reset_sortby').on('click', 'button', function() { // WIP
+    console.log("< ----- trying to SORT ----->");
     // we can't sort and group-by at the same to
     // so first make sure we aren't grouped-by by clicking group-by 'original order'
     if (flag_groupby == true) { // if group-by mode is on
@@ -1067,6 +1068,7 @@ $(document).ready(function() {
         var order_buttons = $('#innerorder').find(".button"); // select all order buttons - both 'SORT' and 'GROUPBY'
         order_buttons.removeClass("is-checked"); // deselect all order buttons 
         $('#hidden_reset_groupby').find(".button").click(); // reset group by
+        $('#hidden_reset_sortby').find(".button").click(); // reset sort by
         console.log('order_buttons', order_buttons);
     });
 });

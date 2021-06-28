@@ -151,9 +151,9 @@ $('.info-button').click(function(e) {
 $(document).ready(function() {
     $('.info-button').click(function(e) {
         var cln_data = []; // prepare array to exclude NULL items (which are created on GroupBy);
-        var data = localStorage.getArray('passed_grid_elems')[0]; // WIP
+        var data = localStorage.getArray('passed_grid_elems')[0];
         $.each(data, function(key, value) {
-            if (value.id != undefined) { // avoid problems with NULL items passed on GroupBy mode WIP
+            if (value.id != undefined) { // avoid problems with NULL items passed on GroupBy mode 
                 cln_data.push(value);
             };
         });
