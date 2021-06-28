@@ -981,9 +981,6 @@ $(function() {
     });
 });
 
-
-
-
 // ------------- functions for passing variables ------------------- //
 Storage.prototype.getArray = function(arrayName) {
     var thisArray = [];
@@ -1061,3 +1058,13 @@ $("#cbp-hrmenu > ul > li:nth-child(2) > a").click(function() {
     });
 });
 */
+
+// ------------- reset buttons ------------------- // WIP
+$(document).ready(function() {
+    $('#order_restart').on('click', function() {
+        console.log('<------ Resetting Order ------>')
+        var order_buttons = $('#innerorder').find(".button"); // select all order buttons - both 'SORT' and 'GROUPBY'
+        order_buttons.removeClass("is-checked"); // deselect all order buttons 
+        console.log('order_buttons', order_buttons);
+    });
+});
