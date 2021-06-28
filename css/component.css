@@ -243,3 +243,10 @@ cbp-hrsub-inner>span {
         padding: 0 2em;
     }
 }
+
+
+/* Hide reset buttons */
+
+#hidden_reset_groupby {
+    display: none;
+}

@@ -148,6 +148,7 @@ var $grid = $('.grid').isotope({
         rowHeight: 52
     },
     getSortData: {
+        id: '.id',
         primary: '.primary',
         secondary: '.secondary',
         complex: '.complex',
@@ -167,7 +168,7 @@ var $grid = $('.grid').isotope({
         arrnona_year: '.arrnona_year',
         radiation: '.radiation',
         col_header: '[col_header]',
-        id: '.id',
+
         n_bicycle_parking: '.n_bicycle_parking',
         n_parks: '.n_parks',
         category: '[data-category]',
@@ -1065,6 +1066,7 @@ $(document).ready(function() {
         console.log('<------ Resetting Order ------>')
         var order_buttons = $('#innerorder').find(".button"); // select all order buttons - both 'SORT' and 'GROUPBY'
         order_buttons.removeClass("is-checked"); // deselect all order buttons 
+        $('#hidden_reset_groupby').find(".button").click(); // reset group by
         console.log('order_buttons', order_buttons);
     });
 });
