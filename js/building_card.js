@@ -150,13 +150,22 @@ $('.info-button').click(function(e) {
 
 $(document).ready(function() {
     $('.info-button').click(function(e) {
-        var data = localStorage.getArray('passed_grid_elems')[0];
-        var counter = 1;
+        var cln_data = []; // prepare array to exclude NULL items (which are created on GroupBy);
+        var data = localStorage.getArray('passed_grid_elems')[0]; // WIP
+        $.each(data, function(key, value) {
+            if (value.id != undefined) { // avoid problems with NULL items passed on GroupBy mode WIP
+                cln_data.push(value);
+            };
+        });
+        // NOTICE need to clear out NULL items in the case of GroupBy
+        console.log('dirty table data: ', data);
+        console.log('clean table data: ', cln_data);
+
         $('#table_id').DataTable({
             "processing": true,
             retrieve: true,
             //paging: false,
-            data: data,
+            data: cln_data, // NOTICE avoiding risk  in the case of GroupBy
             dom: 'Bfrtip',
             lengthMenu: [
                 [10, 25, 50, -1],
@@ -257,12 +266,13 @@ $(document).ready(function() {
     }); // close: $('#table_id').DataTable({
 });
 
+
 Storage.prototype.getArray = function(arrayName) {
     var thisArray = [];
     var fetchArrayObject = this.getItem(arrayName);
-    if (typeof fetchArrayObject !== 'undefined') {
+    if (typeof fetchArrayObject !== undefined) {
         if (fetchArrayObject !== null) { thisArray = JSON.parse(fetchArrayObject); }
-    }
+    };
     return thisArray;
 }
 
@@ -298,17 +308,19 @@ $(document).ready(function() {
         all_zero_line = [];
 
         $.each(all_data, function(key, value) {
-            all_sun_radiation.push(Number(value["radiation"])); //  NOTICE change once there's more data - also lower in script + pushing 1 to avoid dividing 0/0 when normalizing
-            all_building_height.push(Number(value["bld_height"]));
-            all_historical_buildings.push(Number(value["n_historical_bld"]));
-            all_centrality.push(Number(value["centrality"]));
-            all_density.push(Number(value["built_density"]));
-            all_parcel_size.push(Number(value["parcel_size"]));
-            all_zero_line.push(Number(value["dist_parcel_limit"]));
-            // find current selected building matching to the page
-            if (value.id == building_id) {
-                sel_data = value;
-            };
+            if (value.id != undefined) { // avoid problems with NULL items passed on GroupBy mode 
+                all_sun_radiation.push(Number(value["radiation"])); //  NOTICE change once there's more data - also lower in script + pushing 1 to avoid dividing 0/0 when normalizing
+                all_building_height.push(Number(value["bld_height"]));
+                all_historical_buildings.push(Number(value["n_historical_bld"]));
+                all_centrality.push(Number(value["centrality"]));
+                all_density.push(Number(value["built_density"]));
+                all_parcel_size.push(Number(value["parcel_size"]));
+                all_zero_line.push(Number(value["dist_parcel_limit"]));
+                // find current selected building matching to the page
+                if (value.id == building_id) {
+                    sel_data = value;
+                };
+            }; // CLOSE: if (value.id != undefined)
         });
 
         // return avrages for entire filtered values 
@@ -436,7 +448,9 @@ var passed_data_all = localStorage.getArray('passed_grid_elems')[0];
 $(document).ready(function() {
     fltr_lnk_lst = []; // create an empty array to hold the IDs of all filtered buildings
     $.each(passed_data_all, function(key, value) {
-        fltr_lnk_lst.push(value.id);
+        if (value.id != undefined) {
+            fltr_lnk_lst.push(value.id); // to avoid Null items passed on GroupBy mode
+        };
     });
     // find the selected building's ID position in the filtered list
     var window_bld_id = $('#building_id').text().split(' ')[1]; // NOTICE - using space as splitter
@@ -455,7 +469,7 @@ $(document).ready(function() {
             var bld_id_next = fltr_lnk_lst[index_next];
         };
         console.log('index_next, bld_id_next: ', index_next, bld_id_next);
-        var next_html_location = `../building_cards/${bld_id_next}.html`; // WIP
+        var next_html_location = `../building_cards/${bld_id_next}.html`;
         window.location.href = next_html_location;
     });
     $('#navigate_before').click(function(e) {
@@ -468,7 +482,7 @@ $(document).ready(function() {
             var bld_id_before = fltr_lnk_lst[index_before];
         };
         console.log('index_before, bld_id_before: ', index_before, bld_id_before);
-        var previews_html_location = `../building_cards/${bld_id_before}.html`; // WIP
+        var previews_html_location = `../building_cards/${bld_id_before}.html`;
         window.location.href = previews_html_location;
     });
 
