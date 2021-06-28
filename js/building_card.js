@@ -448,14 +448,26 @@ $(document).ready(function() {
         console.log('clicked next!');
         // get list of ID's
         var index_next = bld_index_in_fltr_lnk_lst + 1;
-        var bld_id_next = fltr_lnk_lst[index_next];
+        console.log('trying to move to: ', index_next, 'out of', fltr_lnk_lst.length, 'elements');
+        if (index_next > fltr_lnk_lst.length - 1) { // the there is no 'next link' to go to (reached end of link list)
+            var bld_id_next = fltr_lnk_lst[0]; // go back to the first 
+        } else {
+            var bld_id_next = fltr_lnk_lst[index_next];
+        };
+        console.log('index_next, bld_id_next: ', index_next, bld_id_next);
         var next_html_location = `../building_cards/${bld_id_next}.html`; // WIP
         window.location.href = next_html_location;
     });
     $('#navigate_before').click(function(e) {
         console.log('clicked previews!');
         var index_before = bld_index_in_fltr_lnk_lst - 1;
-        var bld_id_before = fltr_lnk_lst[index_before];
+        if (index_before == -1) { // if we are currenty on the FIRST item (index 0) in fltr_lnk_lst > go to LAST item
+            console.log('FIRST page in filtered link list');
+            var bld_id_before = fltr_lnk_lst[fltr_lnk_lst.length - 1]; // jumping to LAST in array
+        } else {
+            var bld_id_before = fltr_lnk_lst[index_before];
+        };
+        console.log('index_before, bld_id_before: ', index_before, bld_id_before);
         var previews_html_location = `../building_cards/${bld_id_before}.html`; // WIP
         window.location.href = previews_html_location;
     });
