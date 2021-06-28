@@ -250,3 +250,7 @@ cbp-hrsub-inner>span {
 #hidden_reset_groupby {
     display: none;
 }
+
+#hidden_reset_sortby {
+    display: none;
+}
