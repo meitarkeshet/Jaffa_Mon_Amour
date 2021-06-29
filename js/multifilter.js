@@ -802,11 +802,16 @@ $(function() {
     $('.layout-mode-button-group').on('click', 'button', function() {
         // we can't sort and groupby at the same time
         // to make sure 'sort' is on 'original order' - click it.
-        if (flag_sortby == true) { // if sorting mode is on
+        if (flag_sortby == true) { // if sorting mode is on WIP
+            var order_buttons = $('#innerorder').find(".button"); // select all order buttons - both 'SORT' and 'GROUPBY'
+            order_buttons.removeClass("is-checked"); // deselect all order buttons 
+            $('#hidden_reset_sortby').find(".button").click(); // reset sort by
+            /*
             if (!($("#sorts > button:first").hasClass('is-checked'))) { // and is not set to "regular" (not sorting)
                 //alert('< --------- RESETTING regular sort --------- >');
                 $("#sorts > button:first").click(); // return it to "regular" 
             };
+            */
         };
         // now groupby
         groupby_reinnit($(this));
