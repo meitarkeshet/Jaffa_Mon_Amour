@@ -223,7 +223,7 @@ $('.filters').on('click', 'button', function() {
 });
 
 // bind sort button click
-$('#sorts_1, #sorts_2, #hidden_reset_sortby').on('click', 'button', function() { // WIP , 
+$('#sorts_1, #sorts_2, #hidden_reset_sortby').on('click', 'button', function() {
     console.log("< ----- trying to SORT ----->");
     console.log('passed this button: ', $(this));
     console.log('passed this button: ', $(this).attr('data-sort-by'));
@@ -821,7 +821,7 @@ $(function() {
         $(this).addClass("is-checked");
         // we can't sort and groupby at the same time
         // to make sure 'sort' is on 'original order' - click it.
-        if (flag_sortby == true) { // if sorting mode is on WIP
+        if (flag_sortby == true) { // if sorting mode is on 
 
             $('#hidden_reset_sortby').find(".button").click(); // reset sort by
             /*
@@ -1090,7 +1090,7 @@ $("#cbp-hrmenu > ul > li:nth-child(2) > a").click(function() {
 });
 */
 
-// ------------- reset buttons ------------------- // WIP
+// ------------- reset buttons ------------------- // 
 $(document).ready(function() {
     $('#order_restart').on('click', function() {
         console.log('<------ Resetting Order ------>')
@@ -1107,3 +1107,16 @@ $(document).ready(function() {
         };
     });
 });
+
+$(document).ready(function() {
+    $('#filter_restart').on('click', function() {
+        console.log('<------ Resetting Filter ------>')
+            // Return to the 'start' values
+            // Does NOT reset any other slider properties
+        accesability_score_slider.noUiSlider.reset();
+        amenities_score_slider.noUiSlider.reset();
+        tourism_score_slider.noUiSlider.reset();
+        arrnona_year_slider.noUiSlider.reset();
+        $('.noUi-touch-area').first().click(); // click the first touch area possible to reinnit filter and map
+    });
+}); // WIP
