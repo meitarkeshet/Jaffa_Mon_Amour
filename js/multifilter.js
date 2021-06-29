@@ -223,13 +223,26 @@ $('.filters').on('click', 'button', function() {
 });
 
 // bind sort button click
-$('#sorts_1, #sorts_2, #hidden_reset_sortby').on('click', 'button', function() { // WIP
+$('#sorts_1, #sorts_2, #hidden_reset_sortby').on('click', 'button', function() { // WIP , 
     console.log("< ----- trying to SORT ----->");
+    console.log('passed this button: ', $(this));
+    console.log('passed this button: ', $(this).attr('data-sort-by'));
+
+
+    console.log('compare with single button: ', $('#hidden_reset_sortby').find(".button"));
+    console.log('and compare with button.button: ', $('#hidden_reset_sortby').find(".button").find(".button"));
+
+    if (flag_sortby === true && $(this).attr('data-sort-by') !== 'original-order') { // if we are already sorting something - reset sort first ------ 
+        console.log('flag sort by is ON');
+        $('#hidden_reset_sortby').find(".button").click(); // reset sort by
+    }
+    var order_buttons = $('#innerorder').find(".button"); // select all order buttons - both 'SORT' and 'GROUPBY'
+    order_buttons.removeClass("is-checked"); // deselect all order buttons 
+    $(this).addClass("is-checked"); // check clicked button
     // we can't sort and group-by at the same to
     // so first make sure we aren't grouped-by by clicking group-by 'original order'
-    if (flag_groupby == true) { // if group-by mode is on
-        var order_buttons = $('#innerorder').find(".button"); // select all order buttons - both 'SORT' and 'GROUPBY'
-        order_buttons.removeClass("is-checked"); // deselect all order buttons 
+    if (flag_groupby === true) { // if group-by mode is on
+        console.log('<------ resetting group by before sorting ------>');
         $('#hidden_reset_groupby').find(".button").click(); // reset group by
         /*
         if (!($("#group-sort > button:first").hasClass('is-checked'))) { // and it's on "regular" mode
@@ -800,11 +813,16 @@ $(function() {
         return 'Done';
     };
     $('.layout-mode-button-group').on('click', 'button', function() {
+        // force unccheck all buttons
+        var order_buttons = $('#innerorder').find(".button"); // select all order buttons - both 'SORT' and 'GROUPBY'
+        order_buttons.removeClass("is-checked"); // deselect all order buttons 
+        // check only button passed
+        console.log('this passed:', $(this));
+        $(this).addClass("is-checked");
         // we can't sort and groupby at the same time
         // to make sure 'sort' is on 'original order' - click it.
         if (flag_sortby == true) { // if sorting mode is on WIP
-            var order_buttons = $('#innerorder').find(".button"); // select all order buttons - both 'SORT' and 'GROUPBY'
-            order_buttons.removeClass("is-checked"); // deselect all order buttons 
+
             $('#hidden_reset_sortby').find(".button").click(); // reset sort by
             /*
             if (!($("#sorts > button:first").hasClass('is-checked'))) { // and is not set to "regular" (not sorting)
@@ -1078,8 +1096,14 @@ $(document).ready(function() {
         console.log('<------ Resetting Order ------>')
         var order_buttons = $('#innerorder').find(".button"); // select all order buttons - both 'SORT' and 'GROUPBY'
         order_buttons.removeClass("is-checked"); // deselect all order buttons 
-        $('#hidden_reset_groupby').find(".button").click(); // reset group by
-        $('#hidden_reset_sortby').find(".button").click(); // reset sort by
-        console.log('order_buttons', $('#hidden_reset_sortby').find(".button"));
+        if (flag_groupby == true) {
+            $('#hidden_reset_groupby').find(".button").click(); // reset group by
+            console.log('<------ Resetting group-by ------>')
+        };
+        if (flag_sortby == true) {
+            $('#hidden_reset_sortby').find(".button").click(); // reset sort by
+            console.log('<------ Resetting sort-by ------>')
+            console.log('sortby button: ', $('#hidden_reset_sortby').find(".button"));
+        };
     });
 });
