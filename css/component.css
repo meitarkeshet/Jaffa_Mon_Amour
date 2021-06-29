@@ -54,6 +54,7 @@
     width: 90%;
     margin: 0 auto;
     padding: 0 1.875em;
+    height: 100%;
 }
 
 .cbp-hrmenu>ul>li {
@@ -109,6 +110,7 @@
 .cbp-hrmenu .cbp-hrsub-inner:after {
     content: " ";
     display: table;
+    height: 100%;
 }
 
 .cbp-hrmenu .cbp-hrsub-inner:after {
@@ -129,6 +131,8 @@
     font-weight: 300;
 }
 
+
+/*
 .order_reset {
     display: flex;
     flex-direction: row;
@@ -137,6 +141,7 @@
     align-items: center;
     flex-wrap: wrap;
 }
+*/
 
 .groupby_flex {
     display: flex;
@@ -166,6 +171,12 @@ cbp-hrsub-inner>span {
     position: relative;
     left: 98%;
     bottom: 20em;
+}
+
+#filter_restart {
+    color: rgb(255, 255, 255);
+    position: fixed;
+    left: 93%;
 }
 
 .sortby_flex {
