@@ -228,10 +228,16 @@ $('#sorts_1, #sorts_2, #hidden_reset_sortby').on('click', 'button', function() {
     // we can't sort and group-by at the same to
     // so first make sure we aren't grouped-by by clicking group-by 'original order'
     if (flag_groupby == true) { // if group-by mode is on
+        var order_buttons = $('#innerorder').find(".button"); // select all order buttons - both 'SORT' and 'GROUPBY'
+        order_buttons.removeClass("is-checked"); // deselect all order buttons 
+        $('#hidden_reset_groupby').find(".button").click(); // reset group by
+        /*
         if (!($("#group-sort > button:first").hasClass('is-checked'))) { // and it's on "regular" mode
             //alert('< --------- RESETTING groupby sort --------- >');
             $("#group-sort > button:first").click(); // return it to "regular"
         };
+        */
+
     };
 
     // now sort
@@ -429,7 +435,7 @@ $('.img_filters').on('click', '.slider', function() {
     //var filters_concat = concatValues(combo_filters);
     //alert(filters_concat);
     // arrange, and use filter fn
-    $grid.isotope(); // WIP
+    $grid.isotope();
     /*
         $grid.isotope({
             filter: filters + ', .ignore'
@@ -828,8 +834,8 @@ $(function() {
 
         }; // CLOSE: if (!(groupby_status_button.attr('data-group-by') == 'non'))
         console.log('TOUCHED button FILTER');
-        console.log('button filter pass:', groupby_status_button); // pass me to function WIP
-        console.log('attr:', groupby_status_button.attr('data-group-by')); // pass me to function WIP
+        console.log('button filter pass:', groupby_status_button); // pass me to function 
+        console.log('attr:', groupby_status_button.attr('data-group-by')); // pass me to function 
     });
 
     $('.noUi-touch-area').on('click', function() { // re-innit function when slider filters are touched
@@ -871,7 +877,7 @@ $(function() {
             setTimeout(() => {
                 console.log("Inside the mapall_reinnit function");
                 flag_refresh_groupby = false; // make isotope arrangeComplete detectable for mapall.js
-                // relunch the grid to reinnit the map in mapall.js WIP
+                // relunch the grid to reinnit the map in mapall.js 
                 $grid.isotope();
                 //$grid.isotope('reloadItems');
                 resolve();
@@ -1069,6 +1075,6 @@ $(document).ready(function() {
         order_buttons.removeClass("is-checked"); // deselect all order buttons 
         $('#hidden_reset_groupby').find(".button").click(); // reset group by
         $('#hidden_reset_sortby').find(".button").click(); // reset sort by
-        console.log('order_buttons', order_buttons);
+        console.log('order_buttons', $('#hidden_reset_sortby').find(".button"));
     });
 });
