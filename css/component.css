@@ -159,11 +159,13 @@ cbp-hrsub-inner>span {
                             bottom: 20em;
                         }
                         
-                        #order_restart:hover {
+                        #order_restart:hover,
+                        #filter_restart:hover {
                             color: #F1CEA8;
                         }
                         
-                        #order_restart:active {
+                        #order_restart:active,
+                        #filter_restart:active {
                             color: #9F6C58;
                         }
                         

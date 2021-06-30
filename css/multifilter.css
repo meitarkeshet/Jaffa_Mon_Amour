@@ -70,14 +70,14 @@ font size - 14*/
 }
 
 .button:hover {
-    background-color: #8CF;
+    background-color: #F1CEA8;
     text-shadow: 0 1px hsla(0, 0%, 100%, 0.5);
     color: #222;
 }
 
 .button:active,
 .button.is-checked {
-    background-color: #28F;
+    background-color: #9F6C58;
 }
 
 .button.is-checked {
