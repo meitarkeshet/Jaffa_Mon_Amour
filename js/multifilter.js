@@ -1126,27 +1126,33 @@ $(document).ready(function() {
 // ----------- Fade out hide / show ----------- //
 $(document).ready(function() {
     $('#about_section').hide(); // at startup, hide the about section
+    $('#from_projet_info').hide(); // at startup, hide the about section
 });
 
-$('#projet_info').click(function(e) {
-    var parent_div_class = $(this).parent().closest('div').eq(0).attr('class'); //.split(' '); // this gets the parent classes.
-    console.log(parent_div_class);
-    e.preventDefault()
+$(document).ready(function() {
+    $('.info-button').click(function(e) {
+        console.log("clicked info button");
+        var button_leads = $(this).parent().closest('a').eq(0).attr('id'); //.split(' '); // this gets the parent classes.
+        console.log(button_leads);
+        e.preventDefault()
 
-    if (parent_div_class == 'summary-page') {
-        console.log('moving to detailed');
-        $(".info-summary").hide();
-        $(".info-detailed").show();
+        if (button_leads == 'to_projet_info') {
+            console.log('moving to about page');
+            $('#to_projet_info').hide();
 
-        $('.summary-page').fadeOut(600, function() {
-            $('.detailed-page').fadeIn(600);
-        });
-    } else if (parent_div_class == 'detailed-page') {
-        console.log('moving to summary');
-        $(".info-detailed").hide();
-        $(".info-summary").show();
-        $(".detailed-page").fadeOut(600, function() {
-            $('.summary-page').fadeIn(600);
-        });
-    };
+            $('#main_section, .main').fadeOut(600, function() { //  .main
+                $('#about_section').fadeIn(600);
+            });
+            $('#from_projet_info').show();
+
+        } else if (button_leads == 'from_projet_info') {
+            console.log('moving from about page');
+            $('#from_projet_info').hide();
+
+            $('#about_section').fadeOut(600, function() { //  
+                $('#main_section, .main').fadeIn(600);
+            });
+            $('#to_projet_info').show();
+        };
+    });
 });

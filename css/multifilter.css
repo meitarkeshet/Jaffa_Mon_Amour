@@ -38,6 +38,19 @@ body {
     */
 }
 
+#topLeftFixed_1 {
+    z-index: 999999999;
+    position: fixed;
+    top: 2%;
+    /*    left: 2%;
+
+    background: #336600;
+    padding: 6px;
+    color: rgb(0, 0, 0);
+    font-size: 1.4em;
+    */
+}
+
 
 /* ---- button ---- 
 font size - 14*/

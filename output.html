@@ -41731,23 +41731,39 @@
         <!-- load js file with the button controls etc.-->
         <script src="./js/multifilter.js ">
         </script>
-        <a href="#" id='projet_info'>
+
+
+    </div>
+    <!-- close: DIV main section -->
+
+    <!-- info button -->
+    <div class='info_buttons'>
+
+        <a href="#" id='to_projet_info'>
             <div>
                 <span class="material-icons-outlined info-button" href="#" id="topLeftFixed">
-                info
-                </span>
+            info
+            </span>
             </div>
         </a>
 
+        <a href="#" id='from_projet_info'>
+            <div>
+                <span class="material-icons-outlined info-button" href="#" id="topLeftFixed_1">
+            info
+            </span>
+            </div>
+        </a>
         <script>
             var map_zoom_control = $('.leaflet-control-zoom-in');
             //console.log('zoom control left offset: ', $(map_zoom_control).offset().left);
             //console.log('zoom control size: ', $(map_zoom_control).width());
-
+            var pos_icon = $(map_zoom_control).offset().left + ($(map_zoom_control).width() / 4);
             $('#topLeftFixed').css("left", $(map_zoom_control).offset().left + ($(map_zoom_control).width() / 4)); // notice pushing qurter of the button size (30px)
+            $('#topLeftFixed_1').css("left", pos_icon); // notice pushing qurter of the button size (30px)
         </script>
     </div>
-    <!-- close: DIV main section -->
+
 
     <div class="container" id="about_section">
         <h1>About</h1>
@@ -41762,7 +41778,7 @@
                 <h2>Contact</h2>
                 <p>Email </p>
             </aside>
-            <section class="col main">
+            <section class="col main_about">
                 <h2>Jaffa Mon Amour</h2>
                 <p>The project Parxis-X bla bla bla </p>
                 <h2>Partners</h2>
