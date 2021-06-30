@@ -1120,3 +1120,33 @@ $(document).ready(function() {
         $('.noUi-touch-area').first().click(); // click the first touch area possible to reinnit filter and map
     });
 }); // WIP
+
+
+
+// ----------- Fade out hide / show ----------- //
+$(document).ready(function() {
+    $('#about_section').hide(); // at startup, hide the about section
+});
+
+$('#projet_info').click(function(e) {
+    var parent_div_class = $(this).parent().closest('div').eq(0).attr('class'); //.split(' '); // this gets the parent classes.
+    console.log(parent_div_class);
+    e.preventDefault()
+
+    if (parent_div_class == 'summary-page') {
+        console.log('moving to detailed');
+        $(".info-summary").hide();
+        $(".info-detailed").show();
+
+        $('.summary-page').fadeOut(600, function() {
+            $('.detailed-page').fadeIn(600);
+        });
+    } else if (parent_div_class == 'detailed-page') {
+        console.log('moving to summary');
+        $(".info-detailed").hide();
+        $(".info-summary").show();
+        $(".detailed-page").fadeOut(600, function() {
+            $('.summary-page').fadeIn(600);
+        });
+    };
+});
