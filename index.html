@@ -36,17 +36,19 @@
     <script defer="" src="node_modules/swup/dist/swup.min.js">
     </script>
      -->
+    <!-- for about section -->
+    <link rel="stylesheet" href="./css/about.css" />
+
     <!--To pass variables -->
     <script src="../js/app.js" type="text/javascript">
     </script>
     <link href="./css/trans.css" rel="stylesheet" />
     <!-- load leaflet for map-->
     <link crossorigin="" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" rel="stylesheet" />
-    <link href="./css/mapall.css" rel="stylesheet">
+    <link href="./css/mapall.css" rel="stylesheet" />
     <!-- Make sure you put this AFTER Leaflet 's CSS -->
     <script crossorigin="" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js">
     </script>
-    </link>
 </head>
 <!-- for sticky option on scroll-->
 <div class="fixedscroll" id="nav_sticky">
@@ -71,11 +73,16 @@
                 <li>
                     <a href="#">
                         <span button_num="1" class="material-icons-outlined">
-                            filter_list
-                        </span>
+        filter_list
+       </span>
                     </a>
                     <div class="cbp-hrsub">
-                        <div class="cbp-hrsub-inner" id='innerfilter'>
+                        <div class="cbp-hrsub-inner" id="innerfilter">
+                            <a href="#" id="filter_restart">
+                                <span class="material-icons-outlined">
+                                    restart_alt
+                                </span>
+                            </a>
                             <h4>
                                 Filter by:
                             </h4>
@@ -84,41 +91,43 @@
                                 <ul class="filterby_flex">
                                     <li>
                                         <a>
-                                            accessibility score
-                                        </a>
+            accessibility score
+           </a>
                                         <div class="slider" data-filter="accesability_score" id="accesability_score_slider">
                                         </div>
                                     </li>
                                     <li>
                                         <a>
-                                            amenities score
-                                        </a>
+            amenities score
+           </a>
                                         <div class="slider" data-filter="amenities_score" id="amenities_score_slider">
                                         </div>
                                     </li>
                                     <li>
                                         <a>
-                                            tourism score
-                                        </a>
+            tourism score
+           </a>
                                         <div class="slider" data-filter="tourism_score" id="tourism_score_slider">
                                         </div>
                                     </li>
                                     <li>
                                         <a>
-                                            arrnona year
-                                        </a>
+            arrnona year
+           </a>
                                         <div class="slider" data-filter="arrnona_year" id="arrnona_year_slider">
                                         </div>
                                     </li>
-
-
                                 </ul>
                                 <!-- close class="filterby_flex"-->
+
                             </div>
                             <!-- close class="img_filters"-->
+
                         </div>
+                        <!-- WAS HERE WIP-->
                         <!-- close <div class="cbp-hrsub-inner" id='innerfilter'> -->
                     </div>
+
                     <!-- close class="cbp-hrsub"-->
                 </li>
                 <!-- END OF filter part-->
@@ -130,8 +139,7 @@
        </span>
                     </a>
                     <div class="cbp-hrsub">
-                        <div class="cbp-hrsub-inner" id='innerorder'>
-
+                        <div class="cbp-hrsub-inner" id="innerorder">
                             <!-- RESET
                             <div>
                             <a>Reset:</a>
@@ -144,10 +152,9 @@
                             </div>
                         </div>
                         -->
-
                             <div>
                                 <!-- open sort div -->
-                                <h4 id='sortby_text'>
+                                <h4 id="sortby_text">
                                     Sort by:
                                 </h4>
                                 <div>
@@ -155,37 +162,47 @@
                                     <ul class="sortby_flex">
                                         <li>
                                             <a>
-                                            unit
-                                            </a>
-                                            <div class="button-group" id="sorts">
+             unit
+            </a>
+                                            <div class="button-group" id="sorts_1">
                                                 <button class="button" data-sort-by="dist_parcel_limit">
-                                                        dist. to parcel limit
-                                                    </button>
+              dist. to parcel limit
+             </button>
                                                 <button class="button" data-sort-by="bld_vol">
-                                                        volume
-                                                    </button>
+              volume
+             </button>
                                                 <button class="button" data-sort-by="dist_sea">
-                                                        dist. to sea
-                                                   </button>
+              dist. to sea
+             </button>
                                             </div>
                                         </li>
                                         <li>
                                             <a>
-                                                system
-                                            </a>
-                                            <div class="button-group" id="sorts">
+             system
+            </a>
+                                            <div class="button-group" id="sorts_2">
                                                 <button class="button" data-sort-by="built_density">
-                                                    built density
-                                                </button>
+              built density
+             </button>
                                                 <button class="button" data-sort-by="centrality">
-                                                    centrality
-                                                </button>
+              centrality
+             </button>
                                                 <button class="button" data-sort-by="n_historical_bld">
-                                                    #neighbouring historical buildings
-                                               </button>
+              #neighbouring historical buildings
+             </button>
                                             </div>
                                         </li>
+                                        <li id="hidden_reset_sortby">
+                                            <a>
+    Visible?
+</a>
+                                            <div class="button-group">
+                                                <button class="button" data-sort-by="original-order">
+        original order
+       </button>
+                                            </div>
 
+                                        </li>
                                         <!-- 
                                         <button class="button" data-sort-by="arrnona_year">
                                             arrnona_year
@@ -217,7 +234,9 @@
                                         </li>
                                         -->
                                         <li>
-                                            <a>architectural style</a>
+                                            <a>
+             architectural style
+            </a>
                                             <div class="button-group layout-mode-button-group" id="group-sort">
                                                 <!--
                                             <button checked="checked" class="button is-checked" data-group-by="non" data-layout-mode="fitRows" data-sort-by="original-order">
@@ -225,11 +244,11 @@
            </button>
            -->
                                                 <button class="button" data-group-by="primary" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="primary">
-                                                primary
-                                            </button>
+              primary
+             </button>
                                                 <button class="button" data-group-by="secondary" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="secondary">
-                                                secondary
-                                            </button>
+              secondary
+             </button>
                                                 <!-- 
                                             <button class="button" data-group-by="complex" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="complex">
             complex
@@ -262,7 +281,9 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <a>location</a>
+                                            <a>
+             location
+            </a>
                                             <div class="button-group layout-mode-button-group" id="group-sort">
                                                 <!--
                                             <button checked="checked" class="button is-checked" data-group-by="non" data-layout-mode="fitRows" data-sort-by="original-order">
@@ -270,15 +291,17 @@
                                             </button>
                                             -->
                                                 <button class="button" data-group-by="complex" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="complex">
-                                             complex
-                                            </button>
+              complex
+             </button>
                                                 <button class="button" data-group-by="positioning" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="positioning">
-                                                positioning
-                                            </button>
+              positioning
+             </button>
                                             </div>
                                         </li>
                                         <li>
-                                            <a>construction</a>
+                                            <a>
+             construction
+            </a>
                                             <div class="button-group layout-mode-button-group" id="group-sort">
                                                 <!--
                                             <button checked="checked" class="button is-checked" data-group-by="non" data-layout-mode="fitRows" data-sort-by="original-order">
@@ -286,36 +309,43 @@
                                             </button>
                                             -->
                                                 <button class="button" data-group-by="typology" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="typology">
-                                                typology
-                                            </button>
+              typology
+             </button>
                                                 <button class="button" data-group-by="technology" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="technology">
-                                                technology
-                                            </button>
+              technology
+             </button>
                                                 <button class="button" data-group-by="roof" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="roof">
-                                                roof
-                                            </button>
+              roof
+             </button>
                                                 <button class="button" data-group-by="finishing_materials" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="finishing_materials">
-                                                finishing materials
-                                            </button>
+              finishing materials
+             </button>
                                             </div>
                                         </li>
                                         <li>
-                                            <a>evaluation</a>
+                                            <a>
+             evaluation
+            </a>
                                             <div class="button-group layout-mode-button-group" id="group-sort">
-                                                <!--
-                                                <button checked="checked" class="button is-checked" data-group-by="non" data-layout-mode="fitRows" data-sort-by="original-order">
-                                                  original order
-                                                </button>\
-                                                -->
+
+
                                                 <button class="button" data-group-by="status" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="status">
-                                                    status
-                                                </button>
+              status
+             </button>
                                                 <button class="button" data-group-by="physical_condition" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="physical_condition">
-                                                    physical condition
-                                                </button>
+              physical condition
+             </button>
                                                 <button class="button" data-group-by="general_evaluation" data-is-horizontal="true" data-layout-mode="cellsByColumn" data-sort-by="general_evaluation">
-                                                    estimated value
-                                                </button>
+              estimated value
+             </button>
+                                            </div>
+                                        </li>
+                                        <li id='hidden_reset_groupby'>
+                                            <a> Visible?</a>
+                                            <div class="button-group layout-mode-button-group" id="group-sort">
+                                                <button checked="checked" class="button is-checked" data-group-by="non" data-layout-mode="fitRows" data-sort-by="original-order">
+                                                    original order
+                                                  </button>
                                             </div>
                                         </li>
                                         <!-- close  class="button-group layout-mode-button-group" id="group-sort" -->
@@ -324,10 +354,10 @@
                                 <!-- close groupby_flex -->
                             </div>
                             <!-- close group by div -->
-                            <a href="#" id='order_restart'>
+                            <a href="#" id="order_restart">
                                 <span class="material-icons-outlined">
-                                restart_alt
-                                </span>
+          restart_alt
+         </span>
                             </a>
                         </div>
                         <!-- /cbp-hrsub-inner -->
@@ -351,11 +381,12 @@
 <!-- End of id='nav_sticky'-->
 
 <body>
-    <!-- map (first hidden)-->
-    <div id="mapid" style="visibility: visible">
-    </div>
-    <!-- end of: map -->
-    <!-- HIDE MAP / GRID 
+    <div id="main_section">
+        <!-- map (first hidden)-->
+        <div id="mapid" style="visibility: visible">
+        </div>
+        <!-- end of: map -->
+        <!-- HIDE MAP / GRID 
             <script>
                 $('#vis').click(function() {
                     if ($('#mapid').css('visibility') == 'hidden') {
@@ -374,45 +405,89 @@
                 });
             </script>
             -->
-    <!-- Start of grid items-->
-    <div class="grid" id="gridid" style="visibility: visible">
-        <!-- THIS WILL BE REPLACED WITH INSERTED-->
-    </div>
-    <!-- End of grid items-->
-    <!--To load javascript for map-->
-    <script src="./js/mapall.js ">
-    </script>
-    <!--To load noUiSlider-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.0/nouislider.min.js ">
-    </script>
-    <!--To load wNumb formatter-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js ">
-    </script>
-    <script>
-        $(function() {
-            $("#include_html ").load("menu.html ");
-        });
-    </script>
-    <script>
-        $('.menu').on('click', function() {
-            $('.list').toggleClass('hidden');
-        });
-    </script>
-    <!-- load js file with the button controls etc.-->
-    <script src="./js/multifilter.js ">
-    </script>
-    <div>
-        <span class="material-icons-outlined info-button" href="#" id="topLeftFixed">
-    info
-   </span>
-    </div>
-    <script>
-        var map_zoom_control = $('.leaflet-control-zoom-in');
-        //console.log('zoom control left offset: ', $(map_zoom_control).offset().left);
-        //console.log('zoom control size: ', $(map_zoom_control).width());
+        <!-- Start of grid items-->
+        <div class="grid" id="gridid" style="visibility: visible">
+            <!-- THIS WILL BE REPLACED WITH INSERTED-->
+        </div>
+        <!-- End of grid items-->
+        <!--To load javascript for map-->
+        <script src="./js/mapall.js ">
+        </script>
+        <!--To load noUiSlider-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.0/nouislider.min.js ">
+        </script>
+        <!--To load wNumb formatter-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js ">
+        </script>
+        <script>
+            $(function() {
+                $("#include_html ").load("menu.html ");
+            });
+        </script>
+        <script>
+            $('.menu').on('click', function() {
+                $('.list').toggleClass('hidden');
+            });
+        </script>
+        <!-- load js file with the button controls etc.-->
+        <script src="./js/multifilter.js ">
+        </script>
 
-        $('#topLeftFixed').css("left", $(map_zoom_control).offset().left + ($(map_zoom_control).width() / 4)); // notice pushing qurter of the button size (30px)
-    </script>
+
+    </div>
+    <!-- close: DIV main section -->
+
+    <!-- info button -->
+    <div class='info_buttons'>
+
+        <a href="#" id='to_projet_info'>
+            <div>
+                <span class="material-icons-outlined info-button" href="#" id="topLeftFixed">
+            info
+            </span>
+            </div>
+        </a>
+
+        <a href="#" id='from_projet_info'>
+            <div>
+                <span class="material-icons-outlined info-button" href="#" id="topLeftFixed_1">
+            info
+            </span>
+            </div>
+        </a>
+        <script>
+            var map_zoom_control = $('.leaflet-control-zoom-in');
+            //console.log('zoom control left offset: ', $(map_zoom_control).offset().left);
+            //console.log('zoom control size: ', $(map_zoom_control).width());
+            var pos_icon = $(map_zoom_control).offset().left + ($(map_zoom_control).width() / 4);
+            $('#topLeftFixed').css("left", $(map_zoom_control).offset().left + ($(map_zoom_control).width() / 4)); // notice pushing qurter of the button size (30px)
+            $('#topLeftFixed_1').css("left", pos_icon); // notice pushing qurter of the button size (30px)
+        </script>
+    </div>
+
+
+    <div class="container" id="about_section">
+        <h1>About</h1>
+        <div class="flex-grid">
+            <aside class="col sidebar">
+                <h2>Team</h2>
+                <p>Lead: Arch. Meitar Keshet</p>
+                <p>Students: Alex Mogilevsky, Amit Berhard, Elia Cohen, Hanna Amsalem, Inbar Neeman, Yuval Oppenheim </p>
+
+                <h2>Contact</h2>
+                <p>Email: meitarkeshet@gmail.com </p>
+            </aside>
+            <section class="col main_about">
+                <h2>Jaffa Mon Amour</h2>
+                <p>The project elaborates on the research made by studio AN+ to inform the municipal decision-making process regarding historical preservation. </p>
+                <h2>Partners</h2>
+                <img height="100" alt='Shenkar College of Engineering and Design' src="https://upload.wikimedia.org/wikipedia/en/thumb/6/67/Shenkar_College_of_Engineering_and_Design.svg/1200px-Shenkar_College_of_Engineering_and_Design.svg.png">
+                <img height="100" alt='Tel Aviv Yafo municipality' src="https://telavivcitiessummit.com/wp-content/uploads/2018/05/TLV-Logo-1024x559.png">
+                <img height="100" alt='Tel Aviv Yafo municipality' src="https://simplex-smart3d.com/ces/MasterProject/Style/Logos/logo_smart3d.png">
+
+            </section>
+        </div>
+    </div>
 </body>
 <!-- close body-->
 
