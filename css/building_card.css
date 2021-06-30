@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    background-color: #E4E4E4;
 }
 
 .carousel-container {
@@ -31,10 +32,11 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     margin-top: 2%;
+    color: #12323F;
 }
 
 h2 {
-    color: #F1CEA8;
+    color: #12323F;
 }
 
 body {
@@ -67,6 +69,7 @@ body {
     position: fixed;
     bottom: 2%;
     left: 2%;
+    color: #3985A1;
     /*
     background: #336600;
     padding: 6px;
@@ -75,10 +78,19 @@ body {
     */
 }
 
+#buttonLeftFixed:hover {
+    color: #64504D;
+}
+
+#buttonLeftFixed:active {
+    color: #12323F;
+}
+
 #buttonRightFixed {
     position: fixed;
     bottom: 2%;
     right: 2%;
+    color: #3985A1;
     /*
     background: #336600;
     padding: 6px;
@@ -89,6 +101,17 @@ body {
 
 #navigate_before {
     position: fixed;
+    color: #3985A1;
+}
+
+#navigate_before:hover,
+#buttonRightFixed:hover {
+    color: #64504D;
+}
+
+#navigate_before:active,
+#buttonRightFixed:active {
+    color: #12323F;
 }
 
 :root {
@@ -137,7 +160,7 @@ body {
 }
 
 .bottom_container {
-    background: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0);
     height: 50%;
     width: 90%;
     padding-bottom: 25px;
@@ -157,7 +180,7 @@ body {
 .simplex_box {
     flex: 50;
     display: flex;
-    background: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0);
     align-items: center;
     justify-content: center;
 }
@@ -167,7 +190,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: white;
+    background: rgba(255, 255, 255, 0);
     max-height: 100%;
 }
 
